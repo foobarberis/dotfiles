@@ -42,6 +42,7 @@ alias ccd='gcc -Wall -Wextra -g -fsanitize=address'
 alias on='setup && dres'
 # alias vim='vim -u NONE -N'
 alias tmux='TERM=screen-256color-bce tmux'
+alias upd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get clean'
 
 ## Git
 alias gs='git status'
