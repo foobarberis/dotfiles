@@ -1,5 +1,9 @@
+## Openblack
+export VCPKG_FORCE_SYSTEM_BINARIES=1
+alias bw="/home/matthieu/Git/openblack/cmake-build-presets/ninja-multi-vcpkg/bin/Debug/openblack -g ~/bw-assets/bw-20/ -W1650 -H1050 -V"
+
 ## Set $PATH, which tells the computer where to search for commands
-export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:/etc:/usr/ucb:/usr/local/bin:/usr/local/local_dfs/bin:/usr/bin/X11:/usr/local/sas:$HOME/.scripts/"
+export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:/etc:/usr/ucb:/usr/local/bin:/usr/local/local_dfs/bin:/usr/bin/X11:/usr/local/sas:$HOME/.scripts/:$HOME/.local/bin:$HOME/cmake-3.26.4-linux-aarch64/bin"
 
 ## Where to search for manual pages
 export MANPATH="/usr/share/man:/usr/local/man:/usr/local/local_dfs/man"
@@ -17,7 +21,7 @@ export HISTFILESIZE=50
 export TERM=xterm-256color
 
 ## Disable automatic mail checking
-unset MAILCHECK 
+unset MAILCHECK
 
 ## Automatically correct mistyped 'cd' directories
 shopt -s cdspell
@@ -31,18 +35,11 @@ set -o noclobber
 # Aliases
 alias l='ls -Alhp --group-directories-first --color'
 alias off='sudo shutdown now'
-alias frac='cd ~/Git/42/42-fractol'
-alias res='xrandr -s 1920x1080'
-alias dres='xrandr -s 1920x1200'
-alias lres='xrandr -s 1680x1050'
-alias setup='xrdb -merge ~/.Xresources && source ~/.xprofile'
-alias cc='gcc -Wall -Wextra -Werror'
-alias ccl='gcc -Wall -Wextra -Iinc/ -lX11 -lXext'
-alias ccd='gcc -Wall -Wextra -g -fsanitize=address'
-alias on='setup && dres'
-# alias vim='vim -u NONE -N'
-alias tmux='TERM=screen-256color-bce tmux'
+alias res-desktop='xrandr -s 1920x1200_60.00'
+alias res-laptop='xrandr -s 1680x1050_60.00'
 alias upd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get clean'
+alias ccd='cc -Wall -Wextra -g3 -fsanitize=address,undefined'
+alias vg='valgrind --show-reachable=no --leak-check=full --show-leak-kinds=all --track-origins=yes'
 
 ## Git
 alias gs='git status'
@@ -54,4 +51,4 @@ alias gpl='git pull'
 alias b='cd ../'
 
 # Personal PS1
-PS1='\[\e[0m\]\W \[\e[0m\]λ \[\e[0m\]'
+PS1='\[\e[0m\]\W \[\e[0m\]$ \[\e[0m\]'
