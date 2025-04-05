@@ -34,9 +34,14 @@ alias l='ls -Alhp --group-directories-first --color'
 alias off='sudo shutdown now'
 alias res-desktop='xrandr -s 1920x1200_60.00'
 alias res-laptop='xrandr -s 1680x1050_60.00'
-alias upd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt autoremove -y && sudo apt-get clean'
+alias upd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean'
 alias ccd='cc -Wall -Wextra -g3 -fsanitize=address,undefined'
 alias serv='python3 -m http.server'
+alias e='nvim'
+
+alias fed='nvim $(fzf)'
+alias fcd='cd $(ls -d */ | fzf)'
+alias fopen='open $(find . | fzf)'
 
 ## Git
 alias gs='git status'
