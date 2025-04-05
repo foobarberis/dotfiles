@@ -1,23 +1,19 @@
-## Set $PATH, which tells the computer where to search for commands
-export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:/etc:/usr/ucb:/usr/local/bin:/usr/local/local_dfs/bin:/usr/bin/X11:/usr/local/sas:$HOME/.scripts/:$HOME/.local/bin:/usr/local/bin/"
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
-## Where to search for manual pages
+export FZF_DEFAULT_COMMAND='find .'
+
+export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:/etc:/usr/ucb:/usr/local/bin:/usr/local/local_dfs/bin:/usr/bin/X11:/usr/local/sas:$HOME/.scripts/:$HOME/.local/bin:/usr/local/bin/:/opt/nvim-linux-x86_64/bin"
+
 export MANPATH="/usr/share/man:/usr/local/man:/usr/local/local_dfs/man"
 
-## Which pager to use.
 export PAGER=less
 
-## Choose your weapon
-export EDITOR=/usr/local/bin/vim
+export EDITOR=/opt/nvim-linux-x86_64/bin/nvim
 
 ## The maximum number of lines in your history file
 export HISTFILESIZE=1000
-
-## Enables displaying colors in the terminal
-export TERM=xterm-16color
-
-## Disable automatic mail checking
-unset MAILCHECK
 
 ## Automatically correct mistyped 'cd' directories
 shopt -s cdspell
@@ -28,6 +24,7 @@ shopt -s histappend
 ## Prevent accidental overwrites when using IO redirection
 set -o noclobber
 
+<<<<<<< HEAD
 # Aliases
 alias vg='valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-output.txt'
 alias l='ls -Alhp --group-directories-first --color'
@@ -52,5 +49,7 @@ alias gpl='git pull'
 ## Navigation
 alias b='cd ../'
 
+=======
+>>>>>>> 6d833675d8dc5a9a6d18a4b0e60cc28263407389
 # Personal PS1
 PS1='\[\e[0m\]\W \[\e[0m\]$ \[\e[0m\]'
