@@ -9,3 +9,6 @@ vim.api.nvim_set_keymap('t', '<C-t>', [[<C-\><C-n>]], { noremap = true, silent =
 
 -- Use a single global status line
 vim.opt.laststatus = 3
+
+-- Set tabstop to 4 spaces
+vim.opt.shiftwidth = 4
