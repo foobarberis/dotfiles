@@ -17,3 +17,5 @@ alias gpl='git pull'
 # Navigation
 alias b='cd ../'
 alias l='ls -Alhp --group-directories-first --color'
+
+alias ssh='ssh -o TCPKeepAlive="yes" -o ServerAliveInterval="60"'
