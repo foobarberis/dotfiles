@@ -1,3 +1,8 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/inferno.toml"
+]
+
 [window.padding]
 x = 10
 y = 10
@@ -6,54 +11,20 @@ y = 10
 size = 16.0
 
 [font.normal]
-family = "Iosevka Term SS12"
+family = "Cascadia Code"
 style = "Regular"
 
 [font.bold]
-family = "Iosevka Term SS12"
+family = "Cascadia Code"
 style = "Bold Extended"
 
 [font.bold_italic]
-family = "Iosevka Term SS12"
+family = "Cascadia Code"
 style = "Bold Extended Italic"
 
 [font.italic]
-family = "Iosevka Term SS12"
+family = "Cascadia Code"
 style = "Extended Italic"
 
 [selection]
 save_to_clipboard = true
-
-# 0x From the Ubuntu terminal color palette
-
-# 0x Default colors
-[colors.primary]
-background = '#300a24'
-foreground = '#eeeeec'
-
-# 0x Colors the cursor will use if `custom_cursor_colors` is true
-[colors.cursor]
-text = '#bbbbbb'
-cursor = '#b4d5ff'
-
-# 0x Normal colors
-[colors.normal]
-black   = '#2e3436'
-red     = '#cc0000'
-green   = '#4e9a06'
-yellow  = '#c4a000'
-blue    = '#3465a4'
-magenta = '#75507b'
-cyan    = '#06989a'
-white   = '#d3d7cf'
-
-# 0x Bright colors
-[colors.bright]
-black   = '#555753'
-red     = '#ef2929'
-green   = '#8ae234'
-yellow  = '#fce94f'
-blue    = '#729fcf'
-magenta = '#ad7fa8'
-cyan    = '#34e2e2'
-white   = '#eeeeec'
