@@ -1,6 +1,8 @@
 -- Vim Configure Parameters
 
 	./configure --with-features=small
+	Add cscope ?
+	Disable GUI completely
 
 -- Alacritty Themes
 

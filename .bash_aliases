@@ -1,6 +1,8 @@
 alias brc='source ~/.bashrc'
 
-alias ed='nvim'
+alias vi='vim'
+alias ed='vim'
+
 alias off='sudo shutdown now'
 alias upd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt autoremove -y && sudo apt-get clean'
 

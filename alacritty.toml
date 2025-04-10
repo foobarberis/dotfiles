@@ -1,6 +1,6 @@
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/inferno.toml"
+    "./themes/themes/inferno.toml"
 ]
 
 [window.padding]
@@ -8,7 +8,7 @@ x = 10
 y = 10
 
 [font]
-size = 16.0
+size = 12.0
 
 [font.normal]
 family = "Cascadia Code"
