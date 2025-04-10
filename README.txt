@@ -3,6 +3,8 @@
 	./configure --with-features=small
 	Add cscope ?
 	Disable GUI completely
+	Enable diff
+	Disable integrated term
 
 -- Alacritty Themes
 
