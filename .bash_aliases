@@ -20,5 +20,6 @@ alias gpl='git pull'
 alias b='cd ../'
 alias l='ls -Alhp --group-directories-first --color'
 alias 3pc='cd ~/Code/3PC/'
+alias dot='cd ~/Code/dotfiles'
 
 alias ssh='ssh -o TCPKeepAlive="yes" -o ServerAliveInterval="60"'

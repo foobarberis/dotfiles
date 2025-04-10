@@ -1,8 +1,7 @@
 -- Vim Configure Parameters
 
-	./configure --with-features=small
+	./configure --with-features=small --disable-gui
 	Add cscope ?
-	Disable GUI completely
 	Enable diff
 	Disable integrated term
 
