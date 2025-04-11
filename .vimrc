@@ -1,4 +1,4 @@
-" syntax off
+syntax off
 set mouse=a
 set nowrap
 set laststatus=2
