@@ -2,20 +2,49 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:/etc:/usr/ucb:/usr/local/bin:/usr/local/local_dfs/bin:/usr/bin/X11:/usr/local/sas:$HOME/.scripts/:$HOME/.local/bin:/usr/local/bin/"
+# Function to add directories to PATH if they exist
+add_to_path() {
+    for dir in "$@"; do
+        if [ -d "$dir" ] && [[ ":$PATH:" != *":$dir:"* ]]; then
+            PATH="$dir:$PATH"
+        fi
+    done
+}
 
-export MANPATH="/usr/share/man:/usr/local/man:/usr/local/local_dfs/man"
+# Add desired directories
+add_to_path /usr/local/bin
 
+export PATH
+
+# Set locale
+# Might require you to run `sudo locale-gen en_US.UTF-8`
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# Set the default command used by fzf
 export FZF_DEFAULT_COMMAND='find .'
 
+# Set editor
+export EDITOR="vim"
+
+# Set pager
 export PAGER=less
 
-# Set unlimited history
+# Enable vi-mode and re-bind Ctrl-L to clear
+set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
+
+# Set unlimited history and define history format
 export HISTSIZE= 
 export HISTFILESIZE=
+export HISTTIMEFORMAT="%F %T "
 
 # Automatically correct mistyped 'cd' directories
 shopt -s cdspell
+
+# Attempts spelling correction on directory names during word completion
+shopt -s dirspell
 
 # Append to history file; do not overwrite
 shopt -s histappend
