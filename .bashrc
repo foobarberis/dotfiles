@@ -13,6 +13,7 @@ add_to_path() {
 
 # Add desired directories
 add_to_path /usr/local/bin
+add_to_path /opt/homebrew/bin
 
 export PATH
 
