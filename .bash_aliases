@@ -1,4 +1,5 @@
 alias upd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt autoremove -y && sudo apt-get clean'
+alias brewupd='brew update && brew upgrade && brew cleanup'
 
 alias vi='nvi'
 alias ed='nvi'
