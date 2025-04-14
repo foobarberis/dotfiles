@@ -1,20 +1,17 @@
-alias brc='source ~/.bashrc'
-
-alias vi='vim'
-alias ed='vim'
-
-alias off='sudo shutdown now'
 alias upd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt autoremove -y && sudo apt-get clean'
 
+alias vi='nvi'
+alias ed='nvi'
+
 # fzf
-alias fe='vim $(fzf)'
+alias fe='vi $(fzf)'
 alias fc='cd $(fzf)'
 
 # Git
-alias gs='git status'
-alias gc='git commit'
-alias gp='git push'
-alias gpl='git pull'
+alias gstat='git status'
+alias gcomm='git commit'
+alias gpush='git push'
+alias gpull='git pull'
 
 # Navigation
 alias b='cd ../'

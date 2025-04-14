@@ -26,7 +26,7 @@ export LC_ALL="en_US.UTF-8"
 export FZF_DEFAULT_COMMAND='find .'
 
 # Set editor
-export EDITOR="vim"
+export EDITOR="nvi"
 
 # Set pager
 export PAGER=less
