@@ -3,6 +3,7 @@ alias brewupd='brew update && brew upgrade && brew cleanup'
 
 alias vi='nvi'
 alias ed='nvi'
+alias ex='nvi'
 
 # fzf
 alias fvi='vi "$(fzf)"'
