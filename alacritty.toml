@@ -1,6 +1,6 @@
 [general]
 import = [
-    "./themes/themes/inferno.toml"
+    "./themes/themes/argonaut.toml"
 ]
 
 [window.padding]
