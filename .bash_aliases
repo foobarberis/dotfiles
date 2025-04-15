@@ -22,7 +22,16 @@ alias gpull='git pull'
 # Navigation
 alias b='cd ../'
 alias l='ls -Alhp --group-directories-first --color'
-alias 3pc='cd ~/Code/3PC/'
 alias dot='cd ~/Code/dotfiles'
+
+# 3PC
+3PC_FOLDER="$HOME/Code/3PC"
+alias 3pc='cd ~/Code/3PC/'
+alias 3pc-back="cd ${3PC_FOLDER}/3pc-web-back"
+alias 3pc-front="cd ${3PC_FOLDER}/3pc-web-front"
+alias 3pc-etl="cd ${3PC_FOLDER}/mirrhia-etl"
+alias 3pc-hub="cd ${3PC_FOLDER}/mirrhia-hub"
+alias 3pc-report="cd ${3PC_FOLDER}/mirrhia-report"
+alias 3pc-misc="cd ${3PC_FOLDER}/misc"
 
 alias ssh='ssh -o TCPKeepAlive="yes" -o ServerAliveInterval="60"'
