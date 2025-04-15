@@ -20,6 +20,7 @@ alias gcomm='git commit'
 alias gpush='git push'
 alias gpull='git pull'
 alias gbran='git branch'
+alias gblam='git blame'
 
 # Navigation
 alias b='cd ../'
