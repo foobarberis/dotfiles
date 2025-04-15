@@ -18,6 +18,7 @@ alias gstat='git status'
 alias gcomm='git commit'
 alias gpush='git push'
 alias gpull='git pull'
+alias gbran='git branch'
 
 # Navigation
 alias b='cd ../'
