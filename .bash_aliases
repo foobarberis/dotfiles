@@ -5,10 +5,15 @@ alias vi='nvi'
 alias ed='nvi'
 
 # fzf
-alias fe='vi $(fzf)'
-alias fc='cd $(fzf)'
+alias fvi='vi "$(fzf)"'
+alias fcd='cd "$(fzf)"'
+alias fls='ls "$(fzf)"'
+alias fmpv='mpv "$(fzf)"'
 
 # Git
+alias glog='git log'
+alias gadd='git add'
+alias gdiff='git diff'
 alias gstat='git status'
 alias gcomm='git commit'
 alias gpush='git push'
