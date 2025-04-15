@@ -21,6 +21,7 @@ alias gpush='git push'
 alias gpull='git pull'
 alias gbran='git branch'
 alias gblam='git blame'
+alias gchec='git checkout'
 
 # Navigation
 alias b='cd ../'
