@@ -26,11 +26,9 @@ alias gchec='git checkout'
 # Navigation
 alias b='cd ../'
 alias l='ls -Alhp --group-directories-first --color'
-alias dot='cd ~/Code/dotfiles'
+alias dot='cd ${FOLDER_CODE}/dotfiles'
 
 # 3PC
-FOLDER_3PC="${HOME}/Code/3PC"
-
 alias 3pc="cd ${FOLDER_3PC}"
 alias 3pc-back="cd ${FOLDER_3PC}/3pc-web-back"
 alias 3pc-front="cd ${FOLDER_3PC}/3pc-web-front"
@@ -39,4 +37,5 @@ alias 3pc-hub="cd ${FOLDER_3PC}/mirrhia-hub"
 alias 3pc-report="cd ${FOLDER_3PC}/mirrhia-report"
 alias 3pc-misc="cd ${FOLDER_3PC}/misc"
 
+# TODO Move this to ssh config
 alias ssh='ssh -o TCPKeepAlive="yes" -o ServerAliveInterval="60"'
