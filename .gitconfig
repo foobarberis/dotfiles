@@ -1,1 +1,2 @@
-git config --global core.editor 'nvi'
+[core]
+	editor = nvi
