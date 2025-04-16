@@ -10,17 +10,16 @@ TARGET_DIRECTORIES="
 "
 
 # Path to the git hook file
-HOOK_FILE="bin/prepare-commit-msg.sh"
+HOOK_FILE="prepare-commit-msg"
 
 # Iterate through each directory
 for DIR in $TARGET_DIRECTORIES; do
     if [ -d "$DIR/.git" ]; then
         # Copy the hook file to the git hooks directory
-        cp "$HOOK_FILE" "$DIR/.git/hooks/prepare-commit-msg"
-        chmod +x "$DIR/.git/hooks/prepare-commit-msg"
+        cp "$HOOK_FILE" "$DIR/.git/hooks/"
+        chmod +x "$DIR/.git/hooks/"
         echo "Hook deployed to $DIR"
     else
         echo "$DIR is not a git repository"
     fi
 done
-
