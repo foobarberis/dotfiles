@@ -1,2 +1,7 @@
 [core]
 	editor = nvi
+[user]
+	name = Matthieu Barberis
+	email = matthieu.barberis@biomerieux.com
+[credential]
+	helper = store
