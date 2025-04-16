@@ -17,7 +17,7 @@ set path=.
 set showmatch
 
 " Modify the ~ command to take an associated motion.
-set tildop
+set tildeop
 
 " Set searches to wrap around the end or beginning of the file.
 set wrapscan
@@ -36,3 +36,6 @@ set report=1
 
 " Display the current editor mode and a “modified” flag.
 set showmode
+
+" Display a row/column ruler on the colon command line.
+set ruler
