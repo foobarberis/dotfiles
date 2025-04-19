@@ -1,10 +1,13 @@
 #!/bin/sh
 
+# Create necessary folders if they do not yet exist
+mkdir -p $FOLDER_HOME $FOLDER_CODE $FOLDER_3PC $FOLDER_FILES $FOLDER_AUDIO $FOLDER_VIDEO $FOLDER_GAMES $FOLDER_PICTURES
 mkdir -p ${HOME}/.config/alacritty
 mkdir -p ${HOME}/.ssh
 
 # On macOS .bash_profile is read instead of .bashrc
 cp .bashrc ${HOME}/.bash_profile
+cp .bashrc ${HOME}/.profile
 
 # Deploy dotfiles
 cp .gitconfig .env .bashrc .bash_aliases .tmux.conf .exrc ${HOME}
