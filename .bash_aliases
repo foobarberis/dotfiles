@@ -28,6 +28,13 @@ alias gchec='git checkout'
 alias b='cd ../'
 alias l='ls -Alhp --color'
 alias dot='cd ${FOLDER_CODE}/dotfiles'
+alias home=$FOLDER_HOME
+alias code=$FOLDER_CODE
+alias files=$FOLDER_FILES
+alias audio=$FOLDER_AUDIO
+alias video=$FOLDER_VIDEO
+alias games=$FOLDER_GAMES
+alias pictures=$FOLDER_PICTURES
 
 # 3PC
 alias 3pc="cd ${FOLDER_3PC}"
