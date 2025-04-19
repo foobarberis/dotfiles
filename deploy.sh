@@ -7,7 +7,7 @@ mkdir -p ${HOME}/.ssh
 cp .bashrc ${HOME}/.bash_profile
 
 # Deploy dotfiles
-cp .gitconfig .env .bashrc .bash_aliases .tmux.conf .vimrc .exrc ${HOME}
+cp .gitconfig .env .bashrc .bash_aliases .tmux.conf .exrc ${HOME}
 
 # Deploy configuration for Alacritty Unix-based systems 
 cp alacritty.toml ${HOME}/.config/alacritty/alacritty.toml
