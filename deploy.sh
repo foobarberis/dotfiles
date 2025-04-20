@@ -17,7 +17,7 @@ cp .bashrc ${HOME}/.bash_profile
 cp .bashrc ${HOME}/.profile
 
 # Deploy dotfiles
-cp .gitconfig .env .bashrc .bash_aliases .tmux.conf .exrc .vimrc ${HOME}
+cp .env .bashrc .bash_aliases .tmux.conf .vimrc ${HOME}
 
 # Deploy configuration for Alacritty Unix-based systems 
 cp alacritty.toml ${HOME}/.config/alacritty/alacritty.toml
