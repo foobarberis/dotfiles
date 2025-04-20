@@ -1,11 +1,16 @@
 alias upd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt autoremove -y && sudo apt-get clean'
 alias brewupd='brew update && brew upgrade && brew cleanup'
+alias pkgupd='pkg update && pkg upgrade && pkg autoclean'
 
 alias vi="$EDITOR"
 alias ed="$EDITOR"
 alias ex="$EDITOR"
 
-# fzf
+# Files
+alias todo="${EDITOR} ${FOLDER_DOCUMENTS}/todo.txt"
+alias notes="${EDITOR} ${FOLDER_DOCUMENTS}/notes.txt"
+
+# FzF
 alias fvi='vi "$(fzf)"'
 alias fcd='cd "$(fzf)"'
 alias fls='ls "$(fzf)"'

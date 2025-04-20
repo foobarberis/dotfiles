@@ -2,7 +2,6 @@ let mapleader = " "
 
 syntax off
 set mouse=a
-set clipboard=unnamedplus
 set ruler
 set incsearch
 set laststatus=2
