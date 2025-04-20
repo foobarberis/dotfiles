@@ -1,10 +1,16 @@
 #!/bin/sh
 
-# Create necessary folders if they do not yet exist
-mkdir -p ${HOME}/.local/bin
-mkdir -p $FOLDER_HOME $FOLDER_CODE $FOLDER_3PC $FOLDER_FILES $FOLDER_AUDIO $FOLDER_VIDEO $FOLDER_GAMES $FOLDER_PICTURES
-mkdir -p ${HOME}/.config/alacritty
-mkdir -p ${HOME}/.ssh
+# Create necessary directories if they do not exist
+mkdir -p ${HOME}/.ssh \
+         ${HOME}/.local/bin \
+         ${HOME}/.config/alacritty \
+         ${FOLDER_FILES} \
+         ${FOLDER_DOCUMENTS} \
+         ${FOLDER_CODE} \
+         ${FOLDER_AUDIO} \
+         ${FOLDER_VIDEO} \
+         ${FOLDER_PICTURES} \
+         ${FOLDER_GAMES} 
 
 # On macOS .bash_profile is read instead of .bashrc
 cp .bashrc ${HOME}/.bash_profile
