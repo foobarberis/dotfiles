@@ -4,13 +4,12 @@ alias brewupd='brew update && brew upgrade && brew cleanup'
 alias vi="$EDITOR"
 alias ed="$EDITOR"
 alias ex="$EDITOR"
-alias vim="$EDITOR"
 
 # fzf
 alias fvi='vi "$(fzf)"'
 alias fcd='cd "$(fzf)"'
 alias fls='ls "$(fzf)"'
-alias fmpv='mpv "$(fzf)"'
+alias fmpv='mpv --fs "$(fzf)"'
 
 # Git
 alias glog='git log'
