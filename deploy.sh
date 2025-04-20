@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Create necessary folders if they do not yet exist
+mkdir -p ${HOME}/.local/bin
 mkdir -p $FOLDER_HOME $FOLDER_CODE $FOLDER_3PC $FOLDER_FILES $FOLDER_AUDIO $FOLDER_VIDEO $FOLDER_GAMES $FOLDER_PICTURES
 mkdir -p ${HOME}/.config/alacritty
 mkdir -p ${HOME}/.ssh
@@ -19,7 +20,7 @@ cp alacritty.toml ${HOME}/.config/alacritty/alacritty.toml
 # cp alacritty.toml /mnt/c/Users/16018659/AppData/Roaming/alacritty 
 
 # Deploy personal scripts
-chmod +x ./bin/* && sudo cp ./bin/* /usr/local/bin
+chmod +x ./bin/* && cp ./bin/* ~/.local/bin
 
 # Deploy SSH configuration
 cp ssh_config ${HOME}/.ssh/config
