@@ -9,4 +9,4 @@ set tabstop=4 shiftwidth=4 expandtab
 set number
 set relativenumber
 
-nnoremap <leader>n :r!new_note.sh<CR>
+nnoremap <leader>n :r ! sh ~/.local/bin/new-note.sh<CR>
