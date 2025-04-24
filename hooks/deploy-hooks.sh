@@ -2,11 +2,11 @@
 
 # Define the list of target directories as a space-separated string
 TARGET_DIRECTORIES="
-    ${HOME}/Code/3PC/3pc-web-back
-    ${HOME}/Code/3PC/3pc-web-front
-    ${HOME}/Code/3PC/mirrhia-etl
-    ${HOME}/Code/3PC/mirrhia-hub
-    ${HOME}/Code/3PC/mirrhia-report
+    ${FOLDER_3PC}/3pc-web-back
+    ${FOLDER_3PC}/3pc-web-front
+    ${FOLDER_3PC}/mirrhia-etl
+    ${FOLDER_3PC}/mirrhia-hub
+    ${FOLDER_3PC}/mirrhia-report
 "
 
 # Path to the git hook file
