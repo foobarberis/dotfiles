@@ -1,5 +1,5 @@
 [core]
-	editor = vim
+	editor = $EDITOR
 [user]
 	name = Matthieu Barberis
 	email = foobarberis@gmail.com

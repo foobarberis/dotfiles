@@ -1,11 +1,11 @@
 let mapleader = " "
 
-syntax off
+syntax on
 set mouse=a
 set ruler
 set incsearch
 set laststatus=2
-set autoindent tabstop=4 shiftwidth=4 expandtab
+set autoindent tabstop=2 shiftwidth=2 expandtab
 set number relativenumber
 
 " Threshold for reporting number of lines changed.
