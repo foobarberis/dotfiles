@@ -26,7 +26,7 @@ cp .env .bashrc .bash_aliases .tmux.conf .vimrc ${HOME}
 
 # Deploy Alacritty configuration
 cp alacritty.toml ${ALACRITTY_CONFIG_DIR_UNIX}
-if [ -d "${ALACRITTY_CONFIG_DIR_UNIX}" ]; then
+if [ -d "${ALACRITTY_CONFIG_DIR_WINDOWS}" ]; then
   cp alacritty.toml ${ALACRITTY_CONFIG_DIR_WINDOWS}
 fi
 
