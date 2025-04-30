@@ -1,7 +1,7 @@
-[general]
-import = [
-    "./themes/modus_operandi.toml"
-]
+# [general]
+# import = [
+#     "./themes/modus_vivendi.toml"
+# ]
 
 [window.padding]
 x = 10
