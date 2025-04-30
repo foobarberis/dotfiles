@@ -1,6 +1,6 @@
 [general]
 import = [
-    "./themes/themes/argonaut.toml"
+    "./themes/modus_operandi.toml"
 ]
 
 [window.padding]
