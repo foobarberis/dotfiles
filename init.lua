@@ -24,3 +24,4 @@ vim.api.nvim_set_keymap("n", "<leader>n", ":r !sh ~/.local/bin/new-note.sh<CR>",
 
 vim.cmd("aunmenu PopUp.How-to\\ disable\\ mouse")
 vim.cmd("aunmenu PopUp.-1-")
+vim.cmd("colorscheme sorbet")
