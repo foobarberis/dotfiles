@@ -1,40 +1,42 @@
 #!/bin/sh
 
-NVIM_CONFIG_DIR=${HOME}/.config/nvim
-ALACRITTY_CONFIG_DIR_UNIX=${HOME}/.config/alacritty
-ALACRITTY_CONFIG_DIR_WINDOWS=/mnt/c/Users/16018659/AppData/Roaming/alacritty 
+NVIM_CONF_DIR=".config/nvim/"
+ALAC_CONF_DIR=".config/alacritty/"
+ROAMING_DIR="/mnt/c/Users/16018659/AppData/Roaming"
 
 # Create necessary directories if they do not exist
-mkdir -p ${HOME}/.ssh \
-         ${HOME}/.local/bin \
-         ${NVIM_CONFIG_DIR} \
-         ${ALACRITTY_CONFIG_DIR_UNIX} \
-         ${FOLDER_FILES} \
-         ${FOLDER_DOCUMENTS} \
-         ${FOLDER_CODE} \
-         ${FOLDER_AUDIO} \
-         ${FOLDER_VIDEO} \
-         ${FOLDER_PICTURES} \
-         ${FOLDER_GAMES}
+mkdir -p "${HOME}/.ssh" \
+         "${HOME}/.local/bin" \
+         "${NVIM_CONF_DIR}" \
+         "${ALAC_CONF_DIR}" \
+         "${FOLDER_FILES}" \
+         "${FOLDER_DOCUMENTS}" \
+         "${FOLDER_CODE}" \
+         "${FOLDER_AUDIO}" \
+         "${FOLDER_VIDEO}" \
+         "${FOLDER_PICTURES}" \
+         "${FOLDER_GAMES}"
 
 # On macOS .bash_profile is read instead of .bashrc
-cp .bashrc ${HOME}/.bash_profile
-cp .bashrc ${HOME}/.profile
+cp .bashrc "${HOME}/.bash_profile"
+cp .bashrc "${HOME}/.profile"
 
 # Deploy dotfiles
-cp .env .bashrc .bash_aliases .tmux.conf .vimrc ${HOME}
+cp .env .bashrc .bash_aliases .tmux.conf .vimrc "${HOME}"
 
 # Deploy Alacritty configuration
-cp alacritty.toml ${ALACRITTY_CONFIG_DIR_UNIX}
-if [ -d "${ALACRITTY_CONFIG_DIR_WINDOWS}" ]; then
-  cp alacritty.toml ${ALACRITTY_CONFIG_DIR_WINDOWS}
+rsync -a --delete "${ALAC_CONF_DIR}" "${HOME}/${ALAC_CONF_DIR}" 
+if [ -d "${ALAC_CONF_DIR_WINDOWS}" ]; then
+  ALAC_CONF_DIR_WINDOWS="${ROAMING_DIR}/alacritty/"
+  mkdir -p "${ALAC_CONF_DIR_WINDOWS}"
+  rsync -a --delete "${ALAC_CONF_DIR}" "${ALAC_CONF_DIR_WINDOWS}"
 fi
 
 # Deploy Neovim configuration
-cp init.lua ${NVIM_CONFIG_DIR}
+rsync -a --delete "${NVIM_CONF_DIR}" "${HOME}/${NVIM_CONF_DIR}" 
 
 # Deploy personal scripts
-chmod +x ./bin/* && cp ./bin/* ~/.local/bin
+chmod +x ./bin/* && cp ./bin/* "${HOME}/.local/bin"
 
 # Deploy SSH configuration
-cp ssh_config ${HOME}/.ssh/config
+cp ssh_config "${HOME}/.ssh/config"
