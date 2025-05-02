@@ -27,7 +27,7 @@ cp .env .bashrc .bash_aliases .vimrc "${HOME}"
 
 # Deploy Alacritty configuration
 rsync -a --delete "${ALAC_CONF_DIR}" "${HOME}/${ALAC_CONF_DIR}" 
-if [ -d "${ALAC_CONF_DIR_WINDOWS}" ]; then
+if [ -d "${ROAMING_DIR}" ]; then
   ALAC_CONF_DIR_WINDOWS="${ROAMING_DIR}/alacritty/"
   mkdir -p "${ALAC_CONF_DIR_WINDOWS}"
   rsync -a --delete "${ALAC_CONF_DIR}" "${ALAC_CONF_DIR_WINDOWS}"
