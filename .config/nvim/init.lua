@@ -49,5 +49,5 @@ vim.cmd("aunmenu PopUp.How-to\\ disable\\ mouse")
 vim.cmd("aunmenu PopUp.-1-")
 
 -- Set "quiet" colorscheme.
-vim.cmd("colorscheme sorbet")
+vim.cmd("colorscheme modus_vivendi")
 
