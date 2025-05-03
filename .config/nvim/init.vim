@@ -75,9 +75,10 @@ highlight Keyword gui=bold
 highlight Comment gui=italic
 " Change color of constants
 highlight Constant guifg=#999999
-" Change color of Visual selection
-highlight Visual guibg=#303030
-highlight VisualNC guibg=#303030
+" Change color of Visual selection. Make the change persist even when changing
+" colorscheme.
+autocmd ColorScheme * highlight Visual guibg=#303030 guifg=NONE gui=NONE
+autocmd ColorScheme * highlight VisualNC guibg=#303030 guifg=NONE gui=NONE
 
 "" Clipboard
 
