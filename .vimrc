@@ -24,7 +24,6 @@ set nobackup noswapfile
 "" Line numbers & display settings
 " Show line numbers
 set number
-" set relativenumber
 " Highlight the current cursor line
 set cursorline
 " Keep at least 2 lines above/below cursor when scrolling
@@ -59,6 +58,8 @@ set tabstop=2 shiftwidth=2 softtabstop=2
 
 "" UI Enhancements
 
+" Enable syntax highlighting
+syntax on
 " Highlight matching parentheses, brackets, braces
 set showmatch
 " Show cursor position
