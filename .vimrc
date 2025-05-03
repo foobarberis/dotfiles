@@ -1,9 +1,3 @@
-" vim: $HOME/.vimrc
-" nvim: $HOME/.config/nvim/init.vim
-" ln -s $HOME/.config/nvim/init.vim $HOME/.vimrc
-" https://gist.github.com/mendeza/e0c4fbb5592ad52f5eca77ed5873a46b
-" ---------------------------------------------------------------------------
-
 "" General settings
 
 " Set leader key to space for easier shortcuts
@@ -22,6 +16,7 @@ set backspace=indent,eol,start
 set nobackup noswapfile
 
 "" Line numbers & display settings
+
 " Show line numbers
 set number
 " Highlight the current cursor line
