@@ -1,12 +1,8 @@
 " vim: $HOME/.vimrc
 " nvim: $HOME/.config/nvim/init.vim
 " ln -s $HOME/.config/nvim/init.vim $HOME/.vimrc
+" https://gist.github.com/mendeza/e0c4fbb5592ad52f5eca77ed5873a46b
 " ---------------------------------------------------------------------------
-
-"" Neovim specific settings
-
-silent! aunmenu PopUp.How-to\ disable\ mouse 
-silent! aunmenu PopUp.-1-
 
 "" General settings
 
@@ -121,6 +117,20 @@ set hidden
 "" Plugins
 
 call plug#begin('~/.local/share/nvim/plugged')
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 call plug#end()
 
+" nvim-tresitter configuration
+lua << EOF
+  require('nvim-treesitter.configs').setup {
+    ensure_installed = { "lua", "vim", "html", "css", "javascript", "c", "cpp", "xml", "yaml", "bash", "dockerfile" },
+    highlight = { enable = true },
+    indent = { enable = true }
+  }
+EOF
+
+"" Neovim specific settings
+
+" Remove "How to disable mouse" entry from the menu
+silent! aunmenu PopUp.How-to\ disable\ mouse 
+silent! aunmenu PopUp.-1-
