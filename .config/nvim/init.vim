@@ -77,6 +77,8 @@ highlight Comment gui=italic
 highlight Constant guifg=#999999
 " Change color of Visual selection. Make the change persist even when changing
 " colorscheme.
+highlight Visual guibg=#303030 guifg=NONE gui=NONE
+highlight VisualNC guibg=#303030 guifg=NONE gui=NONE
 autocmd ColorScheme * highlight Visual guibg=#303030 guifg=NONE gui=NONE
 autocmd ColorScheme * highlight VisualNC guibg=#303030 guifg=NONE gui=NONE
 
