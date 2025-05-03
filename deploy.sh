@@ -1,6 +1,5 @@
 #!/bin/sh
 
-NVIM_CONF_DIR=".config/nvim/"
 ALAC_CONF_DIR=".config/alacritty/"
 TMUX_CONF_DIR=".config/tmux/"
 ROAMING_DIR="/mnt/c/Users/16018659/AppData/Roaming"
@@ -8,7 +7,6 @@ ROAMING_DIR="/mnt/c/Users/16018659/AppData/Roaming"
 # Create necessary directories if they do not exist
 mkdir -p "${HOME}/.ssh" \
          "${HOME}/.local/bin" \
-         "${NVIM_CONF_DIR}" \
          "${ALAC_CONF_DIR}" \
          "${FOLDER_FILES}" \
          "${FOLDER_DOCUMENTS}" \
@@ -33,9 +31,8 @@ if [ -d "${ROAMING_DIR}" ]; then
   rsync -a --delete "${ALAC_CONF_DIR}" "${ALAC_CONF_DIR_WINDOWS}"
 fi
 
-# Deploy Vim / Neovim configuration
-rsync -a --delete "${NVIM_CONF_DIR}" "${HOME}/${NVIM_CONF_DIR}" 
-cp ./.config/nvim/init.vim ${HOME}/.vimrc
+# Deploy Vim configuration
+cp ./.vimrc ${HOME}/
 
 # Deploy Tmux configuration
 rsync -a --delete "${TMUX_CONF_DIR}" "${HOME}/${TMUX_CONF_DIR}" 
