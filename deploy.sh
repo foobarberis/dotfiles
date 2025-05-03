@@ -33,8 +33,9 @@ if [ -d "${ROAMING_DIR}" ]; then
   rsync -a --delete "${ALAC_CONF_DIR}" "${ALAC_CONF_DIR_WINDOWS}"
 fi
 
-# Deploy Neovim configuration
+# Deploy Vim / Neovim configuration
 rsync -a --delete "${NVIM_CONF_DIR}" "${HOME}/${NVIM_CONF_DIR}" 
+cp ./.config/nvim/init.vim ${HOME}/.vimrc
 
 # Deploy Tmux configuration
 rsync -a --delete "${TMUX_CONF_DIR}" "${HOME}/${TMUX_CONF_DIR}" 
