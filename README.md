@@ -1,1 +1,1 @@
-apt-get install tmux neovim fzf ripgrep shellcheck tree mpv rsync
+apt-get install tmux neovim vim fzf ripgrep shellcheck tree mpv rsync
