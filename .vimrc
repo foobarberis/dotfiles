@@ -44,8 +44,13 @@ autocmd ColorScheme * highlight Visual guibg=#303030 guifg=NONE gui=NONE
 autocmd ColorScheme * highlight VisualNC guibg=#303030 guifg=NONE gui=NONE 
 
 " Clipboard
-set clipboard=unnamed " Use system clipboard (macOS)
-" set clipboard=unnamedplus " Use system clipboard (Linux)
+if system('uname -s') == "Darwin\n"
+  " macOS
+  set clipboard=unnamed
+else
+  "Linux
+  set clipboard=unnamedplus
+endif
 
 " Mappings
 nnoremap <leader>n :r !sh ~/.local/bin/new-note.sh<CR> " Create a new note using an external script
