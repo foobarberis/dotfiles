@@ -29,6 +29,7 @@ set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
 
 " UI Enhancements
 syntax on " Enable syntax highlighting
+set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
 set showmatch " Highlight matching parentheses, brackets, braces
 set ruler " Show cursor position
 set termguicolors " Enable 24-bit colors in the terminal
