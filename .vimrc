@@ -34,8 +34,8 @@ set ruler " Show cursor position
 set termguicolors " Enable 24-bit colors in the terminal
 set bg=dark " Use a dark background
 colorscheme quiet " Set color scheme
-highlight Keyword gui=bold " Make keywords bold
-highlight Comment gui=italic " Make comments italic
+highlight Keyword cterm=bold gui=bold " Make keywords bold
+highlight Comment cterm=italic gui=italic " Make comments italic
 highlight Constant guifg=#999999 " Change color of constants
 highlight Visual guibg=#303030 guifg=NONE gui=NONE " Change color of Visual selection
 highlight VisualNC guibg=#303030 guifg=NONE gui=NONE 
