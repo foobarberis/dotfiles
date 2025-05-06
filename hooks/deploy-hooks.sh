@@ -8,6 +8,7 @@ TARGET_DIRECTORIES="
     ${FOLDER_3PC}/mirrhia-etl
     ${FOLDER_3PC}/mirrhia-hub
     ${FOLDER_3PC}/mirrhia-report
+    ${FOLDER_3PC}/microbio-connectivity
 "
 
 # Path to the git hook file
