@@ -30,6 +30,7 @@ alias gpull='git pull'
 alias gbran='git branch'
 alias gblam='git blame'
 alias gchec='git checkout'
+alias gshow='git show'
 
 # Navigation
 alias dot='cd ${FOLDER_CODE}/dotfiles'
