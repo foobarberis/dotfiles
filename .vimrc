@@ -36,6 +36,7 @@ set termguicolors " Enable 24-bit colors in the terminal
 set bg=dark " Use a dark background
 colorscheme quiet " Set color scheme
 highlight link yamlBlockMappingKey Statement " Make YAML keywords bold
+highlight link tomlTable Statement " Make TOML keywords bold
 highlight Statement cterm=bold gui=bold " Make keywords bold
 highlight Comment cterm=italic gui=italic " Make comments italic
 highlight Constant guifg=#999999 " Change color of constants
