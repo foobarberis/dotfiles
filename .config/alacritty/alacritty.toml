@@ -7,11 +7,11 @@ size = 16.0
 
 [font.normal]
 family = "Iosevka Term"
-style = "Extended"
+style = "Extralight Extended"
 
 [font.bold]
 family = "Iosevka Term"
-style = "Bold Extended"
+style = "Extrabold Extended"
 
 [font.bold_italic]
 family = "Iosevka Term"
@@ -19,7 +19,7 @@ style = "Bold Extended Italic"
 
 [font.italic]
 family = "Iosevka Term"
-style = "Extended Italic"
+style = "Thin Extended Italic"
 
 [selection]
 save_to_clipboard = true
