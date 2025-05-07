@@ -35,7 +35,8 @@ set ruler " Show cursor position
 set termguicolors " Enable 24-bit colors in the terminal
 set bg=dark " Use a dark background
 colorscheme quiet " Set color scheme
-highlight Keyword cterm=bold gui=bold " Make keywords bold
+highlight link yamlBlockMappingKey Statement " Make YAML keywords bold
+highlight Statement cterm=bold gui=bold " Make keywords bold
 highlight Comment cterm=italic gui=italic " Make comments italic
 highlight Constant guifg=#999999 " Change color of constants
 highlight Visual guibg=#303030 guifg=NONE gui=NONE " Change color of Visual selection
@@ -53,7 +54,10 @@ else
 endif
 
 " Mappings
-nnoremap <leader>n :r !sh ~/.local/bin/new-note.sh<CR> " Create a new note using an external script
+" Create a new note using an external script
+nnoremap <leader>n :r !sh ~/.local/bin/new-note.sh<CR>
+" Display highlight groups information about the word under the curor
+map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
 " Wildmenu
 set wildmenu " Enhance command-line completion
