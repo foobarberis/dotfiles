@@ -1,20 +1,18 @@
 #!/bin/sh
 
-ALAC_CONF_DIR=".config/alacritty/"
-TMUX_CONF_DIR=".config/tmux/"
-ROAMING_DIR="/mnt/c/Users/16018659/AppData/Roaming"
-
 # Create necessary directories if they do not exist
 mkdir -p "${HOME}/.ssh" \
          "${HOME}/.local/bin" \
-         "${ALAC_CONF_DIR}" \
          "${FOLDER_FILES}" \
          "${FOLDER_DOCUMENTS}" \
          "${FOLDER_CODE}" \
          "${FOLDER_AUDIO}" \
          "${FOLDER_VIDEO}" \
          "${FOLDER_PICTURES}" \
-         "${FOLDER_GAMES}"
+         "${FOLDER_GAMES}" \
+         "${HOME}/.config/nvim" \
+         "${HOME}/.config/tmux" \
+         "${HOME}/.config/alacritty"
 
 # On macOS .bash_profile is read instead of .bashrc
 cp .bashrc "${HOME}/.bash_profile"
@@ -23,19 +21,22 @@ cp .bashrc "${HOME}/.profile"
 # Deploy dotfiles
 cp .env .bashrc .bash_aliases .vimrc "${HOME}"
 
-# Deploy Alacritty configuration
-rsync -a --delete "${ALAC_CONF_DIR}" "${HOME}/${ALAC_CONF_DIR}" 
+# Deploy Alacritty configuration for Linux / macOS
+cp ./.config/alacritty/alacritty.toml ~/.config/alacritty/
+
+# Deploy Alacritty configuration for Windows
+ROAMING_DIR="/mnt/c/Users/16018659/AppData/Roaming"
 if [ -d "${ROAMING_DIR}" ]; then
-  ALAC_CONF_DIR_WINDOWS="${ROAMING_DIR}/alacritty/"
-  mkdir -p "${ALAC_CONF_DIR_WINDOWS}"
-  rsync -a --delete "${ALAC_CONF_DIR}" "${ALAC_CONF_DIR_WINDOWS}"
+  mkdir -p "${ROAMING_DIR}/alacritty/"
+  cp ./.config/alacritty/alacritty.toml ${ROAMING_DIR}/alacritty/
 fi
 
 # Deploy Vim configuration
-cp ./.vimrc ${HOME}/
+cp ./.vimrc "${HOME}"/
+cp ./.vimrc ~/.config/nvim/init.vim
 
 # Deploy Tmux configuration
-rsync -a --delete "${TMUX_CONF_DIR}" "${HOME}/${TMUX_CONF_DIR}" 
+cp ./.config/tmux/tmux.conf ~/.config/tmux/
 
 # Deploy personal scripts
 chmod +x ./bin/* && cp ./bin/* "${HOME}/.local/bin"
