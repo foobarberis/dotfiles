@@ -20,20 +20,22 @@ alias fls='ls "$(fzf)"'
 alias fmpv='mpv --fs "$(fzf)"'
 
 # Git
-alias glog='git log'
-alias gadd='git add'
-alias gdiff='git diff'
-alias gstat='git status'
-alias gcomm='git commit'
-alias gpush='git push'
-alias gpull='git pull'
-alias gbran='git branch'
-alias gblam='git blame'
-alias gchec='git checkout'
-alias gshow='git show'
+alias glo='git log'
+alias gad='git add'
+alias gdi='git diff'
+alias gst='git status'
+alias gco='git commit'
+alias gps='git push'
+alias gpl='git pull'
+alias gbr='git branch'
+alias gbl='git blame'
+alias gch='git checkout'
+alias gsh='git show'
+alias gre='git rebase'
+alias gst='git stash'
 
 # Navigation
-alias dot='cd ${FOLDER_CODE}/dotfiles'
+alias dot="cd ${FOLDER_CODE}/dotfiles"
 alias home="cd ${FOLDER_HOME}"
 alias code="cd ${FOLDER_CODE}"
 alias files="cd ${FOLDER_FILES}"
