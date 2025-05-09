@@ -32,7 +32,7 @@ alias gbl='git blame'
 alias gch='git checkout'
 alias gsh='git show'
 alias gre='git rebase'
-alias gst='git stash'
+alias gash='git stash'
 
 # Navigation
 alias dot="cd ${FOLDER_CODE}/dotfiles"
