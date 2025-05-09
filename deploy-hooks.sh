@@ -12,7 +12,7 @@ TARGET_DIRECTORIES="
 "
 
 # Path to the git hook file
-HOOK_FILE="prepare-commit-msg"
+HOOK_FILE="./bin/prepare-commit-msg"
 
 # Iterate through each directory
 for DIR in $TARGET_DIRECTORIES; do
