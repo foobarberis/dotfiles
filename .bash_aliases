@@ -20,7 +20,6 @@ alias fls='ls "$(fzf)"'
 alias fmpv='mpv --fs "$(fzf)"'
 
 # Git
-
 alias gad='git add'
 alias gash='git stash'
 alias gbl='git blame'
@@ -29,6 +28,7 @@ alias gch='git checkout'
 alias gco='git commit'
 alias gdi='git diff'
 alias glo='git log'
+alias gme='git merge'
 alias gpl='git pull'
 alias gps='git push'
 alias gre='git rebase'
