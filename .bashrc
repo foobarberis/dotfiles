@@ -6,6 +6,60 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# Terminal
+export TERM='tmux-256color'
+
+export FOLDER_FILES=${HOME}/Files
+
+# Add 'storage/shared' prefix if we are running on termux
+if [ -d ${HOME}/storage ]; then
+    export FOLDER_FILES=${HOME}/storage/shared/Files
+fi
+
+export FOLDER_CODE=${FOLDER_FILES}/Code
+export FOLDER_3PC=${FOLDER_CODE}/3PC
+export FOLDER_DOCUMENTS=${FOLDER_FILES}/Documents
+export FOLDER_AUDIO=${FOLDER_FILES}/Audio
+export FOLDER_VIDEO=${FOLDER_FILES}/Video
+export FOLDER_GAMES=${FOLDER_FILES}/Games
+export FOLDER_PICTURES=${FOLDER_FILES}/Pictures
+
+# Directories to be added to PATH
+export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
+
+# Locale settings
+# Might require you to run `sudo locale-gen en_US.UTF-8`
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# Default command for fzf
+export FZF_DEFAULT_COMMAND='find . -type f -not -path "./.git/*"'
+
+# Editor and pager
+export EDITOR="vim"
+export VISUAL="$EDITOR"
+export PAGER="less"
+
+# History settings
+export HISTSIZE=""
+export HISTFILESIZE=""
+export HISTTIMEFORMAT="%F %T "
+export HISTCONTROL=ignoredups:ignorespace 
+
+
+parse_git_branch() {
+  git branch 2>/dev/null | grep '*' | awk '{print $2}'
+}
+
+# Source the script in charge of getting the branch name
+. ${HOME}/.local/bin/git-prompt.sh
+
+# Display a new line after the end of a command's output
+export PROMPT_COMMAND='echo'
+# PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+
+export PS1='--[ \u@\h \w$(__git_ps1 " (%s)") ]--\n'
+
 # Enable vi-mode and re-bind Ctrl-L to clear
 set -o vi
 bind -m vi-command 'Control-l: clear-screen'
@@ -22,3 +76,4 @@ shopt -s histappend
 
 # Prevent accidental overwrites when using IO redirection
 set -o noclobber
+
