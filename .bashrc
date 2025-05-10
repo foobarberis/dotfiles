@@ -56,8 +56,8 @@ parse_git_branch() {
 
 # Display a new line after the end of a command's output
 export PROMPT_COMMAND='echo'
-# PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
 
+# Define prompt text
 export PS1='--[ \u@\h \w$(__git_ps1 " (%s)") ]--\n'
 
 # Enable vi-mode and re-bind Ctrl-L to clear
