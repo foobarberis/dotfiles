@@ -46,19 +46,12 @@ export HISTFILESIZE=""
 export HISTTIMEFORMAT="%F %T "
 export HISTCONTROL=ignoredups:ignorespace 
 
-
-parse_git_branch() {
-  git branch 2>/dev/null | grep '*' | awk '{print $2}'
-}
-
 # Source the script in charge of getting the branch name
 . ${HOME}/.local/bin/git-prompt.sh
 
-# Display a new line after the end of a command's output
-export PROMPT_COMMAND='echo'
-
-# Define prompt text
-export PS1='--[ \u@\h \w$(__git_ps1 " (%s)") ]--\n'
+# Define prompt text. Shows user, host, current directory, Git branch (if
+# any), and last command's exit status.
+export PS1='\n--[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]--\n'
 
 # Enable vi-mode and re-bind Ctrl-L to clear
 set -o vi
