@@ -19,7 +19,7 @@ cp .bashrc "${HOME}/.bash_profile"
 cp .bashrc "${HOME}/.profile"
 
 # Deploy dotfiles
-cp .env .bashrc .bash_aliases .vimrc "${HOME}"
+cp .bashrc .bash_aliases .vimrc "${HOME}"
 
 # Deploy Alacritty configuration for Linux / macOS
 cp ./.config/alacritty/alacritty.toml ~/.config/alacritty/
