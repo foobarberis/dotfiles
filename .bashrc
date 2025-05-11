@@ -51,7 +51,7 @@ export HISTCONTROL=ignoredups:ignorespace
 
 # Define prompt text. Shows user, host, current directory, Git branch (if
 # any), and last command's exit status.
-export PS1='\n--[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]--\n'
+export PS1='\n--[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]--\n↪ '
 
 # Enable vi-mode and re-bind Ctrl-L to clear
 set -o vi
