@@ -5,6 +5,7 @@ TARGET_DIRECTORIES="
     ${FOLDER_3PC}/3pc-web-back
     ${FOLDER_3PC}/3pc-devops
     ${FOLDER_3PC}/3pc-web-front
+    ${FOLDER_3PC}/3pc-installer
     ${FOLDER_3PC}/mirrhia-etl
     ${FOLDER_3PC}/mirrhia-hub
     ${FOLDER_3PC}/mirrhia-report
