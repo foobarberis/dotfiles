@@ -44,6 +44,7 @@ highlight Visual guibg=#303030 guifg=NONE gui=NONE " Change color of Visual sele
 highlight VisualNC guibg=#303030 guifg=NONE gui=NONE 
 autocmd ColorScheme * highlight Visual guibg=#303030 guifg=NONE gui=NONE 
 autocmd ColorScheme * highlight VisualNC guibg=#303030 guifg=NONE gui=NONE 
+autocmd BufNewFile,BufRead *Jenkinsfile* set syntax=groovy " Enable syntax highlight for Groovy files
 
 " Clipboard
 if system('uname -s') == "Darwin\n"
