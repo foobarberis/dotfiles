@@ -3,7 +3,7 @@ let mapleader=" " " Set leader key to space for easier shortcuts
 set encoding=utf-8 " Use UTF-8 encoding
 set mouse=a " Enable mouse support in all modes
 set autoread " Automatically reload files changed outside Vim
-set visualbell " Flash the screen instead of beeping on errors
+set belloff=all " Disable bell sound / flash
 set backspace=indent,eol,start " Make backspace work more intuitively
 set nobackup noswapfile " Do not create backup or swap files
 
