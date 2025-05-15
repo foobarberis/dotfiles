@@ -77,3 +77,7 @@ let g:netrw_browse_split = 3 " Open netrw file explorer in a new tab
 set autochdir " Change working directory to the current file
 set hidden " Allow switching buffers without saving
 
+" Gvim settings
+language messages English_United States
+set langmenu=en_US.UTF-8
+set guifont=Iosevka_Extended:h14:cANSI
