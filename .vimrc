@@ -77,12 +77,6 @@ let g:netrw_browse_split = 3 " Open netrw file explorer in a new tab
 set autochdir " Change working directory to the current file
 set hidden " Allow switching buffers without saving
 
-<<<<<<< HEAD
-" Gvim settings
-language messages English_United States
-set langmenu=en_US.UTF-8
-set guifont=Iosevka_Extended:h14:cANSI
-=======
 function! SelectFile()
   let tmp = tempname()
   execute '!fzf >'.tmp
@@ -92,3 +86,11 @@ function! SelectFile()
 endfunction
 
 nnoremap <Leader>f :call SelectFile()<CR><CR>
+
+" Gvim settings
+let $LANG = 'en_US'
+set langmenu=en_US.UTF-8
+
+set guifont=Iosevka-Fixed-Extended:h18
+set guioptions=egmtT
+
