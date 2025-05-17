@@ -23,7 +23,7 @@ cp .bashrc "${HOME}/.profile"
 cp .bashrc .bash_aliases .vimrc "${HOME}"
 
 # Deploy Alacritty configuration for Linux / macOS
-cp ./.config/alacritty/alacritty.toml ~/.config/alacritty/
+cp ./.config/alacritty/alacritty.toml ${HOME}/.config/alacritty/
 
 # Deploy Alacritty configuration for Windows
 ROAMING_DIR="/mnt/c/Users/16018659/AppData/Roaming"
@@ -36,10 +36,10 @@ fi
 cp ./.vimrc "${HOME}"/
 
 # Deploy Tmux configuration
-cp ./.config/tmux/tmux.conf ~/.config/tmux/
+cp ./.config/tmux/tmux.conf ${HOME}/.config/tmux/
 
 # Deploy Emacs configuration
-cp emacs.org ${HOME}/.emacs.d/
+cp ./emacs.org ${HOME}/.emacs.d/
 
 # Check if Emacs is available, then tangle the Org file
 if command -v emacs >/dev/null 2>&1; then
