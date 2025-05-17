@@ -362,15 +362,15 @@ basis using =#+STARTUP: inlineimages= or =#+STARTUP: noinlineimages=
 #+end_src
 
 ** Packages
-*** [[https://github.com/protesilaos/ef-themes][ef-themes]]
-
-Install =ef-themes= and select the colorscheme.
+*** [[https://github.com/protesilaos/ef-themes][ef-themes]] / [[https://github.com/protesilaos/doric-themes][doric-themes]]
 
 #+begin_src emacs-lisp
   (use-package ef-themes
-    :straight t
-    :config
-    (load-theme 'ef-arbutus t))
+    :straight t)
+
+  (use-package doric-themes
+    :straight (doric-themes :type git :host github :repo "protesilaos/doric-themes"))
+
 #+end_src
 
 *** [[https://github.com/hadronzoo/theme-changer][theme-changer]]
@@ -387,7 +387,7 @@ sunrise and sunset.
     (setq calendar-location-name "Rennes"
           calendar-latitude 48.08
   	calendar-longitude -1.68)
-    (change-theme 'ef-arbutus 'ef-dream))
+    (change-theme 'doric-fire 'doric-water))
 #+end_src
 
 *** [[https://github.com/emacsmirror/lilypond][lilypond]]
