@@ -1,7 +1,3 @@
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # Terminal
 export TERM='tmux-256color'
 
@@ -66,3 +62,6 @@ shopt -s histappend
 # Prevent accidental overwrites when using IO redirection
 set -o noclobber
 
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
