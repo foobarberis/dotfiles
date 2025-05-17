@@ -3,6 +3,7 @@
 # Create necessary directories if they do not exist
 mkdir -p "${HOME}/.ssh" \
          "${HOME}/.local/bin" \
+         "${HOME}/.emacs.d" \
          "${FOLDER_FILES}" \
          "${FOLDER_DOCUMENTS}" \
          "${FOLDER_CODE}" \
@@ -33,10 +34,17 @@ fi
 
 # Deploy Vim configuration
 cp ./.vimrc "${HOME}"/
-cp ./.vimrc ~/.config/nvim/init.vim
 
 # Deploy Tmux configuration
 cp ./.config/tmux/tmux.conf ~/.config/tmux/
+
+# Deploy Emacs configuration
+cp emacs.org ${HOME}/.emacs.d/
+
+# Check if Emacs is available, then tangle the Org file
+if command -v emacs >/dev/null 2>&1; then
+    emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file \"${HOME}/.emacs.d/emacs.org\")"
+fi
 
 # Deploy personal scripts
 chmod +x ./bin/* && cp ./bin/* "${HOME}/.local/bin"
