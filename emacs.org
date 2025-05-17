@@ -1,24 +1,11 @@
 #+startup: content indent
 #+property: header-args :tangle "init.el"
 
-* TODO vterm does not source .bashrc
-* TODO Install doric-themes
-* TODO Enable lexical binding
-;; -*- lexical-binding: t; -*-
 * TODO Install fontaine.el to be able to change font size dynamically.
 * TODO Set automatic tangle on save for this file
 * TODO Setup some treesitter parsers for most used languages
 * TODO Disable jinx-mode in programming mode
 * TODO Cleanup file and merge with dotfiles
-
-
-* How to compile Emacs on Ubuntu
-+ [[https://github.com/hubisan/emacs-wsl][How to use Emacs GUI on WSL2.]]
-+ [[https://harryrschwartz.com/2022/12/08/how-i-build-emacs-from-source-on-debian][How I build Emacs from source on Debian.]]
-
-** Dependencies
-+ vterm: cmake libtool-bin
-+ jinx: libenchant-2-dev pkgconf
 
 * Notes
 
@@ -39,10 +26,19 @@ The code below prevents =package.el= from loading packages before the
 init-file is loaded (see [[https://github.com/radian-software/straight.el?tab=readme-ov-file#getting-started][straight.el's documentation]]).
 
 #+begin_src emacs-lisp :tangle "early-init.el"
+  ;; -*- lexical-binding: t; -*-
+#+end_src
+
+#+begin_src emacs-lisp :tangle "early-init.el"
   (setq package-enable-at-startup nil)
 #+end_src
 
 * init.el
+
+#+begin_src emacs-lisp :tangle "init.el"
+  ;; -*- lexical-binding: t; -*-
+#+end_src
+
 ** Initialize straight.el and use-package
 *** [[https://github.com/radian-software/straight.el][straight.el]]
 
