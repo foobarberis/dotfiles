@@ -458,17 +458,6 @@ sunrise and sunset.
     (change-theme 'doric-fire 'doric-water))
 #+end_src
 
-*** [[https://github.com/emacsmirror/lilypond][lilypond]]
-
-Set the correct path to the LilyPond executable so that we can compile
-LilyPond code blocks from org-mode.
-
-#+begin_src emacs-lisp
-  (use-package ob-lilypond
-    :ensure nil
-    :custom ((org-babel-lilypond-commands '("/opt/homebrew/bin/lilypond" "open" "open") "Commands to run lilypond and view or play the results.")))
-#+end_src
-
 *** [[https://gitlab.com/phillord/org-drill][org-drill]]
 
 =org-drill= is an extension for =org-mode= which allows us to use
@@ -476,7 +465,7 @@ LilyPond code blocks from org-mode.
 
 #+begin_src emacs-lisp
   (use-package org-drill
-    :straight nil)
+    :straight t)
 #+end_src
 
 *** [[https://github.com/minad/vertico][vertico]]
