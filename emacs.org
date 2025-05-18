@@ -1,11 +1,9 @@
 #+startup: content indent
 #+property: header-args :tangle "init.el"
 
-* TODO Install fontaine.el to be able to change font size dynamically.
-* TODO Set automatic tangle on save for this file
+* TODO Install fontaine.el to be able to change font size dynamically and setup bold and italic fonts
 * TODO Setup some treesitter parsers for most used languages
-* TODO Disable jinx-mode in programming mode
-* TODO Cleanup file and merge with dotfiles
+* TODO Cleanup this file and merge Emacs notes to this file
 
 * Notes
 
@@ -35,7 +33,7 @@ init-file is loaded (see [[https://github.com/radian-software/straight.el?tab=re
 
 * init.el
 
-#+begin_src emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp
   ;; -*- lexical-binding: t; -*-
 #+end_src
 
@@ -366,7 +364,6 @@ basis using =#+STARTUP: inlineimages= or =#+STARTUP: noinlineimages=
 
   (use-package doric-themes
     :straight (doric-themes :type git :host github :repo "protesilaos/doric-themes"))
-
 #+end_src
 
 *** [[https://github.com/hadronzoo/theme-changer][theme-changer]]
@@ -678,7 +675,19 @@ list of dictionary words presented as a completion menu.
     :custom ((jinx-languages "fr_FR en_US" "Dictionary language codes, as a string separated by whitespace."))
     :hook (emacs-startup . global-jinx-mode)
     :bind (("M-$" . jinx-correct)
-  	 ("C-M-$" . jinx-languages)))
+  	 ("C-M-$" . jinx-languages))
+    :config
+    (dolist (hook '(text-mode-hook conf-mode-hook))
+      (add-hook hook #'jinx-mode)))
+#+end_src
+
+*** [[https://github.com/magit/magit][magit]]
+
+Magit is an interface to the version control system Git, implemented as an Emacs package.
+
+#+begin_src emacs-lisp
+  (use-package magit
+    :straight t)
 #+end_src
 
 ** Custom
