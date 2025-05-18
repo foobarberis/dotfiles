@@ -1,10 +1,6 @@
 #+startup: content indent
 #+property: header-args :tangle "init.el"
 
-* TODO Install fontaine.el to be able to change font size dynamically and setup bold and italic fonts
-* TODO Setup some treesitter parsers for most used languages
-* TODO Cleanup this file and merge Emacs notes to this file
-
 * Notes
 
 [[https://protesilaos.com/codelog/2024-11-28-basic-emacs-configuration/][Protesilaos Basic Emacs Configuration]]
@@ -12,11 +8,67 @@
 Use =org-babel-demarcate-block= to easily split a large code block
 into smaller ones.
 
-To filter a Dired buffer:
-  + =% m= marks files whose names mark a regexp.
-  + =t= toggles which files are marked.
-  + =k= kills the lines containing marked files.
-  + =g= to revert to the base view.
+- To filter a Dired buffer:
+  - =% m= marks files whose names mark a regexp.
+  - =t= toggles which files are marked.
+  - =k= kills the lines containing marked files.
+  - =g= to revert to the base view.
+
+-  Type =C-u C-c C-q= to align all tags in the current buffer.
+  
+- =icomplete-mode= and =fido-vertical-mode= can be used to create a
+  =vertico= like minibuffer experience.
+
+- =C-h C-q= will toggle display of a window showing popular commands
+  and their bindings.
+
+- =C-x C-e= in any buffer evaluates the Lisp form immediately before
+  point and prints its value in the echo area.
+
+- =M-x describe-keymap= allows us to see all keybindings for a
+  specific mode.
+
+- =C-u M-x eshell= to launch a new eshell session.
+
+- =C-x p f= to search for a file in a project.
+
+- =C-x h= (M-x mark-whole-buffer) then =C-M-\= (M-x indent-region) to
+  autoformat the whole buffer.
+
+- =C-u C-c C-c= to add or remove a checkbox from a plain list item in
+  org-mode. =C-c C-c= to check / uncheck the checkbox.
+
+- =M-x org-sort= to sort org-mode specific constructs i.e a sort a
+  plain list of org-style links alphabetically.
+
+- =C-S-<backspace>= to =kill-whole-line=.
+
+- =C-x n n= calls =narrow-to-region= which restrict editing in this
+  buffer to the current region. Use =C-x n w= to make the whole buffer
+  visible again.
+
+- =C-h= can be used during a keychord (=C-x v C-h= for example) to see
+  what completions exists for the unfinished keychord.
+
+- To easily rename files in Dired, use =C-x C-q= to switch to
+  =wdired-change-to-wdired-mode=, make the necessary changes then
+  press =C-x C-q= to switch back to the default mode.
+
+- Press =(= in Dired buffer to switch to a simpler view with less details.
+
+- To rotate an image and save it from Emacs:
+  - Open the image directory in dired
+  - Mark the image file with =m=
+  - =C-t d= (image-dired-display-thumbs)
+  - Then type =R= to rotate 90° clockwise or =L= for counter-clockwise
+
+- =hippie-expand= is a function capable of completing words or even
+  sentences by trying several completion methods.
+
+- =bs-show= can be used to display of a buffer selection screen.
+
+- To compile all =org-mode= code blocks to their respective files, run
+  =M-x org-babel-tangle= then =M-x org-babel-execute-buffer=.
 
 * early-init.el
 
@@ -96,6 +148,29 @@ the same as in the user's shell.
     :config
     (when (memq window-system '(mac ns x))
       (exec-path-from-shell-initialize)))
+#+end_src
+
+*** treesitter
+
+Call =treesit-install-language-grammar= to install one parser or evaluate this Lisp expression to install all parsers.
+
+#+begin_src emacs-lisp :tangle no
+(mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
+#+end_src
+
+#+begin_src emac-lisp
+(setq treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
+     (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+     (c "https://github.com/tree-sitter/tree-sitter-c")
+     (make "https://github.com/alemuller/tree-sitter-make")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 #+end_src
 
 ** Appearance
@@ -401,7 +476,7 @@ LilyPond code blocks from org-mode.
 
 #+begin_src emacs-lisp
   (use-package org-drill
-    :straight t)
+    :straight nil)
 #+end_src
 
 *** [[https://github.com/minad/vertico][vertico]]
