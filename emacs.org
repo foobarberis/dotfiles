@@ -737,12 +737,8 @@ list of dictionary words presented as a completion menu.
   (use-package jinx
     :straight t
     :custom ((jinx-languages "fr_FR en_US" "Dictionary language codes, as a string separated by whitespace."))
-    :hook (emacs-startup . global-jinx-mode)
     :bind (("M-$" . jinx-correct)
-  	 ("C-M-$" . jinx-languages))
-    :config
-    (dolist (hook '(text-mode-hook conf-mode-hook))
-      (add-hook hook #'jinx-mode)))
+  	 ("C-M-$" . jinx-languages)))
 #+end_src
 
 *** [[https://github.com/magit/magit][magit]]
