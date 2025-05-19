@@ -1,6 +1,10 @@
 #+startup: content indent
 #+property: header-args :tangle "init.el"
 
+* TODO Corfu does not display when pressing TAB and we cannot use M-Tab because of Windows hotkeys
+* TODO Left Alt + key for typing accentuated characters does not work
+* TODO Add a simpler binding to spaw new vterm instances (instead of =C-u 1 M-x vterm=)
+
 * Notes
 
 [[https://protesilaos.com/codelog/2024-11-28-basic-emacs-configuration/][Protesilaos Basic Emacs Configuration]]
