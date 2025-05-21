@@ -223,10 +223,17 @@ Set the font to be our beloved [[https://typeof.net/Iosevka/][Iosevka]].
 
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil
-                      :family  "Iosevka Extended"
+                      :family  "Iosevka"
                       :height  100
                       :weight 'normal
                       :width  'wide)
+
+  ;; For org-mode code blocks  
+  (set-face-attribute 'fixed-pitch nil
+                    :font "Iosevka"
+                    :height 100
+                    :weight 'normal
+                    :width  'wide)
 #+end_src
 
 Treat all themes as safe.
