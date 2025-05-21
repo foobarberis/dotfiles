@@ -1,14 +1,6 @@
 #+startup: content indent
 #+property: header-args :tangle "init.el"
 
-* TODO Corfu does not display when pressing TAB and we cannot use M-Tab because of Windows hotkeys
-* TODO Left Alt + key for typing accentuated characters does not work
-* TODO Setup shell integration for vterm
-* TODO Add a simpler binding to spaw new vterm instances (instead of =C-u 1 M-x vterm=)
-* TODO Define font used in org code blocks
-* TODO Disable vi mode in shell
-* TODO Update $EDITOR to Emacs ?
-
 * Notes
 
 [[https://protesilaos.com/codelog/2024-11-28-basic-emacs-configuration/][Protesilaos Basic Emacs Configuration]]
@@ -232,7 +224,7 @@ Set the font to be our beloved [[https://typeof.net/Iosevka/][Iosevka]].
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil
                       :family  "Iosevka Extended"
-                      :height  120
+                      :height  100
                       :weight 'normal
                       :width  'wide)
 #+end_src
@@ -741,9 +733,15 @@ scrolling, only the newly visible part of the text is checked if it
 has not been checked before. Each misspelling can be corrected from a
 list of dictionary words presented as a completion menu.
 
+On Debian-based systems you can install new dictionaries with =sudo apt-get install aspell-en hunspell-fr=.
+
 #+begin_src emacs-lisp
   (use-package jinx
     :straight t
+    :hook ((LaTeX-mode . jinx-mode)
+  (latex-mode . jinx-mode)
+  (markdown-mode . jinx-mode)
+  (org-mode . jinx-mode))
     :custom ((jinx-languages "fr_FR en_US" "Dictionary language codes, as a string separated by whitespace."))
     :bind (("M-$" . jinx-correct)
   	 ("C-M-$" . jinx-languages)))
