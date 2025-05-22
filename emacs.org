@@ -70,6 +70,8 @@ into smaller ones.
 - To compile all =org-mode= code blocks to their respective files, run
   =M-x org-babel-tangle= then =M-x org-babel-execute-buffer=.
 
+- =C-x 8 RET= to get a list of Unicode characters.
+
 * early-init.el
 
 The code below prevents =package.el= from loading packages before the
@@ -400,7 +402,7 @@ Disable right =option= key to avoid conflict with my =qwerty-fr=
 keyboard layout.
 
 #+begin_src emacs-lisp
-  (setq mac-right-option-modifier nil)
+  (setq mac-right-option-modifier nil
 #+end_src
 
 Unbind =suspend-frame= since it is annoying and not useful to me.
@@ -443,36 +445,36 @@ basis using =#+STARTUP: inlineimages= or =#+STARTUP: noinlineimages=
 #+begin_src emacs-lisp
   (use-package ef-themes
     :straight t)
+#+end_src
 
+  #+begin_src emacs-lisp
   (use-package doric-themes
     :straight (doric-themes :type git :host github :repo "protesilaos/doric-themes"))
-#+end_src
-
-*** [[https://github.com/hadronzoo/theme-changer][theme-changer]]
-
-Given a location and day/night color themes, this file provides a
-change-theme function that selects the appropriate theme based on
-whether it is day or night. It will continue to change themes at
-sunrise and sunset.
+  #+end_src
 
 #+begin_src emacs-lisp
-  (use-package theme-changer
-    :straight t
-    :config
-    (setq calendar-location-name "Rennes"
-          calendar-latitude 48.08
-  	calendar-longitude -1.68)
-    (change-theme 'doric-fire 'doric-water))
-#+end_src
+(load-theme 'ef-arbutus)
+  
+(defvar my/theme-list '(ef-arbutus ef-dream)
+  "List of themes to toggle between.")
 
-*** [[https://gitlab.com/phillord/org-drill][org-drill]]
+(defvar my/current-theme-index 0
+  "Index of the currently enabled theme in `my/theme-list`.")
 
-=org-drill= is an extension for =org-mode= which allows us to use
-=.org= files to produce flashcards to be memorised using spaced repetion.
+(defun my/load-theme-by-index (index)
+  "Load the theme at INDEX in `my/theme-list`, disabling others."
+  (when (nth index my/theme-list)
+    (mapc #'disable-theme custom-enabled-themes)
+    (load-theme (nth index my/theme-list) t)))
 
-#+begin_src emacs-lisp
-  (use-package org-drill
-    :straight t)
+(defun my/toggle-themes ()
+  "Toggle between themes listed in `my/theme-list`."
+  (interactive)
+  (setq my/current-theme-index
+        (mod (1+ my/current-theme-index) (length my/theme-list)))
+  (my/load-theme-by-index my/current-theme-index))
+  
+(global-set-key (kbd "<f9>") #'my/toggle-themes)  
 #+end_src
 
 *** [[https://github.com/minad/vertico][vertico]]
@@ -484,6 +486,29 @@ based on the default completion system.
   (use-package vertico
     :straight t
     :custom ((vertico-mode t "Enable vertico-mode")))
+#+end_src
+
+*** [[https://github.com/minad/marginalia][marginalia]]
+
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :straight t
+    :custom ((marginalia-mode t "Enable marginalia-mode")))
+#+end_src
+
+*** [[https://github.com/oantolin/orderless][orderless]]
+
+This package provides an =orderless= completion style that divides the
+pattern into space-separated components, and matches candidates that
+match all of the components in any order.
+
+#+begin_src emacs-lisp
+  (use-package orderless
+  :straight t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion))))
+  (completion-category-overrides '((eglot (styles . (orderless flex))))))
 #+end_src
 
 *** [[https://github.com/minad/consult][consult]]
@@ -599,14 +624,6 @@ completion function completing-read.
     )
 #+end_src
 
-*** [[https://github.com/minad/marginalia][marginalia]]
-
-#+begin_src emacs-lisp
-  (use-package marginalia
-    :straight t
-    :custom ((marginalia-mode t "Enable marginalia-mode")))
-#+end_src
-
 *** [[https://github.com/Wilfred/helpful][helpful]]
 
 Helpful is an alternative to the built-in Emacs help that provides
@@ -653,22 +670,7 @@ scheme.
           :hook (dired-mode . denote-dired-mode))
 #+end_src
 
-*** [[https://github.com/oantolin/orderless][orderless]]
-
-This package provides an =orderless= completion style that divides the
-pattern into space-separated components, and matches candidates that
-match all of the components in any order.
-
-#+begin_src emacs-lisp
-  (use-package orderless
-  :straight t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion))))
-  (completion-category-overrides '((eglot (styles . (orderless flex))))))
-#+end_src
-
-*** [[https://github.com/minad/corfu][corfu]]
+*** COMMENT [[https://github.com/minad/corfu][corfu]]
 
 Corfu enhances in-buffer completion with a small completion popup.
 
@@ -677,6 +679,7 @@ Corfu enhances in-buffer completion with a small completion popup.
     :straight t
     :custom
     (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corf  
     ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
     ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
     ;; (corfu-preview-current nil)    ;; Disable current candidate preview
@@ -712,6 +715,20 @@ Corfu enhances in-buffer completion with a small completion popup.
     ;; commands are hidden, since they are not used via M-x. This setting is
     ;; useful beyond Corfu.
     (read-extended-command-predicate #'command-completion-default-include-p))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package dabbrev
+  ;; Swap M-/ and C-M-/
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand))
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+  ;; Available since Emacs 29 (Use `dabbrev-ignored-buffer-regexps' on older Emacs)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'authinfo-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))  
 #+end_src
 
 *** [[https://github.com/susam/devil][devil]]
@@ -877,5 +894,6 @@ kill ring.
     (kill-new url)
     (message (concat "Copied URL: " url))))
 
-(define-key org-mode-map (kbd "C-x C-l") 'my/org-link-copy)
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-x C-l") #'my/org-link-copy))
 #+end_src
