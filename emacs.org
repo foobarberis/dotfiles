@@ -868,7 +868,7 @@ kill ring.
 
 #+begin_src emacs-lisp
 (defun my/org-link-copy (&optional arg)
-  "Extract URL from org-mode link and add it to kill ring."
+  "Extract URL from org-mode link and add it to the kill ring."
   (interactive "P")
   (let* ((link (org-element-lineage (org-element-context) '(link) t))
           (type (org-element-property :type link))

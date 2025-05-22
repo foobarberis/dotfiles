@@ -4,13 +4,6 @@ alias pkgupd='pkg update -y && pkg upgrade -y && pkg autoclean -y'
 
 alias l='ls -Alhp --color'
 
-# Editors
-alias vi="vim"
-
-# Files
-alias todo="${EDITOR} ${FOLDER_DOCUMENTS}/todo.txt"
-alias notes="${EDITOR} ${FOLDER_DOCUMENTS}/notes.txt"
-
 # FzF
 alias fvi='vi "$(fzf)"'
 alias fcd='cd "$(fzf)"'
