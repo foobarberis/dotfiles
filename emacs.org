@@ -189,7 +189,7 @@ Keep only the scratch buffer.
   (setq inhibit-startup-message t)
 #+end_src
 
-Disable the sroll bar.
+Disable the scroll bar.
 
 #+begin_src emacs-lisp
   (use-package scroll-bar
@@ -224,14 +224,14 @@ Set the font to be our beloved [[https://typeof.net/Iosevka/][Iosevka]].
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil
                       :family  "Iosevka"
-                      :height  100
+                      :height  120
                       :weight 'normal
                       :width  'wide)
 
   ;; For org-mode code blocks  
   (set-face-attribute 'fixed-pitch nil
                     :font "Iosevka"
-                    :height 100
+                    :height 120
                     :weight 'normal
                     :width  'wide)
 #+end_src
@@ -248,7 +248,7 @@ Disable hard-wrapping of long lines.
   (global-visual-line-mode 1)
 #+end_src
 
-Set the fringes (the grey borders on the left and right sides) to 5 be
+Set the fringes (the gray borders on the left and right sides) to 5 be
 pixels instead of 8.
 
 #+begin_src emacs-lisp
@@ -863,6 +863,19 @@ This function allow me to sort all headings in an org-mode buffer.
                   (my-org-sort-all))))
 #+end_src
 
-# Local Variables:
-# jinx-local-words: "Dired"
-# End:
+This function allows us to easily copy an org-mode link URL to the
+kill ring.
+
+#+begin_src emacs-lisp
+(defun my/org-link-copy (&optional arg)
+  "Extract URL from org-mode link and add it to kill ring."
+  (interactive "P")
+  (let* ((link (org-element-lineage (org-element-context) '(link) t))
+          (type (org-element-property :type link))
+          (url (org-element-property :path link))
+          (url (concat type ":" url)))
+    (kill-new url)
+    (message (concat "Copied URL: " url))))
+
+(define-key org-mode-map (kbd "C-x C-l") 'my/org-link-copy)
+#+end_src
