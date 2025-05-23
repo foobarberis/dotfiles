@@ -39,12 +39,7 @@ cp ./.vimrc "${HOME}"/
 cp ./.config/tmux/tmux.conf ${HOME}/.config/tmux/
 
 # Deploy Emacs configuration
-cp ./emacs.org ${HOME}/.emacs.d/
-
-# Check if Emacs is available, then tangle the Org file
-if command -v emacs >/dev/null 2>&1; then
-    emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file \"${HOME}/.emacs.d/emacs.org\")"
-fi
+cp ./.emacs.d/* ${HOME}/.emacs.d/
 
 # Deploy personal scripts
 chmod +x ./bin/* && cp ./bin/* "${HOME}/.local/bin"
