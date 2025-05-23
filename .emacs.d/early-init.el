@@ -34,7 +34,7 @@
 
 (use-package exec-path-from-shell
   :straight t
-  :custom ((exec-path-from-shell-arguments '("-l") "Remove -i flag to use a faster, non-interactive shell."))
+  :custom ((exec-path-from-shell-arguments '(nil) "Remove -i flag to use a faster, non-interactive shell."))
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
@@ -58,8 +58,7 @@
   (menu-bar-mode -1)
   (global-visual-line-mode 1)
   (global-hl-line-mode 1)
-  (when (display-graphic-p)
-    (fringe-mode 5)))
+  (fringe-mode 0))
 
 (provide 'early-init)
 ;;; early-init.el ends here

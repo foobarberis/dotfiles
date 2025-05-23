@@ -48,6 +48,8 @@
 (use-package tab-bar
   :ensure nil
   :init
+
+  ;; FIXME Could be removed and replaced with a function like consult-buffer
   ;; Define tab number hints
   (defvar my/tab-numbers-alist
     '((0 . "0.") (1 . "1.") (2 . "2.") (3 . "3.") (4 . "4.")
@@ -356,3 +358,11 @@ the tags and collapse all subtrees."
    ("C-c C-d" . helpful-at-point)
    ("C-h F" . helpful-function)))
 
+(use-package diminish
+  :straight t
+  :config
+  (diminish 'visual-line-mode)
+  (diminish 'jinx-mode)
+  (diminish 'which-key-mode)
+  (diminish 'auto-revert-mode)
+  (diminish 'eldoc-mode))
