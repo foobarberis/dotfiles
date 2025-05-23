@@ -2,29 +2,30 @@
 
 ;; -*- lexical-binding: t; -*-
 
-;; Configure straight to hide the *straight-process* buffer
-(use-package straight
-  :ensure nil
-  :custom (straight-process-buffer " *straight-process*")
+;; Fonts and themes
+(use-package emacs
   :config
-  (when (get-buffer "*straight-process*")
-    (kill-buffer "*straight-process*")))
+  (set-face-attribute 'default nil
+                      :family "Iosevka"
+                      :height 140
+                      :weight 'normal
+                      :width 'wide)
+  (set-face-attribute 'fixed-pitch nil
+                      :font "Iosevka"
+                      :height 140
+                      :weight 'normal
+                      :width 'wide)
 
-(use-package exec-path-from-shell
-  :straight t
-  :custom ((exec-path-from-shell-arguments '("-l") "Remove -i flag to use a faster, non-interactive shell."))
-  :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
+  (require-theme 'modus-themes)
 
-;; Options
-(put 'narrow-to-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
+  ;; Add all your customizations prior to loading the themes
+  (setq modus-themes-italic-constructs t
+        modus-themes-bold-constructs nil)
 
+  ;; Load the theme of your choice.
+  (load-theme 'modus-operandi)
 
-(delete-selection-mode 1)
-
+  (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
 (use-package time
   :commands world-clock
@@ -41,42 +42,40 @@
 (use-package battery
   :hook (after-init . display-battery-mode))
 
+;; Display time and battery level in the tab bar
 (setopt global-mode-string '("" display-time-string battery-mode-line-string))
-
-(defvar my/tab-numbers-alist
-  '((0 . "0.")
-    (1 . "1.")
-    (2 . "2.")
-    (3 . "3.")
-    (4 . "4.")
-    (5 . "5.")
-    (6 . "6.")
-    (7 . "7.")
-    (8 . "8.")
-    (9 . "9."))
-  "Alist of integers to strings.")
-
-(defun my/tab-bar-tab-name-format-default (tab i)
-  (let ((current-p (eq (car tab) 'current-tab))
-        (tab-num (if (and tab-bar-tab-hints (< i 10))
-                     (alist-get i my/tab-numbers-alist) "")))
-    (propertize
-     (concat " " tab-num " " (alist-get 'name tab) " ")
-     'face (funcall tab-bar-tab-face-function tab))))
 
 (use-package tab-bar
   :ensure nil
   :init
+  ;; Define tab number hints
+  (defvar my/tab-numbers-alist
+    '((0 . "0.") (1 . "1.") (2 . "2.") (3 . "3.") (4 . "4.")
+      (5 . "5.") (6 . "6.") (7 . "7.") (8 . "8.") (9 . "9."))
+    "Alist of integers to strings.")
+
+  ;; Customize tab name format
+  (defun my/tab-bar-tab-name-format-default (tab i)
+    (let ((current-p (eq (car tab) 'current-tab))
+          (tab-num (if (and tab-bar-tab-hints (< i 10))
+                       (alist-get i my/tab-numbers-alist) "")))
+      (propertize
+       (concat " " tab-num " " (alist-get 'name tab) " ")
+       'face (funcall tab-bar-tab-face-function tab))))
   (setq tab-bar-tab-name-format-function #'my/tab-bar-tab-name-format-default)
+
   :config
   (tab-bar-mode 1)
-  (setq tab-bar-separator " ")
+  (setq tab-bar-separator "")
   (setq tab-bar-tab-hints t)
+
   :custom
-  (tab-bar-format '(tab-bar-format-tabs
-                    tab-bar-separator
-                    tab-bar-format-align-right
-                    tab-bar-format-global))
+  (tab-bar-format
+   '(tab-bar-format-tabs
+     tab-bar-separator
+     tab-bar-format-align-right
+     tab-bar-format-global))
+
   :bind
   (("C-c t n" . tab-new)
    ("C-c t k" . tab-close)
@@ -91,6 +90,13 @@
    ("C-c t 7" . (lambda () (interactive) (tab-bar-select-tab 7)))
    ("C-c t 8" . (lambda () (interactive) (tab-bar-select-tab 8)))
    ("C-c t 9" . (lambda () (interactive) (tab-bar-select-tab 9)))))
+
+;; Options
+(put 'narrow-to-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+(delete-selection-mode 1)
 
 (use-package files
   :ensure nil
@@ -107,7 +113,6 @@
   :custom (dired-dwim-target t "Make Dired try to guess a default target directory."))
 
 ;; Keybindings ;;
-(which-key-mode 1)
 (setq mac-right-option-modifier nil)
 (global-unset-key "\C-z")
 (global-unset-key "\C-x\ \C-c")
@@ -122,31 +127,7 @@
   (setq org-log-into-drawer t)
   (setq org-tags-column -80)
   (setq org-startup-with-inline-images t)
-  (setq org-directory "~/Documents/Notes/")
-  (setq my-org-agenda-file "20250218T124152--agenda__meta.org")
-  (setq org-agenda-files (list (concat org-directory my-org-agenda-file)))
   :hook (dired-mode . dired-hide-details-mode))
-
-(defvar my/theme-list '(modus-operandi modus-vivendi)
-  "List of themes to toggle between.")
-
-(defvar my/current-theme-index 0
-  "Index of the currently enabled theme in `my/theme-list`.")
-
-(defun my/load-theme-by-index (index)
-  "Load the theme at INDEX in `my/theme-list`, disabling others."
-  (when (nth index my/theme-list)
-    (mapc #'disable-theme custom-enabled-themes)
-    (load-theme (nth index my/theme-list) t)))
-
-(defun my/toggle-themes ()
-  "Toggle between themes listed in `my/theme-list`."
-  (interactive)
-  (setq my/current-theme-index
-        (mod (1+ my/current-theme-index) (length my/theme-list)))
-  (my/load-theme-by-index my/current-theme-index))
-  
-(global-set-key (kbd "<f9>") #'my/toggle-themes)
 
 (use-package vertico
   :straight t
@@ -269,15 +250,6 @@
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
   )
 
-(use-package helpful
-  :straight t
-  :bind
-  (("C-h f" . helpful-callable)
-   ("C-h v" . helpful-variable)
-   ("C-h k" . helpful-key)
-   ("C-h x" . helpful-command)
-   ("C-c C-d" . helpful-at-point)
-   ("C-h F" . helpful-function)))
 
 (use-package vterm
   :straight t
@@ -290,11 +262,6 @@
   (setq denote-directory (expand-file-name "~/Documents/Notes/"))
   (setq denote-dired-directories (list (expand-file-name "~/Documents/Notes/")))
   :hook (dired-mode . denote-dired-mode))
-
-(use-package devil
-  :straight t
-  :config
-  (global-devil-mode))
 
 (use-package jinx
   :straight t
@@ -328,40 +295,6 @@ image files using ImageMagick."
   (setq filename (read-string "Enter filename: "))
   (shell-command (format "magick %s -quality 75 %s.pdf" (mapconcat 'identity (dired-get-marked-files) " ") filename))
   (revert-buffer))
-
-(defun my-create-backup ()
-  "Create a tar archive of specified directories with a name based on the
-current date and time."
-  (interactive)
-  (let* ((tar-flags "-cf")
-         (backup-dir "/Users/matthieu/Sauvegardes")
-         (backup-name (format "%s/%s.tar" backup-dir (format-time-string "%y-%m-%d-%H%M%S")))
-         (backup-files '("/Users/matthieu/Documents"
-                         "/Users/matthieu/.emacs.d")))
-    (let ((process (apply 'start-process "Archive" nil "tar" tar-flags backup-name backup-files)))
-      (set-process-sentinel process
-                            (lambda (proc event)
-                              (if (eq (process-status proc) 'exit)
-                                  (let ((exit-code (process-exit-status proc)))
-                                    (if (eq exit-code 0)
-                                        (message "Archive has been created successfully.")
-                                      (message "Error creating archive. Exit code: %d" exit-code)))
-                                (message "Process is still running...")))))))
-
-(defun my-start-plex-and-caffeinate ()
-  (interactive)
-  "Starts Plex Media Server and caffeinate"
-  (start-process "Plex" nil "open" "/Applications/Plex Media Server.app")
-  (start-process "caffeinate" nil "caffeinate"))
-
-(defun my-stop-plex-and-caffeinate ()
-  (interactive)
-  "Stops Plex Media Server and caffeinate"
-  (setq plex-pid (string-to-number
-                  (shell-command-to-string "pgrep 'Plex Media Server'"))
-	caffeinate-pid (string-to-number
-			(shell-command-to-string "pgrep 'caffeinate'")))
-  (shell-command (format "kill -9 %s %s" plex-pid caffeinate-pid) nil nil))
 
 (defun my-org-sort-all ()
   "Sort all headings in the buffer by tags, then by TODO order, align all
@@ -409,3 +342,17 @@ the tags and collapse all subtrees."
      (json "https://github.com/tree-sitter/tree-sitter-json")
      (toml "https://github.com/tree-sitter/tree-sitter-toml")
      (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+;; Help
+(which-key-mode 1)
+
+(use-package helpful
+  :straight t
+  :bind
+  (("C-h f" . helpful-callable)
+   ("C-h v" . helpful-variable)
+   ("C-h k" . helpful-key)
+   ("C-h x" . helpful-command)
+   ("C-c C-d" . helpful-at-point)
+   ("C-h F" . helpful-function)))
+

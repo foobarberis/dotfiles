@@ -24,6 +24,21 @@
 ;; Install use-package
 (straight-use-package 'use-package)
 
+;; Configure straight to hide the *straight-process* buffer
+(use-package straight
+  :ensure nil
+  :custom (straight-process-buffer " *straight-process*")
+  :config
+  (when (get-buffer "*straight-process*")
+    (kill-buffer "*straight-process*")))
+
+(use-package exec-path-from-shell
+  :straight t
+  :custom ((exec-path-from-shell-arguments '("-l") "Remove -i flag to use a faster, non-interactive shell."))
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 ;; UI
 (use-package emacs
   :init
@@ -45,17 +60,6 @@
   (global-hl-line-mode 1)
   (when (display-graphic-p)
     (fringe-mode 5)))
-
-(set-face-attribute 'default nil
-                    :family "Iosevka"
-                    :height 100
-                    :weight 'normal
-                    :width 'wide)
-(set-face-attribute 'fixed-pitch nil
-                    :font "Iosevka"
-                    :height 100
-                    :weight 'normal
-                    :width 'wide)
 
 (provide 'early-init)
 ;;; early-init.el ends here
