@@ -402,7 +402,7 @@ Disable right =option= key to avoid conflict with my =qwerty-fr=
 keyboard layout.
 
 #+begin_src emacs-lisp
-  (setq mac-right-option-modifier nil
+  (setq mac-right-option-modifier nil)
 #+end_src
 
 Unbind =suspend-frame= since it is annoying and not useful to me.
