@@ -1,6 +1,4 @@
-;;; early-init.el --- Early initialization file
-
-;; -*- lexical-binding: t; -*-
+;;; early-init.el --- Early initialization file  -*- lexical-binding: t; -*-
 
 (setq package-enable-at-startup nil)
 

@@ -1,6 +1,4 @@
-;;; init.el --- Emacs configuration file
-
-;; -*- lexical-binding: t; -*-
+;;; init.el --- Emacs configuration file  -*- lexical-binding: t; -*-
 
 (use-package exec-path-from-shell
   :straight t
