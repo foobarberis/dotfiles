@@ -2,7 +2,6 @@
 
 ;; -*- lexical-binding: t; -*-
 
-;; Boostrap straight.el
 (setq package-enable-at-startup nil)
 
 (defvar bootstrap-version)
@@ -21,32 +20,22 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; Install use-package
 (straight-use-package 'use-package)
-
-;; Configure straight to hide the *straight-process* buffer
-(use-package straight
-  :ensure nil
-  :custom (straight-process-buffer " *straight-process*")
-  :config
-  (when (get-buffer "*straight-process*")
-    (kill-buffer "*straight-process*")))
 
 (use-package exec-path-from-shell
   :straight t
-  :custom ((exec-path-from-shell-arguments '(nil) "Remove -i flag to use a faster, non-interactive shell."))
+  :custom
+  (exec-path-from-shell-arguments '(nil) "Set to use a non-interactive shell for faster startup.")
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-;; UI
 (use-package emacs
   :init
   (setq inhibit-startup-screen t
         inhibit-splash-screen t
         inhibit-startup-message t
         ring-bell-function 'ignore
-        initial-frame-alist '((fullscreen . maximized))
         display-buffer-alist
         (cons '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
                 (display-buffer-no-window)

@@ -2,30 +2,48 @@
 
 ;; -*- lexical-binding: t; -*-
 
-;; Fonts and themes
-(use-package emacs
+;;; Built-ins ;;;
+
+(setq warning-minimum-level :error)
+
+(require-theme 'modus-themes)
+(setq modus-themes-italic-constructs t
+      modus-themes-bold-constructs nil)
+(load-theme 'modus-operandi)
+(define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+
+(use-package fontaine
+  :straight t
   :config
-  (set-face-attribute 'default nil
-                      :family "Iosevka"
-                      :height 140
-                      :weight 'normal
-                      :width 'wide)
-  (set-face-attribute 'fixed-pitch nil
-                      :font "Iosevka"
-                      :height 140
-                      :weight 'normal
-                      :width 'wide)
+  (setq fontaine-presets
+	'((regular
+	   :default-family "Iosevka"
+	   :default-weight regular
+	   :default-slant normal
+	   :default-width wide
+	   :default-height 120
 
-  (require-theme 'modus-themes)
+	   :fixed-pitch-family "Iosevka"
+	   :fixed-pitch-weight regular
+	   :fixed-pitch-slant normal
+	   :fixed-pitch-width wide
+	   :fixed-pitch-height 120
+	   :line-spacing 1)
+	  (bigger
+	   :default-family "Iosevka"
+	   :default-weight regular
+	   :default-slant normal
+	   :default-width wide
+	   :default-height 140
 
-  ;; Add all your customizations prior to loading the themes
-  (setq modus-themes-italic-constructs t
-        modus-themes-bold-constructs nil)
-
-  ;; Load the theme of your choice.
-  (load-theme 'modus-operandi)
-
-  (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+	   :fixed-pitch-family "Iosevka"
+	   :fixed-pitch-weight regular
+	   :fixed-pitch-slant normal
+	   :fixed-pitch-width wide
+	   :fixed-pitch-height 140
+	   :line-spacing 1)))
+  (fontaine-mode 1)
+  (fontaine-set-preset 'regular))
 
 (use-package time
   :commands world-clock
@@ -46,81 +64,54 @@
 (setopt global-mode-string '("" display-time-string battery-mode-line-string))
 
 (use-package tab-bar
-  :ensure nil
-  :init
-
-  ;; FIXME Could be removed and replaced with a function like consult-buffer
-  ;; Define tab number hints
-  (defvar my/tab-numbers-alist
-    '((0 . "0.") (1 . "1.") (2 . "2.") (3 . "3.") (4 . "4.")
-      (5 . "5.") (6 . "6.") (7 . "7.") (8 . "8.") (9 . "9."))
-    "Alist of integers to strings.")
-
-  ;; Customize tab name format
-  (defun my/tab-bar-tab-name-format-default (tab i)
-    (let ((current-p (eq (car tab) 'current-tab))
-          (tab-num (if (and tab-bar-tab-hints (< i 10))
-                       (alist-get i my/tab-numbers-alist) "")))
-      (propertize
-       (concat " " tab-num " " (alist-get 'name tab) " ")
-       'face (funcall tab-bar-tab-face-function tab))))
-  (setq tab-bar-tab-name-format-function #'my/tab-bar-tab-name-format-default)
-
+  :straight nil
   :config
   (tab-bar-mode 1)
   (setq tab-bar-separator "")
-  (setq tab-bar-tab-hints t)
-
+  (setq tab-bar-tab-hints nil)
   :custom
   (tab-bar-format
    '(tab-bar-format-tabs
      tab-bar-separator
      tab-bar-format-align-right
      tab-bar-format-global))
-
   :bind
   (("C-c t n" . tab-new)
    ("C-c t k" . tab-close)
    ("C-c t f" . tab-next)
-   ("C-c t p" . tab-previous)
-   ("C-c t 1" . (lambda () (interactive) (tab-bar-select-tab 1)))
-   ("C-c t 2" . (lambda () (interactive) (tab-bar-select-tab 2)))
-   ("C-c t 3" . (lambda () (interactive) (tab-bar-select-tab 3)))
-   ("C-c t 4" . (lambda () (interactive) (tab-bar-select-tab 4)))
-   ("C-c t 5" . (lambda () (interactive) (tab-bar-select-tab 5)))
-   ("C-c t 6" . (lambda () (interactive) (tab-bar-select-tab 6)))
-   ("C-c t 7" . (lambda () (interactive) (tab-bar-select-tab 7)))
-   ("C-c t 8" . (lambda () (interactive) (tab-bar-select-tab 8)))
-   ("C-c t 9" . (lambda () (interactive) (tab-bar-select-tab 9)))))
+   ("C-c t p" . tab-previous)))
 
-;; Options
-(put 'narrow-to-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
+(which-key-mode 1)
 
 (delete-selection-mode 1)
 
-(use-package files
-  :ensure nil
-  :custom ((make-backup-files nil "Do not make backup files on save buffer.")
-	   (auto-save-default nil "Do not auto-save of every file-visiting buffer.")
-	   (create-lockfiles  nil "Do not use lock-files.")
-	   (require-final-newline t "Ends file with a newline.")
-	   (delete-by-moving-to-trash t "Use the system's trash can"))
-  :hook (before-save . #'delete-trailing-whitespace))
+(put 'narrow-to-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
 
-(use-package dired
-  :ensure nil
-  :config (put 'dired-find-alternate-file 'disabled nil)
-  :custom (dired-dwim-target t "Make Dired try to guess a default target directory."))
-
-;; Keybindings ;;
 (setq mac-right-option-modifier nil)
 (global-unset-key "\C-z")
 (global-unset-key "\C-x\ \C-c")
 
+(use-package files
+  :straight nil
+  :custom
+  ((make-backup-files nil "Do not make backup files on save buffer.")
+   (auto-save-default nil "Do not auto-save of every file-visiting buffer.")
+   (create-lockfiles  nil "Do not use lock-files.")
+   (require-final-newline t "Ends file with a newline.")
+   (delete-by-moving-to-trash t "Use the system's trash can"))
+  :hook
+  (before-save . #'delete-trailing-whitespace))
+
+(use-package dired
+  :straight nil
+  :custom
+  (dired-dwim-target t "Make Dired try to guess a default target directory."))
+
 (use-package org
-  :straight t
+  :straight nil
   :config
   (setq org-M-RET-may-split-line '((default . nil)))
   (setq org-insert-heading-respect-content t)
@@ -129,28 +120,56 @@
   (setq org-log-into-drawer t)
   (setq org-tags-column -80)
   (setq org-startup-with-inline-images t)
-  :hook (dired-mode . dired-hide-details-mode))
+  :hook
+  (dired-mode . dired-hide-details-mode))
+
+(use-package treesit
+  :config
+  (setq treesit-language-source-alist
+	'((bash "https://github.com/tree-sitter/tree-sitter-bash")
+	  (css "https://github.com/tree-sitter/tree-sitter-css")
+	  (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+	  (html "https://github.com/tree-sitter/tree-sitter-html")
+	  (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
+	  (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+	  (c "https://github.com/tree-sitter/tree-sitter-c")
+	  (make "https://github.com/alemuller/tree-sitter-make")
+	  (json "https://github.com/tree-sitter/tree-sitter-json")
+	  (toml "https://github.com/tree-sitter/tree-sitter-toml")
+	  (yaml "https://github.com/ikatyang/tree-sitter-yaml"))))
+
+;;; Packages ;;;
+
+(use-package helpful
+  :straight t
+  :bind
+  (("C-h f" . helpful-callable)
+   ("C-h v" . helpful-variable)
+   ("C-h k" . helpful-key)
+   ("C-h x" . helpful-command)
+   ("C-c C-d" . helpful-at-point)
+   ("C-h F" . helpful-function)))
 
 (use-package vertico
   :straight t
-  :custom ((vertico-mode t "Enable vertico-mode")))
+  :config
+  (vertico-mode 1))
 
 (use-package marginalia
   :straight t
-  :custom ((marginalia-mode t "Enable marginalia-mode")))
+  :config
+  (marginalia-mode 1))
 
 (use-package orderless
-:straight t
-:custom
-(completion-styles '(orderless basic))
-(completion-category-overrides '((file (styles basic partial-completion))))
-(completion-category-overrides '((eglot (styles . (orderless flex))))))
+  :straight t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion))))
+  (completion-category-overrides '((eglot (styles . (orderless flex))))))
 
-;; Example configuration for Consult
 (use-package consult
   :straight t
-  ;; Replace bindings. Lazily loaded by `use-package'.
-  :bind (;; C-c bindings in `mode-specific-map'
+  :bind (
 	 ("C-s" . consult-line)
 	 ("s-f" . consult-line)
          ("C-c M-x" . consult-mode-command)
@@ -252,7 +271,11 @@
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
   )
 
+(use-package magit
+  :straight t)
 
+;; FIXME vterm-module cannot compile because cmake cannot be found
+;; from Emacs
 (use-package vterm
   :straight t
   :hook (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
@@ -261,22 +284,34 @@
 (use-package denote
   :straight t
   :config
-  (setq denote-directory (expand-file-name "~/Documents/Notes/"))
-  (setq denote-dired-directories (list (expand-file-name "~/Documents/Notes/")))
+  (setq my-note-directory "~/Files/Documents/Notes/")
+  (setq denote-directory (expand-file-name my-note-directory))
+  (setq denote-dired-directories (list (expand-file-name my-note-directory)))
   :hook (dired-mode . denote-dired-mode))
 
 (use-package jinx
   :straight t
-  :hook ((LaTeX-mode . jinx-mode)
-(latex-mode . jinx-mode)
-(markdown-mode . jinx-mode)
-(org-mode . jinx-mode))
-  :custom ((jinx-languages "fr_FR en_US" "Dictionary language codes, as a string separated by whitespace."))
-  :bind (("M-$" . jinx-correct)
-	 ("C-M-$" . jinx-languages)))
+  :diminish t
+  :hook
+  ((LaTeX-mode . jinx-mode)
+   (latex-mode . jinx-mode)
+   (markdown-mode . jinx-mode)
+   (org-mode . jinx-mode))
+  :custom
+  ((jinx-languages "fr_FR en_US" "Dictionary language codes, as a string separated by whitespace."))
+  :bind
+  (("M-$" . jinx-correct)
+   ("C-M-$" . jinx-languages)))
 
-(use-package magit
-  :straight t)
+(use-package diminish
+  :straight t
+  :config
+  (diminish 'visual-line-mode)
+  (diminish 'which-key-mode)
+  (diminish 'auto-revert-mode)
+  (diminish 'eldoc-mode))
+
+;;; Utilities ;;;
 
 (defun my-html-sort-classes ()
   "Sort CSS classes in alphabetical order in an HTML document."
@@ -287,8 +322,8 @@
       (setq end (- (search-forward "\"" nil t) 1))
       (sort-regexp-fields nil "\\(\\sw\\|\\s_\\)+" "\\&" begin end))))
 
-    (with-eval-after-load 'mhtml-mode
-      (keymap-set mhtml-mode-map "C-c f" 'my-html-sort-classes))
+(with-eval-after-load 'mhtml-mode
+  (keymap-set mhtml-mode-map "C-c f" 'my-html-sort-classes))
 
 (defun my-dired-image-to-pdf ()
   "In a Dired buffer, this function creates a PDF file from the marked
@@ -298,71 +333,43 @@ image files using ImageMagick."
   (shell-command (format "magick %s -quality 75 %s.pdf" (mapconcat 'identity (dired-get-marked-files) " ") filename))
   (revert-buffer))
 
-(defun my-org-sort-all ()
-  "Sort all headings in the buffer by tags, then by TODO order, align all
-the tags and collapse all subtrees."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (org-sort-entries t ?r nil nil "TAGS")
-    (goto-char (point-min))
-    (org-sort-entries t ?o)
-    (org-align-tags t)
-    (org-overview)))
 
-(add-hook 'before-save-hook
-          (lambda ()
-            (when (and (eq major-mode 'org-mode)
-                       (member (file-name-nondirectory (buffer-file-name))
-                               '("20250218T124152--agenda__meta.org"
-                                 "20250206T163402--liste-de-course__self.org"
-				   "20250213T160103--liste-voyage__self.org")))
-              (my-org-sort-all))))
 
 (defun my/org-link-copy (&optional arg)
   "Extract URL from org-mode link and add it to the kill ring."
   (interactive "P")
   (let* ((link (org-element-lineage (org-element-context) '(link) t))
-          (type (org-element-property :type link))
-          (url (org-element-property :path link))
-          (url (concat type ":" url)))
+         (type (org-element-property :type link))
+         (url (org-element-property :path link))
+         (url (concat type ":" url)))
     (kill-new url)
     (message (concat "Copied URL: " url))))
 
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-x C-l") #'my/org-link-copy))
 
-(setq treesit-language-source-alist
-   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
-     (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
-     (c "https://github.com/tree-sitter/tree-sitter-c")
-     (make "https://github.com/alemuller/tree-sitter-make")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
-;; Help
-(which-key-mode 1)
 
-(use-package helpful
-  :straight t
-  :bind
-  (("C-h f" . helpful-callable)
-   ("C-h v" . helpful-variable)
-   ("C-h k" . helpful-key)
-   ("C-h x" . helpful-command)
-   ("C-c C-d" . helpful-at-point)
-   ("C-h F" . helpful-function)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package diminish
-  :straight t
-  :config
-  (diminish 'visual-line-mode)
-  (diminish 'jinx-mode)
-  (diminish 'which-key-mode)
-  (diminish 'auto-revert-mode)
-  (diminish 'eldoc-mode))
+
+;; (defun my-org-sort-all ()
+;;   "Sort all headings in the buffer by tags, then by TODO order, align all
+;; the tags and collapse all subtrees."
+;;   (interactive)
+;;   (save-excursion
+;;     (goto-char (point-min))
+;;     (org-sort-entries t ?r nil nil "TAGS")
+;;     (goto-char (point-min))
+;;     (org-sort-entries t ?o)
+;;     (org-align-tags t)
+;;     (org-overview)))
+
+;; (add-hook 'before-save-hook
+;;           (lambda ()
+;;             (when (and (eq major-mode 'org-mode)
+;;                        (member (file-name-nondirectory (buffer-file-name))
+;;                                '("20250218T124152--agenda__meta.org"
+;;                                  "20250206T163402--liste-de-course__self.org"
+;; 				   "20250213T160103--liste-voyage__self.org")))
+;;               (my-org-sort-all))))
