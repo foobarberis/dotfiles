@@ -1,5 +1,6 @@
 ;;; init.el --- Emacs configuration file  -*- lexical-binding: t; -*-
 
+; TODO Test that "-l" is not needed
 (use-package exec-path-from-shell
   :straight t
   :custom
@@ -27,19 +28,6 @@
 	   :default-weight regular
 	   :default-slant normal
 	   :default-width wide
-	   :default-height 120
-
-	   :fixed-pitch-family "Iosevka"
-	   :fixed-pitch-weight regular
-	   :fixed-pitch-slant normal
-	   :fixed-pitch-width wide
-	   :fixed-pitch-height 120
-	   :line-spacing 1)
-	  (bigger
-	   :default-family "Iosevka"
-	   :default-weight regular
-	   :default-slant normal
-	   :default-width wide
 	   :default-height 140
 
 	   :fixed-pitch-family "Iosevka"
@@ -47,7 +35,20 @@
 	   :fixed-pitch-slant normal
 	   :fixed-pitch-width wide
 	   :fixed-pitch-height 140
-	   :line-spacing 1)))
+	   :line-spacing 2)
+	  (bigger
+	   :default-family "Iosevka"
+	   :default-weight regular
+	   :default-slant normal
+	   :default-width wide
+	   :default-height 180
+
+	   :fixed-pitch-family "Iosevka"
+	   :fixed-pitch-weight regular
+	   :fixed-pitch-slant normal
+	   :fixed-pitch-width wide
+	   :fixed-pitch-height 180
+	   :line-spacing 2)))
   (fontaine-mode 1)
   (fontaine-set-preset 'regular))
 
