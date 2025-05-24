@@ -2,6 +2,14 @@
 
 ;; -*- lexical-binding: t; -*-
 
+(use-package exec-path-from-shell
+  :straight t
+  :custom
+  (exec-path-from-shell-arguments '(nil) "Set to use a non-interactive shell for faster startup.")
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 ;;; Built-ins ;;;
 
 (setq warning-minimum-level :error)
@@ -274,8 +282,6 @@
 (use-package magit
   :straight t)
 
-;; FIXME vterm-module cannot compile because cmake cannot be found
-;; from Emacs
 (use-package vterm
   :straight t
   :hook (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
@@ -348,10 +354,8 @@ image files using ImageMagick."
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-x C-l") #'my/org-link-copy))
 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+(provide 'init)
+;;; init.el ends here
 
 ;; (defun my-org-sort-all ()
 ;;   "Sort all headings in the buffer by tags, then by TODO order, align all
@@ -373,3 +377,5 @@ image files using ImageMagick."
 ;;                                  "20250206T163402--liste-de-course__self.org"
 ;; 				   "20250213T160103--liste-voyage__self.org")))
 ;;               (my-org-sort-all))))
+
+

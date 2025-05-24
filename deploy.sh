@@ -15,12 +15,12 @@ mkdir -p "${HOME}/.ssh" \
          "${HOME}/.config/tmux" \
          "${HOME}/.config/alacritty"
 
+# Deploy dotfiles
+cp .bashrc .bash_aliases .vimrc "${HOME}"
+
 # On macOS .bash_profile is read instead of .bashrc
 cp .bashrc "${HOME}/.bash_profile"
 cp .bashrc "${HOME}/.profile"
-
-# Deploy dotfiles
-cp .bashrc .bash_aliases .vimrc "${HOME}"
 
 # Deploy Alacritty configuration for Linux / macOS
 cp ./.config/alacritty/alacritty.toml ${HOME}/.config/alacritty/

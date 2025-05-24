@@ -22,14 +22,6 @@
 
 (straight-use-package 'use-package)
 
-(use-package exec-path-from-shell
-  :straight t
-  :custom
-  (exec-path-from-shell-arguments '(nil) "Set to use a non-interactive shell for faster startup.")
-  :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
-
 (use-package emacs
   :init
   (setq inhibit-startup-screen t
@@ -46,8 +38,9 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (global-visual-line-mode 1)
-  (global-hl-line-mode 1)
-  (fringe-mode 0))
+  (fringe-mode 0)
+  (add-hook 'prog-mode-hook #'hl-line-mode)
+  (add-hook 'text-mode-hook #'hl-line-mode))
 
 (provide 'early-init)
 ;;; early-init.el ends here
