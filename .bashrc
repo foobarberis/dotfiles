@@ -28,7 +28,7 @@ export LC_ALL="en_US.UTF-8"
 export FZF_DEFAULT_COMMAND='find . -type f -not -path "./.git/*"'
 
 # Editor and pager
-export EDITOR="emacs -nw"
+export EDITOR="vim"
 export VISUAL="$EDITOR"
 export PAGER="less"
 

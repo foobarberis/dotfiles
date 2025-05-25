@@ -15,12 +15,12 @@ mkdir -p "${HOME}/.ssh" \
          "${HOME}/.config/tmux" \
          "${HOME}/.config/alacritty"
 
+# Deploy dotfiles
+cp .bashrc .bash_aliases .vimrc "${HOME}"
+
 # On macOS .bash_profile is read instead of .bashrc
 cp .bashrc "${HOME}/.bash_profile"
 cp .bashrc "${HOME}/.profile"
-
-# Deploy dotfiles
-cp .bashrc .bash_aliases .vimrc "${HOME}"
 
 # Deploy Alacritty configuration for Linux / macOS
 cp ./.config/alacritty/alacritty.toml ${HOME}/.config/alacritty/
@@ -39,12 +39,7 @@ cp ./.vimrc "${HOME}"/
 cp ./.config/tmux/tmux.conf ${HOME}/.config/tmux/
 
 # Deploy Emacs configuration
-cp ./emacs.org ${HOME}/.emacs.d/
-
-# Check if Emacs is available, then tangle the Org file
-if command -v emacs >/dev/null 2>&1; then
-    emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file \"${HOME}/.emacs.d/emacs.org\")"
-fi
+cp ./.emacs.d/* ${HOME}/.emacs.d/
 
 # Deploy personal scripts
 chmod +x ./bin/* && cp ./bin/* "${HOME}/.local/bin"
