@@ -1,23 +1,55 @@
 ;;; init.el --- Emacs configuration file  -*- lexical-binding: t; -*-
 
-; TODO Test that "-l" is not needed
 (use-package exec-path-from-shell
   :straight t
   :custom
-  (exec-path-from-shell-arguments '(nil) "Set to use a non-interactive shell for faster startup.")
+  (exec-path-from-shell-arguments '("-l") "Set to use a non-interactive shell for faster startup.")
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
 ;;; Built-ins ;;;
 
-(setq warning-minimum-level :error)
+(use-package emacs
+  :custom
+  (cursor-type 'bar "Display cursor as a bar instead of a block")
+  (tab-bar-close-button-show nil "Hide the tab close button")
+  (y-or-n-p-use-read-key t "Allow answering y-or-n-p when minibuffer is not focused")
+  (use-short-answers t "Enable short answers (y/n instead of yes/no)")
+  (warning-minimum-level :error "Only show error-level warnings")
+  (modus-themes-italic-constructs t "Use italic font forms in more code constructs")
+  (modus-themes-bold-constructs t "Use bold text in more code constructs.")
+  (mac-right-option-modifier nil  "Disable right Option key to not interfere with QWERTY French layout")
+  (custom-file (locate-user-emacs-file "custom.el") "Set custom file path")
+  (indent-tabs-mode nil "Disable tabs for indentation")
+  (standard-indent 2 "Use two spaces for indentation")
+  (history-delete-duplicates t "Delete duplicates in history")
+  (kill-do-not-save-duplicates t "Don't add a string to kill-ring if it duplicates the last one.")
+  (native-comp-async-report-warnings-errors 'silent "Silence navite-comp-async output")
+  (scroll-preserve-screen-position t "Preserve cursor position when srolling")
+  :hook
+  (prog-mode . hl-line-mode)
+  (text-mode . hl-line-mode)
+  (after-init . global-visual-line-mode)
+  :bind
+  ("<f5>" . modus-themes-toggle)
+  :config
+  ;; Load custom file, don't error if missing
+  (load custom-file :no-error-if-missing)
 
-(require-theme 'modus-themes)
-(setq modus-themes-italic-constructs t
-      modus-themes-bold-constructs nil)
-(load-theme 'modus-operandi)
-(define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+  ;; Load Modus Operandi theme
+  (require-theme 'modus-themes)
+  (load-theme 'modus-operandi)
+
+  ;; Enable disabled commands
+  (put 'narrow-to-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+  (put 'dired-find-alternate-file 'disabled nil)
+
+  ;; Unset potentially disruptive keybindings
+  (global-unset-key "\C-z")            ; suspend-frame
+  (global-unset-key "\C-x\ \C-c"))     ; save-buffers-kill-terminal
 
 (use-package fontaine
   :straight t
@@ -51,6 +83,11 @@
 	   :line-spacing 2)))
   (fontaine-mode 1)
   (fontaine-set-preset 'regular))
+
+(use-package simple
+  :straight nil
+  :config
+  (column-number-mode 1))
 
 (use-package time
   :commands world-clock
@@ -88,18 +125,21 @@
    ("C-c t f" . tab-next)
    ("C-c t p" . tab-previous)))
 
-(which-key-mode 1)
+(use-package which-key
+  :straight nil
+  :diminish t
+  :hook
+  (after-init . which-key-mode))
 
-(delete-selection-mode 1)
+(use-package delsel
+  :straight nil
+  :hook
+  (after-init . delete-selection-mode))
 
-(put 'narrow-to-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'dired-find-alternate-file 'disabled nil)
-
-(setq mac-right-option-modifier nil)
-(global-unset-key "\C-z")
-(global-unset-key "\C-x\ \C-c")
+(use-package savehist
+  :straight nil
+  :hook
+  (after-init . savehist-mode))
 
 (use-package files
   :straight nil
@@ -114,8 +154,15 @@
 
 (use-package dired
   :straight nil
-  :custom
-  (dired-dwim-target t "Make Dired try to guess a default target directory."))
+  :commands (dired)
+  :hook
+  ((dired-mode . dired-hide-details-mode)
+   (dired-mode . hl-line-mode))
+  :config
+  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'always)
+  (setq delete-by-moving-to-trash t)
+  (setq dired-dwim-target t))
 
 (use-package org
   :straight nil
@@ -131,6 +178,7 @@
   (dired-mode . dired-hide-details-mode))
 
 (use-package treesit
+  :straight nil
   :config
   (setq treesit-language-source-alist
 	'((bash "https://github.com/tree-sitter/tree-sitter-bash")
@@ -146,6 +194,54 @@
 	  (yaml "https://github.com/ikatyang/tree-sitter-yaml"))))
 
 ;;; Packages ;;;
+
+(use-package diminish
+  :straight t
+  :config
+  (diminish 'visual-line-mode)
+  (diminish 'auto-revert-mode)
+  (diminish 'eldoc-mode))
+
+(use-package nerd-icons
+  :straight t)
+
+(use-package nerd-icons-completion
+  :straight t
+  :after marginalia
+  :config
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
+(use-package nerd-icons-corfu
+  :straight t
+  :after corfu
+  :config
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
+(use-package nerd-icons-dired
+  :straight t
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
+(use-package dired-subtree
+  :straight t
+  :after dired
+  :bind
+  ( :map dired-mode-map
+    ("<tab>" . dired-subtree-toggle)
+    ("TAB" . dired-subtree-toggle)
+    ("<backtab>" . dired-subtree-remove)
+    ("S-TAB" . dired-subtree-remove))
+  :config
+  (setq dired-subtree-use-backgrounds nil))
+
+(use-package trashed
+  :straight t
+  :commands (trashed)
+  :config
+  (setq trashed-action-confirmer 'y-or-n-p)
+  (setq trashed-use-header-line t)
+  (setq trashed-sort-key '("Date deleted" . t))
+  (setq trashed-date-format "%Y-%m-%d %H:%M:%S"))
 
 (use-package helpful
   :straight t
@@ -278,13 +374,27 @@
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
   )
 
+(use-package corfu
+  :straight t
+  :hook
+  (after-init . global-corfu-mode)
+  :bind
+  (:map corfu-map ("<tab>" . corfu-complete))
+  :config
+  (setq tab-always-indent 'complete)
+  (setq corfu-preview-current nil)
+  (setq corfu-min-width 20)
+
+  (setq corfu-popupinfo-delay '(1.25 . 0.5))
+  (corfu-popupinfo-mode 1) ; shows documentation after `corfu-popupinfo-delay'
+
+  ;; Sort by input history (no need to modify `corfu-sort-function').
+  (with-eval-after-load 'savehist
+    (corfu-history-mode 1)
+    (add-to-list 'savehist-additional-variables 'corfu-history)))
+
 (use-package magit
   :straight t)
-
-(use-package vterm
-  :straight t
-  :hook (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
-  :custom (initial-buffer-choice 'vterm))
 
 (use-package denote
   :straight t
@@ -308,15 +418,37 @@
   (("M-$" . jinx-correct)
    ("C-M-$" . jinx-languages)))
 
-(use-package diminish
+(use-package vterm
   :straight t
-  :config
-  (diminish 'visual-line-mode)
-  (diminish 'which-key-mode)
-  (diminish 'auto-revert-mode)
-  (diminish 'eldoc-mode))
+  :custom (initial-buffer-choice 'vterm))
 
 ;;; Utilities ;;;
+
+(defun my/keyboard-quit-dwim ()
+  "Do-What-I-Mean behaviour for a general `keyboard-quit'.
+
+The generic `keyboard-quit' does not do the expected thing when
+the minibuffer is open.  Whereas we want it to close the
+minibuffer, even without explicitly focusing it.
+
+The DWIM behaviour of this command is as follows:
+
+- When the region is active, disable it.
+- When a minibuffer is open, but not focused, close the minibuffer.
+- When the Completions buffer is selected, close it.
+- In every other case use the regular `keyboard-quit'."
+  (interactive)
+  (cond
+   ((region-active-p)
+    (keyboard-quit))
+   ((derived-mode-p 'completion-list-mode)
+    (delete-completion-window))
+   ((> (minibuffer-depth) 0)
+    (abort-recursive-edit))
+   (t
+    (keyboard-quit))))
+
+(define-key global-map (kbd "C-g") #'my/keyboard-quit-dwim)
 
 (defun my-html-sort-classes ()
   "Sort CSS classes in alphabetical order in an HTML document."
@@ -338,7 +470,17 @@ image files using ImageMagick."
   (shell-command (format "magick %s -quality 75 %s.pdf" (mapconcat 'identity (dired-get-marked-files) " ") filename))
   (revert-buffer))
 
-
+(defun my-org-sort-all ()
+  "Sort all headings in the buffer by tags, then by TODO order, align all
+the tags and collapse all subtrees."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (org-sort-entries t ?r nil nil "TAGS")
+    (goto-char (point-min))
+    (org-sort-entries t ?o)
+    (org-align-tags t)
+    (org-overview)))
 
 (defun my/org-link-copy (&optional arg)
   "Extract URL from org-mode link and add it to the kill ring."
@@ -355,26 +497,3 @@ image files using ImageMagick."
 
 (provide 'init)
 ;;; init.el ends here
-
-;; (defun my-org-sort-all ()
-;;   "Sort all headings in the buffer by tags, then by TODO order, align all
-;; the tags and collapse all subtrees."
-;;   (interactive)
-;;   (save-excursion
-;;     (goto-char (point-min))
-;;     (org-sort-entries t ?r nil nil "TAGS")
-;;     (goto-char (point-min))
-;;     (org-sort-entries t ?o)
-;;     (org-align-tags t)
-;;     (org-overview)))
-
-;; (add-hook 'before-save-hook
-;;           (lambda ()
-;;             (when (and (eq major-mode 'org-mode)
-;;                        (member (file-name-nondirectory (buffer-file-name))
-;;                                '("20250218T124152--agenda__meta.org"
-;;                                  "20250206T163402--liste-de-course__self.org"
-;; 				   "20250213T160103--liste-voyage__self.org")))
-;;               (my-org-sort-all))))
-
-

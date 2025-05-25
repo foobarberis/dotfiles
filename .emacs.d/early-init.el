@@ -35,10 +35,7 @@
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (global-visual-line-mode 1)
-  (fringe-mode 0)
-  (add-hook 'prog-mode-hook #'hl-line-mode)
-  (add-hook 'text-mode-hook #'hl-line-mode))
+  (fringe-mode 0))
 
 (provide 'early-init)
 ;;; early-init.el ends here
