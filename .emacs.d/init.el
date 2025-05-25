@@ -3,7 +3,7 @@
 (use-package exec-path-from-shell
   :straight t
   :custom
-  (exec-path-from-shell-arguments '("-l") "Set to use a non-interactive shell for faster startup.")
+  (exec-path-from-shell-arguments nil "Set to use a non-interactive shell for faster startup.")
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
@@ -37,7 +37,7 @@
   ;; Load custom file, don't error if missing
   (load custom-file :no-error-if-missing)
 
-  ;; Load Modus Operandi theme
+  ;; Load theme
   (require-theme 'modus-themes)
   (load-theme 'modus-operandi)
 
@@ -180,18 +180,48 @@
 (use-package treesit
   :straight nil
   :config
+  ;; Grammar source definitions
   (setq treesit-language-source-alist
-	'((bash "https://github.com/tree-sitter/tree-sitter-bash")
-	  (css "https://github.com/tree-sitter/tree-sitter-css")
-	  (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-	  (html "https://github.com/tree-sitter/tree-sitter-html")
-	  (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
-	  (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
-	  (c "https://github.com/tree-sitter/tree-sitter-c")
-	  (make "https://github.com/alemuller/tree-sitter-make")
-	  (json "https://github.com/tree-sitter/tree-sitter-json")
-	  (toml "https://github.com/tree-sitter/tree-sitter-toml")
-	  (yaml "https://github.com/ikatyang/tree-sitter-yaml"))))
+        '((bash        "https://github.com/tree-sitter/tree-sitter-bash")
+          (css         "https://github.com/tree-sitter/tree-sitter-css")
+          (elisp       "https://github.com/Wilfred/tree-sitter-elisp")
+          (html        "https://github.com/tree-sitter/tree-sitter-html")
+          (javascript  "https://github.com/tree-sitter/tree-sitter-javascript")
+          (cpp         "https://github.com/tree-sitter/tree-sitter-cpp")
+          (c           "https://github.com/tree-sitter/tree-sitter-c")
+          (make        "https://github.com/alemuller/tree-sitter-make")
+          (json        "https://github.com/tree-sitter/tree-sitter-json")
+          (toml        "https://github.com/tree-sitter/tree-sitter-toml")
+          (yaml        "https://github.com/ikatyang/tree-sitter-yaml")))
+
+  ;; Use Tree-sitter modes instead of standard ones
+  (setq major-mode-remap-alist
+        '((bash-mode      . bash-ts-mode)
+          (c-mode         . c-ts-mode)
+          (c++-mode       . c++-ts-mode)
+          (css-mode       . css-ts-mode)
+          (emacs-lisp-mode . elisp-ts-mode)
+          (html-mode      . html-ts-mode)
+          (js-mode        . js-ts-mode)
+          (javascript-mode . js-ts-mode)
+          (json-mode      . json-ts-mode)
+          (makefile-mode  . makefile-ts-mode)
+          (toml-mode      . toml-ts-mode)
+          (yaml-mode      . yaml-ts-mode)))
+
+  ;; Optional: Ensure specific file extensions open with ts-modes
+  (dolist (entry
+           '(("\\.sh\\'"       . bash-ts-mode)
+             ("\\.c\\'"        . c-ts-mode)
+             ("\\.cpp\\'"      . c++-ts-mode)
+             ("\\.js\\'"       . js-ts-mode)
+             ("\\.json\\'"     . json-ts-mode)
+             ("\\.html?\\'"    . html-ts-mode)
+             ("\\.css\\'"      . css-ts-mode)
+             ("\\.toml\\'"     . toml-ts-mode)
+             ("\\.ya?ml\\'"    . yaml-ts-mode)
+             ("\\.el\\'"       . elisp-ts-mode)))
+    (add-to-list 'auto-mode-alist entry)))
 
 ;;; Packages ;;;
 
@@ -200,8 +230,10 @@
   :config
   (diminish 'visual-line-mode)
   (diminish 'auto-revert-mode)
+  (diminish 'which-key-mode)
   (diminish 'eldoc-mode))
 
+;; Use nerd-icons-install-fonts to dowload the icons
 (use-package nerd-icons
   :straight t)
 
