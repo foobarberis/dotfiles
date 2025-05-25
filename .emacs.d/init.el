@@ -266,15 +266,6 @@
   :config
   (setq dired-subtree-use-backgrounds nil))
 
-(use-package trashed
-  :straight t
-  :commands (trashed)
-  :config
-  (setq trashed-action-confirmer 'y-or-n-p)
-  (setq trashed-use-header-line t)
-  (setq trashed-sort-key '("Date deleted" . t))
-  (setq trashed-date-format "%Y-%m-%d %H:%M:%S"))
-
 (use-package helpful
   :straight t
   :bind
