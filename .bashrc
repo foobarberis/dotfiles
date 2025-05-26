@@ -1,6 +1,9 @@
 # Terminal
 export TERM='tmux-256color'
 
+# Change cursor to a bar instead of a block
+printf '\033[6 q'
+
 export FOLDER_FILES=${HOME}/Files
 
 # Add 'storage/shared' prefix if we are running on termux
