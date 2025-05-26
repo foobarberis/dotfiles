@@ -265,6 +265,11 @@
   :config
   (setq dired-subtree-use-backgrounds nil))
 
+(use-package minions
+  :straight t
+  :config
+  (minions-mode 1))
+
 (use-package helpful
   :straight t
   :bind
