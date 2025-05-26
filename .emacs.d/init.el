@@ -68,7 +68,7 @@
 	   :fixed-pitch-width wide
 	   :fixed-pitch-height 140
 	   :line-spacing 2)
-	  (bigger
+	  (retina
 	   :default-family "Iosevka"
 	   :default-weight regular
 	   :default-slant normal
