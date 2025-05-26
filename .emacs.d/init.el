@@ -189,6 +189,8 @@
   :hook
   (dired-mode . dired-hide-details-mode))
 
+;; Evaluate the expression below to install all specified language parsers
+;; (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 (use-package treesit
   :straight nil
   :config
