@@ -200,6 +200,7 @@
           (css         "https://github.com/tree-sitter/tree-sitter-css")
           (html        "https://github.com/tree-sitter/tree-sitter-html")
           (javascript  "https://github.com/tree-sitter/tree-sitter-javascript")
+          (jsdoc  "https://github.com/tree-sitter/tree-sitter-jsdoc")
           (cpp         "https://github.com/tree-sitter/tree-sitter-cpp")
           (c           "https://github.com/tree-sitter/tree-sitter-c")
           (json        "https://github.com/tree-sitter/tree-sitter-json")
