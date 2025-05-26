@@ -55,7 +55,20 @@
   :straight t
   :config
   (setq fontaine-presets
-	'((regular
+	'((smaller
+	   :default-family "Iosevka"
+	   :default-weight regular
+	   :default-slant normal
+	   :default-width wide
+	   :default-height 120
+
+	   :fixed-pitch-family "Iosevka"
+	   :fixed-pitch-weight regular
+	   :fixed-pitch-slant normal
+	   :fixed-pitch-width wide
+	   :fixed-pitch-height 120
+	   :line-spacing 2)
+          (regular
 	   :default-family "Iosevka"
 	   :default-weight regular
 	   :default-slant normal
@@ -127,7 +140,6 @@
 
 (use-package which-key
   :straight nil
-  :diminish t
   :hook
   (after-init . which-key-mode))
 
@@ -223,14 +235,6 @@
     (add-to-list 'auto-mode-alist entry)))
 
 ;;; Packages ;;;
-
-(use-package diminish
-  :straight t
-  :config
-  (diminish 'visual-line-mode)
-  (diminish 'auto-revert-mode)
-  (diminish 'which-key-mode)
-  (diminish 'eldoc-mode))
 
 ;; Use nerd-icons-install-fonts to dowload the icons
 (use-package nerd-icons
@@ -433,7 +437,6 @@
 
 (use-package jinx
   :straight t
-  :diminish t
   :hook
   ((LaTeX-mode . jinx-mode)
    (latex-mode . jinx-mode)
@@ -447,7 +450,11 @@
 
 (use-package vterm
   :straight t
-  :custom (initial-buffer-choice 'vterm))
+  :custom
+  (initial-buffer-choice 'vterm)
+  :hook
+  ((vterm-mode . (lambda () (line-number-mode -1)))
+   (vterm-mode . (lambda () (column-number-mode -1)))))
 
 ;;; Utilities ;;;
 
