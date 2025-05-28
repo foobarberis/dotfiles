@@ -55,19 +55,20 @@
   :straight t
   :config
   (setq fontaine-presets
-	'((smaller
+	'((small
 	   :default-family "Iosevka"
 	   :default-weight regular
 	   :default-slant normal
 	   :default-width wide
-	   :default-height 120
+	   :default-height 100
 
 	   :fixed-pitch-family "Iosevka"
 	   :fixed-pitch-weight regular
 	   :fixed-pitch-slant normal
 	   :fixed-pitch-width wide
-	   :fixed-pitch-height 120
+	   :fixed-pitch-height 100
 	   :line-spacing 2)
+          
           (regular
 	   :default-family "Iosevka"
 	   :default-weight regular
@@ -81,7 +82,8 @@
 	   :fixed-pitch-width wide
 	   :fixed-pitch-height 140
 	   :line-spacing 2)
-	  (retina
+          
+	  (big
 	   :default-family "Iosevka"
 	   :default-weight regular
 	   :default-slant normal
@@ -94,6 +96,7 @@
 	   :fixed-pitch-width wide
 	   :fixed-pitch-height 180
 	   :line-spacing 2)))
+  
   (fontaine-mode 1)
   (fontaine-set-preset 'regular))
 
