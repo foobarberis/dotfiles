@@ -191,7 +191,15 @@
   (setq dired-recursive-copies 'always)
   (setq dired-recursive-deletes 'always)
   (setq delete-by-moving-to-trash t)
-  (setq dired-dwim-target t))
+  (setq dired-dwim-target t)
+
+  (defun my/dired-image-to-pdf ()
+    "In a Dired buffer, this function creates a PDF file from the marked
+image files using ImageMagick."
+    (interactive)
+    (setq filename (read-string "Enter filename: "))
+    (shell-command (format "magick %s -quality 75 %s.pdf" (mapconcat 'identity (dired-get-marked-files) " ") filename))
+    (revert-buffer)))
 
 (use-package org
   :straight nil
@@ -203,8 +211,36 @@
   (setq org-log-into-drawer t)
   (setq org-tags-column -80)
   (setq org-startup-with-inline-images t)
+
+  (defun my/org-sort-all ()
+    "Sort all headings in the buffer by tags, then by TODO order, align all
+the tags and collapse all subtrees."
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (org-sort-entries t ?r nil nil "TAGS")
+      (goto-char (point-min))
+      (org-sort-entries t ?o)
+      (org-align-tags t)
+      (org-overview)))
+
+  (defun my/org-link-copy (&optional arg)
+    "Extract URL from org-mode link and add it to the kill ring."
+    (interactive "P")
+    (let* ((link (org-element-lineage (org-element-context) '(link) t))
+           (type (org-element-property :type link))
+           (url (org-element-property :path link))
+           (url (concat type ":" url)))
+      (kill-new url)
+      (message (concat "Copied URL: " url))))
+
+  (with-eval-after-load 'org
+    (define-key org-mode-map (kbd "C-x C-l") #'my/org-link-copy))
+
   :hook
-  (dired-mode . dired-hide-details-mode))
+  ((dired-mode . dired-hide-details-mode))
+  :bind
+  ((:map org-mode-map ("C-x C-l" . my/org-link-copy))))
 
 ;; Evaluate the expression below to install all specified language parsers
 ;; (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
@@ -512,7 +548,7 @@ The DWIM behaviour of this command is as follows:
 
 (define-key global-map (kbd "C-g") #'my/keyboard-quit-dwim)
 
-(defun my-html-sort-classes ()
+(defun my/html-sort-classes ()
   "Sort CSS classes in alphabetical order in an HTML document."
   (interactive)
   (save-excursion
@@ -523,39 +559,6 @@ The DWIM behaviour of this command is as follows:
 
 (with-eval-after-load 'mhtml-mode
   (keymap-set mhtml-mode-map "C-c f" 'my-html-sort-classes))
-
-(defun my-dired-image-to-pdf ()
-  "In a Dired buffer, this function creates a PDF file from the marked
-image files using ImageMagick."
-  (interactive)
-  (setq filename (read-string "Enter filename: "))
-  (shell-command (format "magick %s -quality 75 %s.pdf" (mapconcat 'identity (dired-get-marked-files) " ") filename))
-  (revert-buffer))
-
-(defun my-org-sort-all ()
-  "Sort all headings in the buffer by tags, then by TODO order, align all
-the tags and collapse all subtrees."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (org-sort-entries t ?r nil nil "TAGS")
-    (goto-char (point-min))
-    (org-sort-entries t ?o)
-    (org-align-tags t)
-    (org-overview)))
-
-(defun my/org-link-copy (&optional arg)
-  "Extract URL from org-mode link and add it to the kill ring."
-  (interactive "P")
-  (let* ((link (org-element-lineage (org-element-context) '(link) t))
-         (type (org-element-property :type link))
-         (url (org-element-property :path link))
-         (url (concat type ":" url)))
-    (kill-new url)
-    (message (concat "Copied URL: " url))))
-
-(with-eval-after-load 'org
-  (define-key org-mode-map (kbd "C-x C-l") #'my/org-link-copy))
 
 (provide 'init)
 ;;; init.el ends here
