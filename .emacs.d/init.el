@@ -55,7 +55,21 @@
   :straight t
   :config
   (setq fontaine-presets
-	'((small
+	'((tiny
+	   :default-family "Iosevka"
+	   :default-weight regular
+	   :default-slant normal
+	   :default-width wide
+	   :default-height 80
+
+	   :fixed-pitch-family "Iosevka"
+	   :fixed-pitch-weight regular
+	   :fixed-pitch-slant normal
+	   :fixed-pitch-width wide
+	   :fixed-pitch-height 80
+	   :line-spacing 2)
+          
+          (small
 	   :default-family "Iosevka"
 	   :default-weight regular
 	   :default-slant normal
@@ -74,13 +88,13 @@
 	   :default-weight regular
 	   :default-slant normal
 	   :default-width wide
-	   :default-height 140
+	   :default-height 120
 
 	   :fixed-pitch-family "Iosevka"
 	   :fixed-pitch-weight regular
 	   :fixed-pitch-slant normal
 	   :fixed-pitch-width wide
-	   :fixed-pitch-height 140
+	   :fixed-pitch-height 120
 	   :line-spacing 2)
           
 	  (big
@@ -88,13 +102,13 @@
 	   :default-weight regular
 	   :default-slant normal
 	   :default-width wide
-	   :default-height 180
+	   :default-height 140
 
 	   :fixed-pitch-family "Iosevka"
 	   :fixed-pitch-weight regular
 	   :fixed-pitch-slant normal
 	   :fixed-pitch-width wide
-	   :fixed-pitch-height 180
+	   :fixed-pitch-height 140
 	   :line-spacing 2)))
   
   (fontaine-mode 1)
@@ -460,7 +474,15 @@
   (initial-buffer-choice 'vterm)
   :hook
   ((vterm-mode . (lambda () (line-number-mode -1)))
-   (vterm-mode . (lambda () (column-number-mode -1)))))
+   (vterm-mode . (lambda () (column-number-mode -1))))
+  :config
+  (defun my/vterm-with-prefix ()
+    "Simulate `C-u M-x vterm` to open a new vterm buffer."
+    (interactive)
+    (let ((current-prefix-arg '(4))) ;; Equivalent to C-u
+      (call-interactively 'vterm)))
+  :bind
+  (("C-c v" . vterm-with-prefix)))
 
 ;;; Utilities ;;;
 
