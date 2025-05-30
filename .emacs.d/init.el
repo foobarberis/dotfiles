@@ -179,7 +179,7 @@
    (require-final-newline t "Ends file with a newline.")
    (delete-by-moving-to-trash t "Use the system's trash can"))
   :hook
-  (before-save . #'delete-trailing-whitespace))
+  (before-save . delete-trailing-whitespace))
 
 (use-package dired
   :straight nil
@@ -233,10 +233,6 @@ the tags and collapse all subtrees."
            (url (concat type ":" url)))
       (kill-new url)
       (message (concat "Copied URL: " url))))
-
-  (with-eval-after-load 'org
-    (define-key org-mode-map (kbd "C-x C-l") #'my/org-link-copy))
-
   :hook
   ((dired-mode . dired-hide-details-mode))
   :bind
