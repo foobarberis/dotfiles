@@ -41,6 +41,17 @@
   (require-theme 'modus-themes)
   (load-theme 'modus-operandi)
 
+  ;; Configure border appearance
+  (modify-all-frames-parameters
+   '((right-divider-width . 10)
+     (internal-border-width . 10)))
+  (dolist (face '(window-divider
+                  window-divider-first-pixel
+                  window-divider-last-pixel))
+    (face-spec-reset-face face)
+    (set-face-foreground face (face-attribute 'default :background)))
+  (set-face-background 'fringe (face-attribute 'default :background))
+
   ;; Enable disabled commands
   (put 'narrow-to-region 'disabled nil)
   (put 'downcase-region 'disabled nil)
@@ -212,6 +223,15 @@ image files using ImageMagick."
   (setq org-log-into-drawer t)
   (setq org-tags-column -80)
   (setq org-startup-with-inline-images t)
+  (setq org-auto-align-tags nil
+  (setq org-tags-column 0)
+  (setq org-catch-invisible-edits 'show-and-error)
+  (setq org-special-ctrl-a/e t)
+  (setq org-insert-heading-respect-content t)
+  (setq org-hide-emphasis-markers t)
+  (setq org-pretty-entities t)
+  (setq org-agenda-tags-column 0)
+  (setq org-ellipsis "…"))
 
   (defun my/org-sort-all ()
     "Sort all headings in the buffer by tags, then by TODO order, align all
@@ -288,6 +308,11 @@ the tags and collapse all subtrees."
     (add-to-list 'auto-mode-alist entry)))
 
 ;;; Packages ;;;
+
+(use-package org-modern
+  :straight t
+  :config
+  (global-org-modern-mode))
 
 ;; Use nerd-icons-install-fonts to dowload the icons
 (use-package nerd-icons
@@ -490,11 +515,6 @@ the tags and collapse all subtrees."
 
 (use-package jinx
   :straight t
-  :hook
-  ((LaTeX-mode . jinx-mode)
-   (latex-mode . jinx-mode)
-   (markdown-mode . jinx-mode)
-   (org-mode . jinx-mode))
   :custom
   ((jinx-languages "fr_FR en_US" "Dictionary language codes, as a string separated by whitespace."))
   :bind
