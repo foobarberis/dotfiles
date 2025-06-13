@@ -28,11 +28,11 @@ cp .bashrc "${HOME}/.profile"
 cp ./.config/alacritty/alacritty.toml "${HOME}/.config/alacritty/"
 
 # Deploy Alacritty configuration for Windows (via WSL)
-ROAMING_DIR="/mnt/c/Users/16018659/AppData/Roaming"
-if [ -d "${ROAMING_DIR}" ]; then
-    mkdir -p "${ROAMING_DIR}/alacritty/"
-    cp ./.config/alacritty/alacritty.toml "${ROAMING_DIR}/alacritty/"
-fi
+# ROAMING_DIR="/mnt/c/Users/16018659/AppData/Roaming"
+# if [ -d "${ROAMING_DIR}" ]; then
+#     mkdir -p "${ROAMING_DIR}/alacritty/"
+#     cp ./.config/alacritty/alacritty.toml "${ROAMING_DIR}/alacritty/"
+# fi
 
 # Deploy Vim configuration
 cp .vimrc "${HOME}/"

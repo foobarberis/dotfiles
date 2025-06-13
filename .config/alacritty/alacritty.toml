@@ -7,11 +7,11 @@ size = 16.0
 
 [font.normal]
 family = "Iosevka Term"
-style = "Light Extended"
+style = "Extended"
 
 [font.italic]
 family = "Iosevka Term"
-style = "Light Extended Italic"
+style = "Extended Italic"
 
 [font.bold]
 family = "Iosevka Term"

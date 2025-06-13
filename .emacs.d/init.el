@@ -68,7 +68,7 @@
 	   :fixed-pitch-width wide
 	   :fixed-pitch-height 80
 	   :line-spacing 2)
-          
+
           (small
 	   :default-family "Iosevka"
 	   :default-weight regular
@@ -82,7 +82,7 @@
 	   :fixed-pitch-width wide
 	   :fixed-pitch-height 100
 	   :line-spacing 2)
-          
+
           (regular
 	   :default-family "Iosevka"
 	   :default-weight regular
@@ -96,7 +96,7 @@
 	   :fixed-pitch-width wide
 	   :fixed-pitch-height 120
 	   :line-spacing 2)
-          
+
 	  (big
 	   :default-family "Iosevka"
 	   :default-weight regular
@@ -110,7 +110,7 @@
 	   :fixed-pitch-width wide
 	   :fixed-pitch-height 140
 	   :line-spacing 2)))
-  
+
   (fontaine-mode 1)
   (fontaine-set-preset 'regular))
 
@@ -206,6 +206,7 @@ image files using ImageMagick."
   :config
   (setq org-M-RET-may-split-line '((default . nil)))
   (setq org-insert-heading-respect-content t)
+  (setq org-use-fast-todo-selection 'nil)
   (setq org-confirm-babel-evaluate nil)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
