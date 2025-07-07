@@ -255,7 +255,7 @@ the tags and collapse all subtrees."
       (kill-new url)
       (message (concat "Copied URL: " url))))
   :hook
-  ((dired-mode . dired-hide-details-mode))
+  ((org-mode . org-indent-mode))
   :bind
   ((:map org-mode-map ("C-x C-l" . my/org-link-copy))))
 
@@ -308,11 +308,6 @@ the tags and collapse all subtrees."
     (add-to-list 'auto-mode-alist entry)))
 
 ;;; Packages ;;;
-
-(use-package org-modern
-  :straight t
-  :config
-  (global-org-modern-mode))
 
 ;; Use nerd-icons-install-fonts to dowload the icons
 (use-package nerd-icons
