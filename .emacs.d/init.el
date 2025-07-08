@@ -41,17 +41,6 @@
   (require-theme 'modus-themes)
   (load-theme 'modus-operandi)
 
-  ;; Configure border appearance
-  (modify-all-frames-parameters
-   '((right-divider-width . 10)
-     (internal-border-width . 10)))
-  (dolist (face '(window-divider
-                  window-divider-first-pixel
-                  window-divider-last-pixel))
-    (face-spec-reset-face face)
-    (set-face-foreground face (face-attribute 'default :background)))
-  (set-face-background 'fringe (face-attribute 'default :background))
-
   ;; Enable disabled commands
   (put 'narrow-to-region 'disabled nil)
   (put 'downcase-region 'disabled nil)
@@ -308,6 +297,30 @@ the tags and collapse all subtrees."
     (add-to-list 'auto-mode-alist entry)))
 
 ;;; Packages ;;;
+
+(use-package spacious-padding
+  :straight t
+  :config
+  (setq spacious-padding-widths
+        '( :internal-border-width 15
+           :header-line-width 5
+           :mode-line-width 5
+           :tab-width 5
+           :right-divider-width 10
+           :scroll-bar-width 0
+           :fringe-width 6))
+
+  ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+  ;; is very flexible and provides several examples.
+  (setq spacious-padding-subtle-frame-lines
+        `( :mode-line-active 'default
+           :mode-line-inactive vertical-border))
+
+  ;; Make the underlines appear below the base line, to create a more
+  ;; consistent effect between overlines and underlines.
+  (setq x-underline-at-descent-line t)
+
+  (spacious-padding-mode 1))
 
 ;; Use nerd-icons-install-fonts to dowload the icons
 (use-package nerd-icons
