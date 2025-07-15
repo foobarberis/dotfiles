@@ -212,7 +212,7 @@ image files using ImageMagick."
   (setq org-log-into-drawer t)
   (setq org-tags-column -80)
   (setq org-startup-with-inline-images t)
-  (setq org-auto-align-tags nil
+  (setq org-auto-align-tags nil)
   (setq org-tags-column 0)
   (setq org-catch-invisible-edits 'show-and-error)
   (setq org-special-ctrl-a/e t)
@@ -220,7 +220,10 @@ image files using ImageMagick."
   (setq org-hide-emphasis-markers t)
   (setq org-pretty-entities t)
   (setq org-agenda-tags-column 0)
-  (setq org-ellipsis "…"))
+  (setq org-ellipsis "…")
+
+  (setq org-todo-keyword-faces
+      '(("INPROGRESS" . (:foreground "orange" :weight bold))))
 
   (defun my/org-sort-all ()
     "Sort all headings in the buffer by tags, then by TODO order, align all
