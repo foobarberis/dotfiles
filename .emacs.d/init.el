@@ -262,66 +262,50 @@ the tags and collapse all subtrees."
           (css         "https://github.com/tree-sitter/tree-sitter-css")
           (html        "https://github.com/tree-sitter/tree-sitter-html")
           (javascript  "https://github.com/tree-sitter/tree-sitter-javascript")
-          (jsdoc  "https://github.com/tree-sitter/tree-sitter-jsdoc")
-          (cpp         "https://github.com/tree-sitter/tree-sitter-cpp")
-          (c           "https://github.com/tree-sitter/tree-sitter-c")
           (json        "https://github.com/tree-sitter/tree-sitter-json")
           (toml        "https://github.com/tree-sitter/tree-sitter-toml")
-          (yaml        "https://github.com/ikatyang/tree-sitter-yaml")))
+          (yaml        "https://github.com/ikatyang/tree-sitter-yaml")
+          (dockerfile  "https://github.com/camdencheek/tree-sitter-dockerfile")))
 
   ;; Remap standard major modes to Tree-sitter modes
   (setq major-mode-remap-alist
-        '((sh-mode      . bash-ts-mode)
-          (c-mode       . c-ts-mode)
-          (c++-mode     . c++-ts-mode)
-          (css-mode     . css-ts-mode)
-          (mhtml-mode   . mhtml-ts-mode)
-          (html-mode    . html-ts-mode)
-          (js-mode      . js-ts-mode)
-          (json-mode    . json-ts-mode)
-          (toml-mode    . toml-ts-mode)
-          (yaml-mode    . yaml-ts-mode)))
+        '((sh-mode           . bash-ts-mode)
+          (css-mode          . css-ts-mode)
+          (mhtml-mode        . mhtml-ts-mode)
+          (html-mode         . html-ts-mode)
+          (js-mode           . js-ts-mode)
+          (json-mode         . json-ts-mode)
+          (toml-mode         . toml-ts-mode)
+          (yaml-mode         . yaml-ts-mode)
+          (dockerfile-mode   . dockerfile-ts-mode)))
 
   ;; Associate file extensions with Tree-sitter modes
   (dolist (entry
            '(("\\.sh\\'"        . bash-ts-mode)
-             ("\\.c\\'"         . c-ts-mode)
-             ("\\.h\\'"         . c-ts-mode)
-             ("\\.cpp\\'"       . c++-ts-mode)
-             ("\\.cc\\'"        . c++-ts-mode)
-             ("\\.cxx\\'"       . c++-ts-mode)
-             ("\\.hpp\\'"       . c++-ts-mode)
              ("\\.js\\'"        . js-ts-mode)
              ("\\.json\\'"      . json-ts-mode)
              ("\\.html?\\'"     . mhtml-ts-mode)
              ("\\.css\\'"       . css-ts-mode)
              ("\\.toml\\'"      . toml-ts-mode)
-             ("\\.ya?ml\\'"     . yaml-ts-mode)))
+             ("\\.ya?ml\\'"     . yaml-ts-mode)
+             ("Dockerfile\\'"   . dockerfile-ts-mode)))
     (add-to-list 'auto-mode-alist entry)))
 
 ;;; Packages ;;;
+
+(use-package adoc-mode
+  :straight t
+  :mode "\\.adoc\\'")
 
 (use-package spacious-padding
   :straight t
   :config
   (setq spacious-padding-widths
-        '( :internal-border-width 15
-           :header-line-width 5
-           :mode-line-width 5
-           :tab-width 5
-           :right-divider-width 10
-           :scroll-bar-width 0
-           :fringe-width 6))
-
-  ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
-  ;; is very flexible and provides several examples.
-  (setq spacious-padding-subtle-frame-lines
-        `( :mode-line-active 'default
-           :mode-line-inactive vertical-border))
-
-  ;; Make the underlines appear below the base line, to create a more
-  ;; consistent effect between overlines and underlines.
-  (setq x-underline-at-descent-line t)
+        '( :internal-border-width 0
+           :right-divider-width 1
+           :fringe-width 5
+           :tab-width 3
+           :mode-line-width 5))
 
   (spacious-padding-mode 1))
 
