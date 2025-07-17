@@ -141,7 +141,7 @@
   :straight nil
   :config
   (tab-bar-mode 1)
-  (setq tab-bar-separator "")
+  (setq tab-bar-separator " ")
   (setq tab-bar-tab-hints nil)
   :custom
   (tab-bar-format
