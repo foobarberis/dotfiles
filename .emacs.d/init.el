@@ -256,6 +256,8 @@ the tags and collapse all subtrees."
 (use-package treesit
   :straight nil
   :config
+  (require 'treesit-auto) ; Fixes a load-order issue that breaks bash-ts-mode.
+
   ;; Grammar source definitions
   (setq treesit-language-source-alist
         '((bash        "https://github.com/tree-sitter/tree-sitter-bash")
@@ -267,29 +269,29 @@ the tags and collapse all subtrees."
           (yaml        "https://github.com/ikatyang/tree-sitter-yaml")
           (dockerfile  "https://github.com/camdencheek/tree-sitter-dockerfile")))
 
-  ;; Remap standard major modes to Tree-sitter modes
-  (setq major-mode-remap-alist
-        '((sh-mode           . bash-ts-mode)
-          (css-mode          . css-ts-mode)
-          (mhtml-mode        . mhtml-ts-mode)
-          (html-mode         . html-ts-mode)
-          (js-mode           . js-ts-mode)
-          (json-mode         . json-ts-mode)
-          (toml-mode         . toml-ts-mode)
-          (yaml-mode         . yaml-ts-mode)
-          (dockerfile-mode   . dockerfile-ts-mode)))
+  ;; Define all language configurations in one place
+  (defconst my-treesit-languages
+    '(
+      (sh-mode         . (bash-ts-mode         . "\\.sh\\'"))
+      (css-mode        . (css-ts-mode          . "\\.css\\'"))
+      (html-mode       . (html-ts-mode         . "\\.html?\\'"))
+      (mhtml-mode      . (html-ts-mode         . nil))
+      (js-mode         . (js-ts-mode           . "\\.js\\'"))
+      (json-mode       . (json-ts-mode         . "\\.json\\'"))
+      (toml-mode       . (toml-ts-mode         . "\\.toml\\'"))
+      (yaml-mode       . (yaml-ts-mode         . "\\.ya?ml\\'"))
+      (dockerfile-mode . (dockerfile-ts-mode   . "Dockerfile\\'"))))
 
-  ;; Associate file extensions with Tree-sitter modes
-  (dolist (entry
-           '(("\\.sh\\'"        . bash-ts-mode)
-             ("\\.js\\'"        . js-ts-mode)
-             ("\\.json\\'"      . json-ts-mode)
-             ("\\.html?\\'"     . mhtml-ts-mode)
-             ("\\.css\\'"       . css-ts-mode)
-             ("\\.toml\\'"      . toml-ts-mode)
-             ("\\.ya?ml\\'"     . yaml-ts-mode)
-             ("Dockerfile\\'"   . dockerfile-ts-mode)))
-    (add-to-list 'auto-mode-alist entry)))
+  ;; Programmatically configure the remaps and auto-modes
+  (dolist (lang-config my-treesit-languages)
+    (let ((old-mode (car lang-config))
+          (ts-mode (car (cdr lang-config)))
+          (file-regex (cdr (cdr lang-config))))
+      ;; Add to the major-mode-remap-alist
+      (add-to-list 'major-mode-remap-alist (cons old-mode ts-mode))
+      ;; Add to the auto-mode-alist if a file regex is provided
+      (when file-regex
+        (add-to-list 'auto-mode-alist (cons file-regex ts-mode))))))
 
 ;;; Packages ;;;
 
