@@ -256,7 +256,6 @@ the tags and collapse all subtrees."
 (use-package treesit
   :straight nil
   :config
-  (require 'treesit-auto) ; Fixes a load-order issue that breaks bash-ts-mode.
 
   ;; Grammar source definitions
   (setq treesit-language-source-alist
