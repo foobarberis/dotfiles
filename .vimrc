@@ -7,8 +7,8 @@ set backspace=indent,eol,start " Make backspace work more intuitively
 set nobackup noswapfile " Do not create backup or swap files
 
 " Line numbers & display settings
-" set number " Show line numbers
-" set cursorline " Highlight the current cursor line
+set number " Show line numbers
+set cursorline " Highlight the current cursor line
 set scrolloff=2 " Keep at least 2 lines above/below cursor when scrolling
 set laststatus=2 " Always show status line
 set statusline=%F " Show full path in the status line
@@ -27,7 +27,7 @@ set expandtab " Convert tabs to spaces
 set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
 
 " UI Enhancements
-syntax off
+syntax on
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
 set showmatch " Highlight matching parentheses, brackets, braces
 set ruler " Show cursor position

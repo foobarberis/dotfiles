@@ -1,81 +1,64 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -euo pipefail  # Safer bash behavior: exit on error, unset vars, or pipe failure
+set -euo pipefail
 
-# Create necessary directories if they do not exist
-mkdir -p "${HOME}/.ssh" \
-         "${HOME}/.local/bin" \
-         "${HOME}/.emacs.d" \
-         "${FOLDER_FILES}" \
-         "${FOLDER_DOCUMENTS}" \
-         "${FOLDER_CODE}" \
-         "${FOLDER_AUDIO}" \
-         "${FOLDER_VIDEO}" \
-         "${FOLDER_PICTURES}" \
-         "${FOLDER_GAMES}" \
-         "${HOME}/.config/nvim" \
-         "${HOME}/.config/tmux" \
-         "${HOME}/.config/alacritty"
+# The directory where this script is located
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Deploy dotfiles
-cp .bashrc .bash_aliases .vimrc "${HOME}/"
+# Files and directories to symlink
+# This list contains paths relative to the dotfiles directory
+# The script will symlink them to the corresponding path in $HOME
+FILES_TO_LINK=(
+    ".bashrc"
+    ".gitconfig"
+    ".vimrc"
+    ".ssh/config"
+    ".config/alacritty/alacritty.toml"
+    ".config/tmux/tmux.conf"
+    ".local/bin"
+)
 
-# On macOS, .bash_profile and .profile are sourced instead of .bashrc
-cp .bashrc "${HOME}/.bash_profile"
-cp .bashrc "${HOME}/.profile"
+main() {
+    echo "Starting dotfiles deployment..."
 
-# Deploy Alacritty configuration for Linux/macOS
-cp ./.config/alacritty/alacritty.toml "${HOME}/.config/alacritty/"
+    for item in "${FILES_TO_LINK[@]}"; do
+        local source_path="${DOTFILES_DIR}/${item}"
+        local target_path="${HOME}/${item}"
 
-# Deploy Alacritty configuration for Windows (via WSL)
-# ROAMING_DIR="/mnt/c/Users/16018659/AppData/Roaming"
-# if [ -d "${ROAMING_DIR}" ]; then
-#     mkdir -p "${ROAMING_DIR}/alacritty/"
-#     cp ./.config/alacritty/alacritty.toml "${ROAMING_DIR}/alacritty/"
-# fi
+        if [ ! -e "$source_path" ]; then
+            echo "ERROR: Source file/directory does not exist: ${source_path}"
+            continue
+        fi
 
-# Deploy Vim configuration
-cp .vimrc "${HOME}/"
+        # Create parent directory for the target if it doesn't exist
+        mkdir -p "$(dirname "${target_path}")"
 
-# Deploy Tmux configuration
-cp ./.config/tmux/tmux.conf "${HOME}/.config/tmux/"
+        # If the target already exists, back it up
+        if [ -e "$target_path" ] && [ ! -L "$target_path" ]; then
+            echo "Backing up existing ${target_path} to ${target_path}.bak"
+            mv "$target_path" "${target_path}.bak"
+        fi
 
-# Deploy Emacs configuration (copy contents, not the folder itself)
-cp -r .emacs.d/* "${HOME}/.emacs.d/"
+        # Remove existing symlink if it points to the wrong place
+        if [ -L "$target_path" ]; then
+            rm "$target_path"
+        fi
 
-# Deploy personal scripts
-chmod +x ./bin/*
-cp ./bin/* "${HOME}/.local/bin/"
+        # Create the symlink
+        echo "Linking ${source_path} to ${target_path}"
+        ln -s "$source_path" "$target_path"
+    done
 
-# Deploy SSH configuration
-cp ssh_config "${HOME}/.ssh/config"
-
-# Define the list of target directories
-TARGET_DIRECTORIES="
-    ${FOLDER_3PC}/3pc-web-back
-    ${FOLDER_3PC}/3pc-devops
-    ${FOLDER_3PC}/3pc-web-front
-    ${FOLDER_3PC}/3pc-installer
-    ${FOLDER_3PC}/mirrhia-etl
-    ${FOLDER_3PC}/mirrhia-hub
-    ${FOLDER_3PC}/mirrhia-report
-    ${FOLDER_3PC}/microbio-connectivity
-"
-
-# Path to the Git hook file
-HOOK_FILE="./bin/prepare-commit-msg"
-
-# Iterate through each directory and deploy the Git hook
-for DIR in $TARGET_DIRECTORIES; do
-    if [ ! -d "$DIR" ]; then
-        continue
+    # On macOS, ensure .bashrc is sourced by .bash_profile
+    if [[ "$(uname)" == "Darwin" ]]; then
+        local profile_file="${HOME}/.bash_profile"
+        if ! grep -q ".bashrc" "$profile_file" 2>/dev/null; then
+            echo "Adding .bashrc source to ${profile_file}"
+            echo -e "\n# Source .bashrc\nif [ -f \"\${HOME}/.bashrc\" ]; then\n    . \"\${HOME}/.bashrc\"\nfi" >> "$profile_file"
+        fi
     fi
 
-    if [ -d "$DIR/.git" ]; then
-        cp "$HOOK_FILE" "$DIR/.git/hooks/"
-        chmod +x "$DIR/.git/hooks/prepare-commit-msg"
-        echo "Hook deployed to $DIR"
-    else
-        echo "$DIR is not a Git repository"
-    fi
-done
+    echo "Deployment complete!"
+}
+
+main

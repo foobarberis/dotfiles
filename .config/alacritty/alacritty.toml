@@ -15,7 +15,7 @@ style = "Extended Italic"
 
 [font.bold]
 family = "Iosevka Term"
-style = "Heavy Extended"
+style = "Bold Extended"
 
 [font.bold_italic]
 family = "Iosevka Term"
