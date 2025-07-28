@@ -1,9 +1,6 @@
 # Terminal
 export TERM='tmux-256color'
 
-# Change cursor to a bar instead of a block
-# printf '\033[6 q'
-
 # Directories to be added to PATH
 export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
 
@@ -47,13 +44,16 @@ set -o noclobber
 
 ### ALIASES ###
 
-alias upd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt autoremove -y && sudo apt-get clean'
+alias l='ls -Alhp --color'
+
+alias vi='nvim'
+alias vim='nvim'
+
+alias aptupd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get clean'
 alias brewupd='brew update && brew upgrade && brew cleanup'
 alias pkgupd='pkg update -y && pkg upgrade -y && pkg autoclean -y'
 
-alias l='ls -Alhp --color'
-
-alias fvi='vi "$(fzf)"'
+alias fvi='nvim "$(fzf)"'
 alias fcd='cd "$(fzf)"'
 alias fls='ls "$(fzf)"'
 alias fmpv='mpv --fs "$(fzf)"'

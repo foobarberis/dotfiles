@@ -6,4 +6,4 @@
 [credential]
 	helper = store
 [safe]
-    directory = /storage/emulated/0/Files/
+	directory = /storage/emulated/0/Files/
