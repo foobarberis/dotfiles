@@ -1,54 +1,17 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -euo pipefail
+mkdir -p ${HOME}/.ssh ${HOME}/.local/bin ${HOME}/.config/alacritty/ ${HOME}/.config/tmux ${HOME}/.config/nvim
 
-# The directory where this script is located
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cp ./.bashrc ${HOME}
+cp ./.bashrc ${HOME}/.profile
+cp ./.bashrc ${HOME}/.bash_profile
 
-# Files and directories to symlink
-# This list contains paths relative to the dotfiles directory
-# The script will symlink them to the corresponding path in $HOME
-FILES_TO_LINK=(
-    ".bashrc"
-    ".vimrc"
-    ".ssh/config"
-    ".config/alacritty/alacritty.toml"
-    ".config/tmux/tmux.conf"
-    ".local/bin"
-)
+cp ./.vimrc ${HOME}
+cp ./.vimrc ${HOME}/.config/nvim/init.vim
 
-main() {
-    echo "Starting dotfiles deployment..."
+cp ./.ssh/config ${HOME}/.ssh/
+cp ./.config/tmux/tmux.conf ${HOME}/.config/tmux/
+cp ./.config/alacritty/alacritty.toml ${HOME}/.config/alacritty/
 
-    for item in "${FILES_TO_LINK[@]}"; do
-        local source_path="${DOTFILES_DIR}/${item}"
-        local target_path="${HOME}/${item}"
+cp ./.local/bin/* ${HOME}/.local/bin
 
-        if [ ! -e "$source_path" ]; then
-            echo "ERROR: Source file/directory does not exist: ${source_path}"
-            continue
-        fi
-
-        # Create parent directory for the target if it doesn't exist
-        mkdir -p "$(dirname "${target_path}")"
-
-        # If the target already exists, back it up
-        if [ -e "$target_path" ] && [ ! -L "$target_path" ]; then
-            echo "Backing up existing ${target_path} to ${target_path}.bak"
-            mv "$target_path" "${target_path}.bak"
-        fi
-
-        # Remove existing symlink if it points to the wrong place
-        if [ -L "$target_path" ]; then
-            rm "$target_path"
-        fi
-
-        # Create the symlink
-        echo "Linking ${source_path} to ${target_path}"
-        ln -s "$source_path" "$target_path"
-    done
-
-    echo "Deployment complete!"
-}
-
-main

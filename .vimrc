@@ -1,3 +1,6 @@
+" Set leader key to Space
+let mapleader = " "
+
 " General settings
 set encoding=utf-8 " Use UTF-8 encoding
 set mouse=a " Enable mouse support in all modes
@@ -31,14 +34,12 @@ syntax on
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
 set showmatch " Highlight matching parentheses, brackets, braces
 set ruler " Show cursor position
-colorscheme default
+colorscheme zaibatsu
 
 " Clipboard
 if system('uname -s') == "Darwin\n"
-  " macOS
   set clipboard=unnamed
 else
-  "Linux
   set clipboard=unnamedplus
 endif
 
@@ -50,3 +51,14 @@ set wildmode=list:longest,full " Wildmode settings
 let g:netrw_browse_split = 3 " Open netrw file explorer in a new tab
 set autochdir " Change working directory to the current file
 set hidden " Allow switching buffers without saving
+
+" Custom Functions & Mappings
+" Function to create a new log entry at the top of the file.
+function! InsertLogHeader()
+  let l:header_line = '--[ ' . strftime('%d/%m/%Y %H:%M:%S') . ' ]--'
+  call append(0, [l:header_line, ''])
+  call cursor(2, 1)
+  startinsert
+endfunction
+
+nnoremap <leader>l :call InsertLogHeader()<CR>
