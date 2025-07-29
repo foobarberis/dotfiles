@@ -47,6 +47,7 @@ export WIN_DOCS="/mnt/c/Users/16018659/OneDrive\ -\ bioMerieux/Documents"
 ### ALIASES ###
 
 alias docs="cd ${WIN_DOCS}"
+alias log="${EDITOR} ${WIN_DOCS}/log.txt"
 alias note="${EDITOR} ${WIN_DOCS}/notes.txt"
 alias todo="${EDITOR} ${WIN_DOCS}/todo.txt"
 
