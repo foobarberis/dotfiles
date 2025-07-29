@@ -53,12 +53,13 @@ set autochdir " Change working directory to the current file
 set hidden " Allow switching buffers without saving
 
 " Custom Functions & Mappings
-" Function to create a new log entry at the top of the file.
 function! InsertLogHeader()
-  let l:header_line = '--[ ' . strftime('%d/%m/%Y %H:%M:%S') . ' ]--'
-  call append(0, [l:header_line, ''])
-  call cursor(2, 1)
+  let l:time_line = strftime('%d/%m/%Y %H:%M:%S')
+  let l:separator_line = repeat('-', strlen(l:time_line))
+  let l:bullet_line = '- '
+  call append(0, [l:time_line, l:separator_line, l:bullet_line, ''])
+  call cursor(3, 3)
   startinsert
 endfunction
-
 nnoremap <leader>l :call InsertLogHeader()<CR>
+
