@@ -62,4 +62,3 @@ function! InsertLogHeader()
   startinsert
 endfunction
 nnoremap <leader>l :call InsertLogHeader()<CR>
-

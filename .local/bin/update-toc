@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+if [ -z "$1" ] || [ ! -f "$1" ]; then
+    echo "Usage: $0 <journal_file>" >&2
+    exit 1
+fi
+
+JOURNAL_FILE="$1"
+TMP_FILE=$(mktemp)
+
+# Get a list of all sectors in the order they appear in the file
+NEW_TOC=$(grep '^\+ SEC/' "$JOURNAL_FILE" | sed -e 's/^\+ /~ /' -e 's/ \+$//')
+
+# Body of the file is from the first sector until the end of the file
+BODY=$(awk '/^--+$/{p=1} p' "$JOURNAL_FILE")
+
+# Write the new ToC and the original body to the temporary file.
+{
+    echo "$NEW_TOC"
+    echo ""
+    echo "$BODY"
+} > "$TMP_FILE"
+
+# Safely replace the original file with the updated version.
+mv "$TMP_FILE" "$JOURNAL_FILE"
+
