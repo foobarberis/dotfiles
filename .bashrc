@@ -42,12 +42,13 @@ shopt -s histappend
 # Prevent accidental overwrites when using IO redirection
 set -o noclobber
 
-export WIN_DOCS="/mnt/c/Users/16018659/OneDrive\ -\ bioMerieux/Documents"
-
 ### ALIASES ###
 
+WIN_DOCS="/mnt/c/Users/16018659/OneDrive\ -\ bioMerieux/Documents"
 alias docs="cd ${WIN_DOCS}"
-alias journal="${EDITOR} ${WIN_DOCS}/journal.txt"
+
+alias journal="${EDITOR} ~/journal/journal.txt"
+alias journalw="${EDITOR} ~/journal/journal_work.txt"
 
 alias l='ls -Alhp --color'
 

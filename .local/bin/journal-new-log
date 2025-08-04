@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -e
+
+TIME_LINE=$(date '+%d/%m/%Y %H:%M:%S')
+SEPARATOR_LINE=$(printf '%s' "$TIME_LINE" | tr '[:print:]' '-')
+printf '%s\n%s\n-' "$TIME_LINE" "$SEPARATOR_LINE"

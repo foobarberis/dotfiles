@@ -52,13 +52,27 @@ let g:netrw_browse_split = 3 " Open netrw file explorer in a new tab
 set autochdir " Change working directory to the current file
 set hidden " Allow switching buffers without saving
 
-" Custom Functions & Mappings
-function! InsertLogHeader()
-  let l:time_line = strftime('%d/%m/%Y %H:%M:%S')
-  let l:separator_line = repeat('-', strlen(l:time_line))
-  let l:bullet_line = '- '
-  call append(0, [l:time_line, l:separator_line, l:bullet_line, ''])
-  call cursor(3, 3)
-  startinsert
+" Add New Sector
+function! AddNewSector()
+    let title = input('New sector title: ')
+    let cmd = 'echo ' . shellescape(title) . ' | journal-new-sector'
+    let new_sector = system(cmd)
+
+    " Append the new sector text after the current line.
+    call append(line('.'), split(new_sector, "\n"))
+
+    " Move cursor to the line after the new sector banner and start insert.
+	execute "normal! jjjo\<Esc>o"
+    startinsert.config/tmux
 endfunction
-nnoremap <leader>l :call InsertLogHeader()<CR>
+
+nnoremap <leader>s :call AddNewSector()<CR>
+
+" Add New Log Entry
+nnoremap <leader>l /^+ SEC\/.* LOG +$<CR>:nohl<CR>jo<Esc>:r! journal-new-log<CR>A
+
+" Add line to INBOX
+nnoremap <leader>i /^+ SEC\/.* INBOX +$<CR>:nohl<CR>jjo-
+
+" Update the ToC
+nnoremap <leader>t gg0d}:0r! journal-print-toc %<CR><Esc>
