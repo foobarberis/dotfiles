@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -euo pipefail
 
@@ -16,7 +16,7 @@ main() {
       fi
 
       local base_branch="${1:-main}"
-      local output_file="feature_diff.diff"
+      local output_file="feature_diff.txt"
 
       echo "Fetching from origin to get the latest changes..."
       git fetch origin
