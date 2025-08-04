@@ -60,12 +60,14 @@ function! AddNewSector()
     let cmd = 'echo ' . shellescape(title) . ' | journal-new-sector'
     let new_sector = system(cmd)
 
+  	execute "normal! Go\<Esc>"
+
     " Append the new sector text after the current line.
     call append(line('.'), split(new_sector, "\n"))
 
     " Move cursor to the line after the new sector banner and start insert.
-	execute "normal! jjjo\<Esc>o"
-    startinsert.config/tmux
+  	execute "normal! jjjo\<Esc>o"
+    startinsert
 endfunction
 
 nnoremap <leader>s :call AddNewSector()<CR>
