@@ -7,10 +7,6 @@ if [ -z "$1" ] || [ ! -f "$1" ]; then
     exit 1
 fi
 
-JOURNAL_FILE="$1"
-
-# Get a list of all sectors in the order they appear in the file
-NEW_TOC=$(grep '^\+ SEC/' "$JOURNAL_FILE" | sed -e 's/^\+ /~ /' -e 's/ \+$//')
-
-# Write the new ToC and the original body to the temporary file.
-echo "$NEW_TOC"
+# For lines starting with '+ SEC/', replace the first field (+) with '~',
+# decrement the field count (NF--) to remove the last field (+), then print.
+awk '/^\+ SEC\// { $1="~"; NF--; print }' "$1"

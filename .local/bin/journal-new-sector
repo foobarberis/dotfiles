@@ -3,15 +3,13 @@
 set -e
 
 TITLE=""
-
 # Check if standard input is NOT a terminal (i.e., it's a pipe).
 if ! [ -t 0 ]; then
-    # If it's a pipe, then it's safe to read from stdin.
     TITLE=$(cat)
 fi
 
-ID=$(uuidgen | tr -d '-' | head -c 8 | tr 'a-z' 'A-Z')
-UPPER_TITLE=$(echo "$TITLE" | tr 'a-z' 'A-Z')
+ID=$(uuidgen | tr -d '-' | head -c 8 | tr '[:lower:]' '[:upper:]')
+UPPER_TITLE=$(echo "$TITLE" | tr '[:lower:]' '[:upper:]')
 
 if [ -n "$TITLE" ]; then
     BANNER_LINE="+ SEC/$ID $UPPER_TITLE +"
