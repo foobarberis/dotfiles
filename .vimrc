@@ -1,6 +1,9 @@
 " Set leader key to Space
 let mapleader = " "
 
+" Disable the built-in matchparen plugin as it causes annoying cursor behavior.
+let g:loaded_matchparen = 1
+
 " General settings
 set encoding=utf-8 " Use UTF-8 encoding
 set mouse=a " Enable mouse support in all modes
@@ -32,7 +35,6 @@ set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
 " UI Enhancements
 syntax on
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
-set showmatch " Highlight matching parentheses, brackets, braces
 set ruler " Show cursor position
 colorscheme zaibatsu
 
