@@ -52,6 +52,7 @@ alias journal-work="${EDITOR} ~/journal/journal_work.txt"
 alias journal-sync="git add . && git commit -m '.' && git push"
 
 alias l='ls -Alhp --color'
+alias t='tree'
 
 alias vi='nvim'
 alias vim='nvim'
