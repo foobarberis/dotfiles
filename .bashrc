@@ -48,7 +48,8 @@ WIN_DOCS="/mnt/c/Users/16018659/OneDrive\ -\ bioMerieux/Documents"
 alias docs="cd ${WIN_DOCS}"
 
 alias journal="${EDITOR} ~/journal/journal.txt"
-alias journalw="${EDITOR} ~/journal/journal_work.txt"
+alias journal-work="${EDITOR} ~/journal/journal_work.txt"
+alias journal-sync="git add . && git commit -m '.' && git push"
 
 alias l='ls -Alhp --color'
 
