@@ -13,7 +13,7 @@ set backspace=indent,eol,start " Make backspace work more intuitively
 set nobackup noswapfile " Do not create backup or swap files
 
 " Line numbers & display settings
-set number " Show line numbers
+" set number " Show line numbers
 set cursorline " Highlight the current cursor line
 set scrolloff=2 " Keep at least 2 lines above/below cursor when scrolling
 set laststatus=2 " Always show status line
@@ -36,7 +36,7 @@ set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
 syntax on
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
 set ruler " Show cursor position
-colorscheme zaibatsu
+colorscheme darkblue
 
 " Clipboard
 if system('uname -s') == "Darwin\n"
