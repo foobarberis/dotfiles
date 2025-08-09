@@ -7,7 +7,7 @@ cp .bashrc ${HOME}/.profile
 cp .bashrc ${HOME}/.bash_profile
 
 cp .vimrc ${HOME}
-cp .vimrc ${HOME}/.config/nvim/init.vim
+cp .config/nvim/init.lua ${HOME}/.config/nvim/
 
 # cp .ssh/config ${HOME}/.ssh/
 cp .config/tmux/tmux.conf ${HOME}/.config/tmux/
@@ -15,3 +15,4 @@ cp .config/alacritty/alacritty.toml ${HOME}/.config/alacritty/
 
 cp .local/bin/* ${HOME}/.local/bin
 
+cp .cheatsheet ${HOME}

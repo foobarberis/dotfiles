@@ -1,0 +1,330 @@
+Git: Nuke history and start a fresh repository (DANGEROUS)
+---
+  rm -rf .git/
+  git init
+  git remote add origin <remote_url>
+  git add .
+  git commit -m 'Initial commit'
+  git push -f origin master
+---
+
+Git: Show current status
+---
+  git status
+---
+
+Git: Add all changes to staging
+---
+  git add --all
+---
+
+Git: Commit staged changes
+---
+  git commit -m "message"
+---
+
+Git: Compact, graphed log view
+---
+  git log --oneline --graph --decorate
+---
+
+Git: Log with full diffs for each commit
+---
+  git log -p
+---
+
+Git: Show changes for a specific file
+---
+  git log -p <file>
+---
+
+Git: Prune local branches that no longer exist on remote
+---
+  git fetch --prune
+---
+
+Git: Save current uncommitted changes to a stash
+---
+  git stash
+---
+
+Git: Apply and remove the most recent stash
+---
+  git stash pop
+---
+
+Git: Interactively rebase the last 3 commits
+---
+  git rebase -i HEAD~3
+---
+
+Git: Force-push to overwrite remote history (DANGEROUS)
+---
+  git push -f
+---
+
+Git: Reset current branch to a specific commit (DANGEROUS)
+---
+  git reset --hard <commit_hash>
+---
+
+Git: Setup global username
+---
+  git config --global user.name "username"
+---
+
+Git: Setup global email
+---
+  git config --global user.email "foobar@gmail.com"
+---
+
+Git: Enable the credential store helper
+---
+  git config --global credential.helper store
+---
+
+Docker: List running containers
+---
+  docker ps
+---
+
+Docker: List all containers (running and stopped)
+---
+  docker ps -a
+---
+
+Docker: List images
+---
+  docker images
+---
+
+Docker: Execute a shell in a running container
+---
+  docker exec -it <container_name> /bin/bash
+---
+
+Docker: Follow logs of a container
+---
+  docker logs -f <container_name>
+---
+
+Docker: Prune all unused images, containers, and volumes (DANGEROUS)
+---
+  docker system prune -af
+---
+
+Docker: Mount a folder into a container
+---
+  docker run -v <folder>:<mount_point> -it --rm <image> /bin/bash
+---
+
+Docker/DNS: Send a DNS query with dig from within a Docker network
+---
+  docker run --rm -it --network <network_name> alpine sh -c "apk add --no-cache bind-tools && dig @<ip> <hostname>"
+---
+
+Docker/Artifactory: Login to Artifactory
+---
+  docker login bmxrdartifactoryfr.jfrog.io -u <user>
+---
+
+Docker/Artifactory: Pull from a Docker mirror
+---
+  docker pull bmxrdartifactoryfr.jfrog.io/ext-docker-remote/<image>:<tag>
+---
+
+PowerShell: Deploy SSH key to a Windows admin user
+---
+  $authorizedKey = Get-Content -Path $env:USERPROFILE\.ssh\id_ecdsa.pub
+  $remotePowershell = "powershell Add-Content -Force -Path $env:ProgramData\ssh\administrators_authorized_keys -Value '$authorizedKey';icacls.exe ""$env:ProgramData\ssh\administrators_authorized_keys"" /inheritance:r /grant ""Administrators:F"" /grant ""SYSTEM:F"""
+  ssh username@hostname $remotePowershell
+---
+
+PowerShell: Open a firewall port
+---
+  $firewallRuleParams = @{
+    Name = "__FIREWALL_RULE_NAME__"
+    DisplayName = "__FIREWALL_RULE_DISPLAY_NAME__"
+    LocalPort = __PORT_NUMBER__
+    Protocol = "TCP"
+    Action = "Allow"
+    Direction = "Inbound"
+    Enabled = "True"
+  }
+  New-NetFirewallRule @firewallRuleParams
+---
+
+PowerShell: Bypass execution policy for a single script
+---
+  PowerShell.exe -ExecutionPolicy Bypass -File .\script.ps1
+---
+
+Windows: Path to user startup folder (in Run prompt or Explorer)
+---
+  shell:startup
+---
+
+Bash: Create a directory and change into it
+---
+  mkcd <dir>
+---
+
+Bash: Find files by name (case-insensitive)
+---
+  find . -iname "filename"
+---
+
+Bash: Find files containing text recursively
+---
+  grep -r "pattern" .
+---
+
+Bash: Show disk usage for current directory's children
+---
+  du -sh *
+---
+
+Bash: Show free disk space for mounted filesystems
+---
+  df -h
+---
+
+Bash: See which process is using a port
+---
+  sudo lsof -i :<port>
+---
+
+Bash: Make a script executable
+---
+  chmod u+x script.sh
+---
+
+Bash: Recursively change ownership of a directory
+---
+  sudo chown -R <owner>:<group> <directory>
+---
+
+Bash: Start a simple Python web server
+---
+  python3 -m http.server 8000
+---
+
+Tmux: Start a new session
+---
+  tmux new -s <session_name>
+---
+
+Tmux: List running sessions
+---
+  tmux ls
+---
+
+Tmux: Attach to a named session
+---
+  tmux a -t <session_name>
+---
+
+Tmux (in session): Detach
+---
+  PREFIX d
+---
+
+Tmux (in session): Split pane vertically
+---
+  PREFIX %
+---
+
+Tmux (in session): Split pane horizontally
+---
+  PREFIX "
+---
+
+FZF: Reverse command history search
+---
+  Ctrl+R
+---
+
+FZF: Fuzzy find file/dir and insert into command line
+---
+  Ctrl+T
+---
+
+FZF: Fuzzy find a directory and cd into it
+---
+  Alt+C
+---
+
+Vim: Search and replace in whole file (with confirmation)
+---
+  :%s/foo/bar/gc
+---
+
+Linux: Enable NetBIOS hostname resolution
+---
+  sudo apt-get install -y winbind libnss-winbind
+  sudo sed -i 's/^hosts:.*/hosts: files wins dns/' /etc/nsswitch.conf
+  sudo systemctl restart winbind
+  getent hosts <NETBIOS_HOSTNAME>
+---
+
+Linux: Change hostname
+---
+  hostnamectl set-hostname <new_hostname>
+---
+
+Metrics: Check a Prometheus-style endpoint
+---
+  curl -s "http://localhost:9252/metrics" | grep -E "# HELP"
+---
+
+Prometheus: Validate configuration file inside a container
+---
+  docker exec <prometheus_container> promtool check config /etc/prometheus/prometheus.yml
+---
+
+Blackduck: Run a detect scan
+---
+  bash <(curl -s -L https://detect.blackduck.com/detect10.sh) \
+  --detect.cleanup=false \
+  --blackduck.url="<url>" \
+  --blackduck.api.token="<token>" \
+  --detect.source.path="." \
+  --detect.excluded.directories="blackduck,.git" \
+  --detect.project.version.name=<version> \
+  --detect.project.name="<name>"
+---
+
+Maven: Get project.artifactId value
+---
+  mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout
+---
+
+NodeJS: Get Puppeteer's Chrome path
+---
+  npx -p puppeteer node -e "console.log(require('puppeteer').executablePath());"
+---
+
+ImageMagick: Reduce JPG size to 20% in a loop
+---
+  for img in *.jpg; do magick "$img" -resize 20% "opt-$img"; done
+---
+
+ImageMagick: Reduce PDF file size
+---
+  magick input.pdf -density 120 -quality 25 -compress jpeg output.pdf
+---
+
+ImageMagick: Combine all images in a directory into a PDF
+---
+  magick "*.{png,jpeg}" -quality 100 outfile.pdf
+---
+
+C/GCC: Recommended development compiler flags
+---
+  cc -g3 -Wall -Wextra -fsanitize=undefined,address -fsanitize-trap ...
+---
+
+C/Clang: Generate .clang-format config file
+---
+  clang-format -style='{BasedOnStyle: Webkit, PointerAlignment: Middle}' -dump-config > .clang-format
+---

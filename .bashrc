@@ -1,67 +1,136 @@
-# Terminal
+#-------------------------------------------------------------------------------
+# ENVIRONMENT
+#-------------------------------------------------------------------------------
 export TERM='tmux-256color'
+export PATH="${HOME}/.local/bin:${HOME}/go/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
 
-# Directories to be added to PATH
-export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
-
-# Locale settings
-# Might require you to run `sudo locale-gen en_US.UTF-8`
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-# Default command for fzf
-export FZF_DEFAULT_COMMAND='find . -type f -not -path "./.git/*"'
-
-# Editor and pager
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export PAGER="less"
 
-# History settings
+export FZF_DEFAULT_COMMAND='find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/target/*"'
+
+#-------------------------------------------------------------------------------
+# HISTORY
+#-------------------------------------------------------------------------------
 export HISTSIZE=""
 export HISTFILESIZE=""
 export HISTTIMEFORMAT="%F %T "
-export HISTCONTROL=ignoredups:ignorespace
-
-# Source the script in charge of getting the branch name
-. ${HOME}/.local/bin/git-prompt.sh
-
-# Define prompt text. Shows user, host, current directory, Git branch (if
-# any), and last command's exit status.
-export PS1='\n[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]\n> '
-
-# Automatically correct mistyped 'cd' directories
-shopt -s cdspell
-
-# Attempts spelling correction on directory names during word completion
-shopt -s dirspell
-
-# Append to history file; do not overwrite
+export HISTCONTROL="ignoredups:ignorespace"
 shopt -s histappend
 
-# Prevent accidental overwrites when using IO redirection
+#-------------------------------------------------------------------------------
+# SHELL BEHAVIOR
+#-------------------------------------------------------------------------------
+shopt -s cdspell
+shopt -s dirspell
 set -o noclobber
 
-### ALIASES ###
+#-------------------------------------------------------------------------------
+# PROMPT
+#-------------------------------------------------------------------------------
+if [ -f "${HOME}/.local/bin/git-prompt.sh" ]; then
+    . "${HOME}/.local/bin/git-prompt.sh"
+fi
+export PS1='\n[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]\n> '
 
-WIN_DOCS="/mnt/c/Users/16018659/OneDrive\ -\ bioMerieux/Documents"
-alias docs="cd ${WIN_DOCS}"
-
-alias journal="${EDITOR} ~/journal/journal.txt"
-alias journal-work="${EDITOR} ~/journal/journal_work.txt"
-alias journal-sync="git add . && git commit -m '.' && git push"
-
+#-------------------------------------------------------------------------------
+# ALIASES
+#-------------------------------------------------------------------------------
 alias l='ls -Alhp --color'
 alias t='tree'
-
 alias vi='nvim'
 alias vim='nvim'
+alias journal="${EDITOR} ~/journal/journal.txt"
+alias journal-work="${EDITOR} ~/journal/journal_work.txt"
+alias journal-sync="git add ~/journal/*.txt && git commit -m 'chore(journal): Update journal' && git push"
+alias cheat='cat ~/.cheatsheet | less'
 
-alias aptupd='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get clean'
-alias brewupd='brew update && brew upgrade && brew cleanup'
-alias pkgupd='pkg update -y && pkg upgrade -y && pkg autoclean -y'
+#-------------------------------------------------------------------------------
+# INTERACTIVE ENHANCEMENTS & SAFETY
+#-------------------------------------------------------------------------------
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias sudo='sudo '
 
-alias fvi='nvim "$(fzf)"'
-alias fcd='cd "$(fzf)"'
-alias fls='ls "$(fzf)"'
-alias fmpv='mpv --fs "$(fzf)"'
+#-------------------------------------------------------------------------------
+# GIT ALIASES
+#-------------------------------------------------------------------------------
+alias g='git'
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit -m'
+alias gca='git commit -a -m'
+alias gs='git status'
+alias gco='git checkout'
+alias gb='git branch'
+alias gl='git log --oneline --graph --decorate'
+alias gsw='git switch'
+
+#-------------------------------------------------------------------------------
+# FZF KEYBINDINGS
+#-------------------------------------------------------------------------------
+if command -v fzf &>/dev/null; then
+    eval "$(fzf --bash)"
+fi
+
+#-------------------------------------------------------------------------------
+# FUNCTIONS
+#-------------------------------------------------------------------------------
+
+# Universal fuzzy-finder to open files, media, or change directory.
+function fop {
+    local bookmarks_file="${HOME}/.bookmarks"
+    touch "${bookmarks_file}"
+
+    # Store find arguments in an array to prevent shell word-splitting issues.
+    # Declaration and assignment are separated for compatibility with older Bash versions.
+    local find_args
+    find_args=(
+        -maxdepth 3
+        \( -name ".git" -o -name "node_modules" -o -name "build" -o -name "target" -o -name "dist" -o -name "vendor" \) -prune
+        -o -print
+    )
+
+    local selection
+    # The "${find_args[@]}" syntax correctly expands the array into separate arguments.
+    selection=$( (cat "${bookmarks_file}"; find . "${find_args[@]}" ) | fzf --height 40% --reverse --prompt="Fuzzy Open > ")
+
+    if [ -z "$selection" ]; then
+        return 1
+    fi
+
+    if [ -d "$selection" ]; then
+        cd "$selection"
+    elif [ -f "$selection" ]; then
+        case "${selection##*.}" in
+            mp4|mkv|mov|avi|webm|flv|mp3|flac|ogg|wav)
+                mpv --fs "$selection"
+                ;;
+            *)
+                "${EDITOR:-nvim}" "$selection"
+                ;;
+        esac
+    else
+        echo "Error: Selection not a valid file or directory." >&2
+        return 1
+    fi
+}
+
+# Universal system update function. Detects package manager.
+function sysupd {
+    if command -v apt-get >/dev/null; then
+        sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get clean
+    elif command -v brew >/dev/null; then
+        brew update && brew upgrade && brew cleanup
+    elif command -v pkg >/dev/null; then
+        pkg update -y && pkg upgrade -y && pkg autoclean -y
+    else
+        echo "No supported package manager (apt, brew, pkg) found." >&2
+        return 1
+    fi
+}
