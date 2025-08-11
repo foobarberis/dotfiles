@@ -1,3 +1,7 @@
+Git: Rebase against the remote `main` branch
+---
+git fetch origin && git rebase -i origin/main
+---
 Git: Nuke history and start a fresh repository (DANGEROUS)
 ---
   rm -rf .git/
