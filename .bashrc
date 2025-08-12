@@ -1,6 +1,5 @@
-#-------------------------------------------------------------------------------
 # ENVIRONMENT
-#-------------------------------------------------------------------------------
+
 export TERM='tmux-256color'
 export PATH="${HOME}/.local/bin:${HOME}/go/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
 
@@ -11,35 +10,30 @@ export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export PAGER="less"
 
-export FZF_DEFAULT_COMMAND='find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/target/*"'
 
-#-------------------------------------------------------------------------------
 # HISTORY
-#-------------------------------------------------------------------------------
+
 export HISTSIZE=""
 export HISTFILESIZE=""
 export HISTTIMEFORMAT="%F %T "
 export HISTCONTROL="ignoredups:ignorespace"
 shopt -s histappend
 
-#-------------------------------------------------------------------------------
 # SHELL BEHAVIOR
-#-------------------------------------------------------------------------------
+
 shopt -s cdspell
 shopt -s dirspell
 set -o noclobber
 
-#-------------------------------------------------------------------------------
 # PROMPT
-#-------------------------------------------------------------------------------
+
 if [ -f "${HOME}/.local/bin/git-prompt.sh" ]; then
     . "${HOME}/.local/bin/git-prompt.sh"
 fi
 export PS1='\n[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]\n> '
 
-#-------------------------------------------------------------------------------
 # ALIASES
-#-------------------------------------------------------------------------------
+
 alias l='ls -Alhp --color'
 alias t='tree'
 alias vi='nvim'
@@ -49,17 +43,15 @@ alias journal-work="${EDITOR} ~/journal/journal_work.txt"
 alias journal-sync="git add ~/journal/*.txt && git commit -m 'chore(journal): Update journal' && git push"
 alias cheat='cat ~/.cheatsheet | less'
 
-#-------------------------------------------------------------------------------
 # INTERACTIVE ENHANCEMENTS & SAFETY
-#-------------------------------------------------------------------------------
+
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias sudo='sudo '
 
-#-------------------------------------------------------------------------------
-# GIT ALIASES
-#-------------------------------------------------------------------------------
+# GIT
+
 alias g='git'
 alias ga='git add'
 alias gaa='git add --all'
@@ -71,16 +63,14 @@ alias gb='git branch'
 alias gl='git log --oneline --graph --decorate'
 alias gsw='git switch'
 
-#-------------------------------------------------------------------------------
-# FZF KEYBINDINGS
-#-------------------------------------------------------------------------------
+# FZF
+
+export FZF_DEFAULT_COMMAND='find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/target/*"'
 if command -v fzf &>/dev/null; then
     eval "$(fzf --bash)"
 fi
 
-#-------------------------------------------------------------------------------
 # FUNCTIONS
-#-------------------------------------------------------------------------------
 
 # Universal system update function. Detects package manager.
 function sysupd {
