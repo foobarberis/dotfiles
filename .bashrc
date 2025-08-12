@@ -82,45 +82,6 @@ fi
 # FUNCTIONS
 #-------------------------------------------------------------------------------
 
-# Universal fuzzy-finder to open files, media, or change directory.
-function fop {
-    local bookmarks_file="${HOME}/.bookmarks"
-    touch "${bookmarks_file}"
-
-    # Store find arguments in an array to prevent shell word-splitting issues.
-    # Declaration and assignment are separated for compatibility with older Bash versions.
-    local find_args
-    find_args=(
-        -maxdepth 3
-        \( -name ".git" -o -name "node_modules" -o -name "build" -o -name "target" -o -name "dist" -o -name "vendor" \) -prune
-        -o -print
-    )
-
-    local selection
-    # The "${find_args[@]}" syntax correctly expands the array into separate arguments.
-    selection=$( (cat "${bookmarks_file}"; find . "${find_args[@]}" ) | fzf --height 40% --reverse --prompt="Fuzzy Open > ")
-
-    if [ -z "$selection" ]; then
-        return 1
-    fi
-
-    if [ -d "$selection" ]; then
-        cd "$selection"
-    elif [ -f "$selection" ]; then
-        case "${selection##*.}" in
-            mp4|mkv|mov|avi|webm|flv|mp3|flac|ogg|wav)
-                mpv --fs "$selection"
-                ;;
-            *)
-                "${EDITOR:-nvim}" "$selection"
-                ;;
-        esac
-    else
-        echo "Error: Selection not a valid file or directory." >&2
-        return 1
-    fi
-}
-
 # Universal system update function. Detects package manager.
 function sysupd {
     if command -v apt-get >/dev/null; then
