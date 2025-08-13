@@ -54,29 +54,29 @@ endif
 set wildmenu " Enhance command-line completion
 set wildmode=list:longest,full " Wildmode settings
 
-" Add New Sector
+" Journal
+
+" Jump to the next/previous sector heading
+nnoremap <leader>] mm/^+ SEC/<CR>
+nnoremap <leader>[ mm?^+ SEC/<CR>
+
+" Append new sector to the journal
 function! AddNewSector()
     let title = input('New sector title: ')
     let cmd = 'echo ' . shellescape(title) . ' | journal-new-sector'
     let new_sector = system(cmd)
-
   	execute "normal! Go\<Esc>"
-
-    " Append the new sector text after the current line.
     call append(line('.'), split(new_sector, "\n"))
-
-    " Move cursor to the line after the new sector banner and start insert.
   	execute "normal! jjjo\<Esc>o"
     startinsert
 endfunction
-
 nnoremap <leader>s :call AddNewSector()<CR>
 
-" Add New Log Entry
-nnoremap <leader>l /^+ SEC\/.* LOG +$<CR>:nohl<CR>jo<Esc>:r! journal-new-log<CR>A
+" Create a new LOG entry
+nnoremap <leader>l mm/^+ SEC\/.* LOG +$<CR>:nohl<CR>jo<Esc>:r! journal-new-log<CR>A
 
-" Add line to INBOX
-nnoremap <leader>i /^+ SEC\/.* INBOX +$<CR>:nohl<CR>jjo-
+" Create a new INBOX entry
+nnoremap <leader>i mm/^+ SEC\/.* INBOX +$<CR>:nohl<CR>jjo-
 
-" Update the ToC
-nnoremap <leader>t gg0d}:0r! journal-print-toc %<CR><Esc>
+" Update the table of content
+nnoremap <leader>t mmgg0d}:0r! journal-new-toc %<CR><Esc>
