@@ -3,7 +3,7 @@ if [ -f "${HOME}/.local/bin/git-prompt" ]; then
 fi
 export PS1='\n[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]\n> '
 export TERM='tmux-256color'
-export PATH="${HOME}/.local/bin:${HOME}/go/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
+export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export EDITOR="nvim"
