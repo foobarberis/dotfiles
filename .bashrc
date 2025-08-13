@@ -35,7 +35,7 @@ alias vi='nvim'
 alias vim='nvim'
 
 alias j="${EDITOR} ~/.journal/journal.txt"
-alias jk="${EDITOR} ~/.journal/journal_work.txt"
+alias jw="${EDITOR} ~/.journal/journal_work.txt"
 alias js="git add ~/.journal/*.txt && git commit -m 'chore(journal): Update journal' && git push"
 
 alias cheat='cat ~/.cheatsheet | less'
