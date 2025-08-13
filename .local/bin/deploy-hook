@@ -4,7 +4,7 @@
 # target directory.
 
 PARENT_DIR="${1:-.}"
-HOOK_FILE="{HOME}/.local/bin/prepare-commit-msg"
+HOOK_FILE="${HOME}/.local/bin/prepare-commit-msg"
 HOOK_NAME="prepare-commit-msg"
 
 if [ ! -f "$HOOK_FILE" ]; then

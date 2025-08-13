@@ -10,8 +10,8 @@ cp .vimrc ${HOME}
 cp .vimrc ${HOME}/.config/nvim/init.vim
 
 # cp .ssh/config ${HOME}/.ssh/
+# cp .config/alacritty/alacritty.toml ${HOME}/.config/alacritty/
 cp .config/tmux/tmux.conf ${HOME}/.config/tmux/
-cp .config/alacritty/alacritty.toml ${HOME}/.config/alacritty/
 
 cp .local/bin/* ${HOME}/.local/bin
 

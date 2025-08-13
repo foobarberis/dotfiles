@@ -40,11 +40,6 @@ alias js="git add ~/.journal/*.txt && git commit -m 'chore(journal): Update jour
 
 alias cheat='cat ~/.cheatsheet | less'
 
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-alias sudo='sudo '
-
 alias g='git'
 alias ga='git add'
 alias gaa='git add --all'
