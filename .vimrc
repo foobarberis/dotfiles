@@ -55,8 +55,8 @@ set wildmenu " Enhance command-line completion
 set wildmode=list:longest,full " Wildmode settings
 
 " Jump to the next/previous sector heading
-nnoremap <leader>] /^+ SEC/<CR>:nohl
-nnoremap <leader>[ ?^+ SEC/<CR>:nohl
+nnoremap <leader>] /^+ SEC/<CR>:nohl<CR>
+nnoremap <leader>[ ?^+ SEC/<CR>:nohl<CR>
 
 " Append new sector to the journal
 nnoremap <leader>s :let title = input('New sector title: ') \| if !empty(title) \| execute "normal! G" \| execute "r! journal -s " . shellescape(title) \| execute "normal! o" \| endif<CR>
