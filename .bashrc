@@ -34,10 +34,6 @@ alias l='ls -Alhp --color'
 alias vi='nvim'
 alias vim='nvim'
 
-alias j="${EDITOR} ~/.journal/journal.txt"
-alias jw="${EDITOR} ~/.journal/journal_work.txt"
-alias js="git add ~/.journal/*.txt && git commit -m 'chore(journal): Update journal' && git push"
-
 alias cheat='cat ~/.cheatsheet | less'
 
 alias g='git'
@@ -64,3 +60,44 @@ function sysupd {
         return 1
     fi
 }
+
+export JOURNAL_DIR=~/.journal
+
+function _journal_is_clean() {
+    if git -C "${JOURNAL_DIR}" status --porcelain | grep -q .; then
+        echo "Error: Uncommitted changes found. Run 'jc' to commit." >&2
+        return 1
+    fi
+    return 0
+}
+
+function jh() {
+    _journal_is_clean || return 1
+    echo "Syncing journal..."
+    git -C "${JOURNAL_DIR}" pull --rebase || { echo "Error: Git pull failed." >&2; return 1; }
+    ${EDITOR} "${JOURNAL_DIR}/home.txt"
+}
+
+function jw() {
+    _journal_is_clean || return 1
+    echo "Syncing journal..."
+    git -C "${JOURNAL_DIR}" pull --rebase || { echo "Error: Git pull failed." >&2; return 1; }
+    ${EDITOR} "${JOURNAL_DIR}/work.txt"
+}
+
+function jc() {
+    local commit_msg="${1:-"Update journal"}"
+    git -C "${JOURNAL_DIR}" add .
+    git -C "${JOURNAL_DIR}" commit -m "${commit_msg}"
+}
+
+function js() {
+    echo "Syncing with remote..."
+    git -C "${JOURNAL_DIR}" pull --rebase && git -C "${JOURNAL_DIR}" push
+}
+
+function jst() {
+    git -C "${JOURNAL_DIR}" status
+}
+
+
