@@ -7,7 +7,7 @@ cp .bashrc ${HOME}/.profile
 cp .bashrc ${HOME}/.bash_profile
 
 cp .vimrc ${HOME}
-cp .config/nvim/init.lua ${HOME}/.config/nvim/
+cp .vimrc ${HOME}/.config/nvim/init.vim
 
 # cp .ssh/config ${HOME}/.ssh/
 cp .config/tmux/tmux.conf ${HOME}/.config/tmux/

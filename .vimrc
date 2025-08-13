@@ -3,6 +3,11 @@ let mapleader = " "
 
 " Disable the built-in matchparen plugin as it causes annoying cursor behavior.
 let g:loaded_matchparen = 1
+let g:loaded_netrw = 1
+
+" Hide entry for the right click menu
+aunmenu PopUp.How-to\ disable\ mouse
+aunmenu PopUp.-2-
 
 " General settings
 set encoding=utf-8 " Use UTF-8 encoding
@@ -34,9 +39,9 @@ set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
 
 " UI Enhancements
 syntax on
-set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
-set ruler " Show cursor position
 colorscheme darkblue
+set ruler " Show cursor position
+set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
 
 " Clipboard
 if system('uname -s') == "Darwin\n"
@@ -48,11 +53,6 @@ endif
 " Wildmenu
 set wildmenu " Enhance command-line completion
 set wildmode=list:longest,full " Wildmode settings
-
-" File navigation
-let g:netrw_browse_split = 3 " Open netrw file explorer in a new tab
-set autochdir " Change working directory to the current file
-set hidden " Allow switching buffers without saving
 
 " Add New Sector
 function! AddNewSector()
