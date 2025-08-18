@@ -74,7 +74,7 @@ do_update_toc() {
     echo "" >> "$temp_file"
 
     # Append the rest of the journal body, skipping the old ToC.
-    awk '/^\+ SEC\// && !p { p=1 }; p' "$journal_file" >> "$temp_file"
+    awk '/^\+ SEC\// && !p { if (NR>1) print prev; p=1 } p { print } { prev=$0 }' "$journal_file"
 
     # Replace original file.
     mv "$temp_file" "$journal_file"
