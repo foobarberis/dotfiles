@@ -80,4 +80,27 @@ do_update_toc() {
     mv "$temp_file" "$journal_file"
 }
 
+do_update_toc() {
+    journal_file="$1"
+    if [ -z "$journal_file" ] || [ ! -f "$journal_file" ]; then
+
+        echo "Error: '-t' requires a valid file path." >&2
+        exit 1
+    fi
+
+    temp_file=$(mktemp)
+    trap 'rm -f "$temp_file"' EXIT
+
+    awk '/^\+ SEC\// { $1="~"; NF--; print }' "$journal_file" > "$temp_file"
+    echo "" >> "$temp_file"
+
+    first_heading_line=$(grep -n -m 1 "^\+ SEC/" "$journal_file" | cut -d: -f1)
+    if [ -n "$first_heading_line" ]; then
+        start_of_body=$((first_heading_line - 1))
+        sed -n "${start_of_body},\$p" "$journal_file" >> "$temp_file"
+    fi
+
+    mv "$temp_file" "$journal_file"
+}
+
 main "$@"
