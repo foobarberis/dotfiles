@@ -40,6 +40,7 @@ set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
 " UI Enhancements
 syntax on
 colorscheme darkblue
+set nowrap " Disable visual line wrapping
 set ruler " Show cursor position
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
 
