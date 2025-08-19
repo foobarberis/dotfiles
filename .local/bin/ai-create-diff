@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -euo pipefail
+
+usage() {
+  echo "Usage: $0 [base_branch]"
+    echo "Generates a diff between the current branch and the specified base branch (default: main)."
+    echo "The diff is saved to 'feature_diff.diff'."
+    exit 1
+}
+
+main() {
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "Error: Not inside a git repository." >&2
+      exit 1
+      fi
+
+      local base_branch="${1:-main}"
+      local output_file="feature_diff.txt"
+
+      echo "Fetching from origin to get the latest changes..."
+      git fetch origin
+
+      if ! git show-ref --verify --quiet "refs/remotes/origin/$base_branch"; then
+        echo "Error: Base branch 'origin/$base_branch' not found." >&2
+          echo "Please ensure the branch exists and you have fetched the latest changes." >&2
+          exit 1
+          fi
+
+# Find the common ancestor between the current branch (HEAD) and the target base branch.
+          local merge_base
+          merge_base=$(git merge-base HEAD "origin/$base_branch")
+
+          echo "Generating diff against 'origin/$base_branch'..."
+          git diff "$merge_base" HEAD > "$output_file"
+
+          echo "Feature diff saved to $output_file"
+}
+
+main "$@"

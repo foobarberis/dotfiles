@@ -1,3 +1,14 @@
+" Set leader key to Space
+let mapleader = " "
+
+" Disable the built-in matchparen plugin as it causes annoying cursor behavior.
+let g:loaded_matchparen = 1
+let g:loaded_netrw = 1
+
+" Hide entry for the right click menu
+aunmenu PopUp.How-to\ disable\ mouse
+aunmenu PopUp.-2-
+
 " General settings
 set encoding=utf-8 " Use UTF-8 encoding
 set mouse=a " Enable mouse support in all modes
@@ -8,7 +19,7 @@ set nobackup noswapfile " Do not create backup or swap files
 
 " Line numbers & display settings
 " set number " Show line numbers
-" set cursorline " Highlight the current cursor line
+set cursorline " Highlight the current cursor line
 set scrolloff=2 " Keep at least 2 lines above/below cursor when scrolling
 set laststatus=2 " Always show status line
 set statusline=%F " Show full path in the status line
@@ -27,18 +38,15 @@ set expandtab " Convert tabs to spaces
 set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
 
 " UI Enhancements
-syntax off
-set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
-set showmatch " Highlight matching parentheses, brackets, braces
+syntax on
+colorscheme darkblue
 set ruler " Show cursor position
-colorscheme default
+set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
 
 " Clipboard
 if system('uname -s') == "Darwin\n"
-  " macOS
   set clipboard=unnamed
 else
-  "Linux
   set clipboard=unnamedplus
 endif
 
@@ -46,7 +54,18 @@ endif
 set wildmenu " Enhance command-line completion
 set wildmode=list:longest,full " Wildmode settings
 
-" File navigation
-let g:netrw_browse_split = 3 " Open netrw file explorer in a new tab
-set autochdir " Change working directory to the current file
-set hidden " Allow switching buffers without saving
+" Jump to the next/previous sector heading
+nnoremap <leader>] /^+ SEC/<CR>:nohl<CR>
+nnoremap <leader>[ ?^+ SEC/<CR>:nohl<CR>
+
+" Append new sector to the journal
+nnoremap <leader>s :let title = input('New sector title: ') \| if !empty(title) \| execute "normal! G" \| execute "r! journal -s " . shellescape(title) \| execute "normal! o" \| endif<CR>
+
+" Create a new LOG entry.
+nnoremap <leader>l mm/^+ SEC\/.* LOG +$<CR>:nohl<CR>jo<Esc>:r! journal -l<CR>A
+
+" Create a new INBOX entry
+nnoremap <leader>i mm/^+ SEC\/.* INBOX +$<CR>:nohl<CR>jjo-
+
+" Update the Table of Contents
+nnoremap <leader>t :execute 'silent !~/.local/bin/journal -t ' . shellescape(expand('%')) \| checktime \| redraw!<CR>

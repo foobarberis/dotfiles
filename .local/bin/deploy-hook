@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# A script to install a Git hook into all repositories found in a
+# target directory.
+
+PARENT_DIR="${1:-.}"
+HOOK_FILE="${HOME}/.local/bin/prepare-commit-msg"
+HOOK_NAME="prepare-commit-msg"
+
+if [ ! -f "$HOOK_FILE" ]; then
+    echo "Error: Hook file not found at '$HOOK_FILE'"
+    echo "Please ensure the hook is in a 'bin' subdirectory relative to where you run this script."
+    exit 1
+fi
+
+if [ ! -d "$PARENT_DIR" ]; then
+    echo "Error: Target directory '$PARENT_DIR' not found."
+    exit 1
+fi
+
+echo "Scanning for Git repositories in: $PARENT_DIR"
+echo "--------------------------------------------------"
+
+find "$PARENT_DIR" -maxdepth 1 -type d | while read -r DIR; do
+    if [ "$DIR" == "$PARENT_DIR" ]; then
+        continue
+    fi
+
+    if [ -d "$DIR/.git" ]; then
+        echo "Found Git repo: $(basename "$DIR")"
+        
+        cp "$HOOK_FILE" "$DIR/.git/hooks/$HOOK_NAME"
+        chmod +x "$DIR/.git/hooks/$HOOK_NAME"
+        
+        echo "  -> Hook deployed successfully."
+    fi
+done
+
+echo "--------------------------------------------------"
+echo "Deployment complete."

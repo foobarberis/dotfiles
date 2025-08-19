@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# The name of the file to be created.
+OUTPUT_FILE="prompt.txt"
+
+# Print directory strucutre
+echo "--- DIRECTORY STRUCTURE ---" > "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+tree . >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+# Find all files, excluding specified paths and the output file itself.
+find . \( -path './.git' -o -path './node_modules' -o -path './venv' \) -prune -o -type f ! -name "$OUTPUT_FILE" ! -name "$(basename "$0")" -print0 |
+
+# Read each file path found by `find`.
+# `while IFS= read -r -d ''` is the standard, safe way to read null-separated input.
+while IFS= read -r -d '' file; do
+  # Check if the file is text-based.
+  # The -I flag processes the file only if it does not contain binary data.
+  # The -q flag runs in quiet mode (no output), returning an exit code.
+  # We test for any character '.', which will succeed for any non-empty text file.
+  if grep -qI . "$file"; then
+    echo "--- FILE $file STARTS HERE ---" >> "$OUTPUT_FILE"
+    echo "" >> "$OUTPUT_FILE"
+    cat "$file" >> "$OUTPUT_FILE"
+    echo "" >> "$OUTPUT_FILE"
+  fi
+done

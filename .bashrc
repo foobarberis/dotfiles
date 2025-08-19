@@ -1,95 +1,103 @@
-# Terminal
-export TERM='tmux-256color'
-
-# Change cursor to a bar instead of a block
-printf '\033[6 q'
-
-export FOLDER_FILES=${HOME}/Files
-
-# Add 'storage/shared' prefix if we are running on termux
-if [ -d ${HOME}/storage ]; then
-    export FOLDER_FILES=${HOME}/storage/shared/Files
+if [ -f "${HOME}/.local/bin/git-prompt" ]; then
+    . "${HOME}/.local/bin/git-prompt"
 fi
-
-export FOLDER_CODE=${FOLDER_FILES}/Code
-export FOLDER_3PC=${FOLDER_CODE}/3PC
-export FOLDER_DOCUMENTS=${FOLDER_FILES}/Documents
-export FOLDER_AUDIO=${FOLDER_FILES}/Audio
-export FOLDER_VIDEO=${FOLDER_FILES}/Video
-export FOLDER_GAMES=${FOLDER_FILES}/Games
-export FOLDER_PICTURES=${FOLDER_FILES}/Pictures
-
-# Directories to be added to PATH
-export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
-
-# Locale settings
-# Might require you to run `sudo locale-gen en_US.UTF-8`
+export PS1='\n[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]\n> '
+export TERM='tmux-256color'
+export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-
-# Default command for fzf
-export FZF_DEFAULT_COMMAND='find . -type f -not -path "./.git/*"'
-
-# Editor and pager
-export EDITOR="vim"
+export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export PAGER="less"
-
-# History settings
 export HISTSIZE=""
 export HISTFILESIZE=""
 export HISTTIMEFORMAT="%F %T "
-export HISTCONTROL=ignoredups:ignorespace 
+export HISTCONTROL="ignoredups:ignorespace"
+export FZF_DEFAULT_COMMAND='find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/target/*"'
+# Enable fzf's shell integration
+# CTRL-t Fuzzy find all files and subdirectories of the working directory, and output the selection to STDOUT.
+# ALT-c	Fuzzy find all subdirectories of the working directory, and run the command “cd” with the output as argument.
+# CTRL-r Fuzzy find through your shell history, and output the selection to STDOUT.
+if command -v fzf &>/dev/null; then
+    eval "$(fzf --bash)"
+fi
 
-# Source the script in charge of getting the branch name
-. ${HOME}/.local/bin/git-prompt.sh
-
-# Define prompt text. Shows user, host, current directory, Git branch (if
-# any), and last command's exit status.
-export PS1='\n--[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]--\n↪ '
-
-# Automatically correct mistyped 'cd' directories
+shopt -s histappend
 shopt -s cdspell
-
-# Attempts spelling correction on directory names during word completion
 shopt -s dirspell
 
-# Append to history file; do not overwrite
-shopt -s histappend
-
-# Prevent accidental overwrites when using IO redirection
 set -o noclobber
 
-# Shell-side configuration for vterm
-vterm_printf() {
-    if [ -n "$TMUX" ] \
-        && { [ "${TERM%%-*}" = "tmux" ] \
-            || [ "${TERM%%-*}" = "screen" ]; }; then
-        # Tell tmux to pass the escape sequences through
-        printf "\ePtmux;\e\e]%s\007\e\\" "$1"
-    elif [ "${TERM%%-*}" = "screen" ]; then
-        # GNU screen (screen, screen-256color, screen-256color-bce)
-        printf "\eP\e]%s\007\e\\" "$1"
+alias t='tree'
+alias l='ls -Alhp --color'
+
+alias vi='nvim'
+alias vim='nvim'
+
+alias cheat='cat ~/.cheatsheet | less'
+
+alias g='git'
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit -m'
+alias gca='git commit -a -m'
+alias gs='git status'
+alias gco='git checkout'
+alias gb='git branch'
+alias gl='git log --oneline --graph --decorate'
+alias gsw='git switch'
+
+# Universal system update function. Detects package manager.
+function sysupd {
+    if command -v apt-get >/dev/null; then
+        sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get clean
+    elif command -v brew >/dev/null; then
+        brew update && brew upgrade && brew cleanup
+    elif command -v pkg >/dev/null; then
+        pkg update -y && pkg upgrade -y && pkg autoclean -y
     else
-        printf "\e]%s\e\\" "$1"
+        echo "No supported package manager (apt, brew, pkg) found." >&2
+        return 1
     fi
 }
 
-vterm_cmd() {
-    local vterm_elisp
-    vterm_elisp=""
-    while [ $# -gt 0 ]; do
-        vterm_elisp="$vterm_elisp""$(printf '"%s" ' "$(printf "%s" "$1" | sed -e 's|\\|\\\\|g' -e 's|"|\\"|g')")"
-        shift
-    done
-    vterm_printf "51;E$vterm_elisp"
+export JOURNAL_DIR=~/.journal
+
+function _journal_is_clean() {
+    if git -C "${JOURNAL_DIR}" status --porcelain | grep -q .; then
+        echo "Error: Uncommitted changes found. Run 'jc' to commit." >&2
+        return 1
+    fi
+    return 0
 }
 
-vterm_prompt_end(){
-    vterm_printf "51;A$(whoami)@$(hostname):$(pwd)"
+function jh() {
+    _journal_is_clean || return 1
+    echo "Syncing journal..."
+    git -C "${JOURNAL_DIR}" pull --rebase || { echo "Error: Git pull failed." >&2; return 1; }
+    ${EDITOR} "${JOURNAL_DIR}/home.txt"
 }
-PS1=$PS1'\[$(vterm_prompt_end)\]'
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+function jw() {
+    _journal_is_clean || return 1
+    echo "Syncing journal..."
+    git -C "${JOURNAL_DIR}" pull --rebase || { echo "Error: Git pull failed." >&2; return 1; }
+    ${EDITOR} "${JOURNAL_DIR}/work.txt"
+}
+
+function jc() {
+    local commit_msg="${1:-"Update journal"}"
+    git -C "${JOURNAL_DIR}" add .
+    git -C "${JOURNAL_DIR}" commit -m "${commit_msg}"
+}
+
+function js() {
+    echo "Syncing with remote..."
+    git -C "${JOURNAL_DIR}" pull --rebase && git -C "${JOURNAL_DIR}" push
+}
+
+function jst() {
+    git -C "${JOURNAL_DIR}" status
+}
+
+

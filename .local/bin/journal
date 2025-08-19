@@ -1,0 +1,106 @@
+#!/bin/sh
+
+# A unified script for manipulating a journal file.
+# It accepts short flags to perform specific actions.
+
+set -e
+
+main() {
+    command="$1"
+    if [ -z "$command" ]; then
+        print_usage >&2
+        exit 1
+    fi
+    shift # Remove the command/flag from the arguments list
+
+    case "$command" in
+        -s)
+            do_new_sector "$@"
+            ;;
+        -l)
+            do_new_log
+            ;;
+        -t)
+            do_update_toc "$@"
+            ;;
+        *)
+            echo "Error: Unknown option '$command'" >&2
+            print_usage >&2
+            exit 1
+            ;;
+    esac
+}
+
+print_usage() {
+    echo "Usage: $(basename "$0") <option> [arguments...]"
+    echo "Options:"
+    echo "  -s <title>  - Prints a new sector banner."
+    echo "  -l          - Prints a new log entry timestamp."
+    echo "  -t <file>   - Rebuilds the Table of Contents for the file."
+}
+
+do_new_sector() {
+    TITLE="$1"
+    if [ -z "$TITLE" ];
+        then echo "Error: '-s' requires a title." >&2; exit 1;
+    fi
+
+    ID=$(uuidgen | tr -d '-' | head -c 8 | tr '[:lower:]' '[:upper:]')
+    UPPER_TITLE=$(echo "$TITLE" | tr '[:lower:]' '[:upper:]')
+    BANNER_LINE="+ SEC/$ID $UPPER_TITLE +"
+    SEPARATOR_LINE=$(printf '%s' "$BANNER_LINE" | tr '[:print:]' '-')
+
+    printf '\n%s\n%s\n%s\n' "$SEPARATOR_LINE" "$BANNER_LINE" "$SEPARATOR_LINE"
+}
+
+do_new_log() {
+    TIME_LINE=$(date '+%d/%m/%Y %H:%M:%S')
+    SEPARATOR_LINE=$(printf '%s' "$TIME_LINE" | tr '[:print:]' '-')
+    printf '%s\n%s\n-' "$TIME_LINE" "$SEPARATOR_LINE"
+}
+
+do_update_toc() {
+    journal_file="$1"
+    if [ -z "$journal_file" ] || [ ! -f "$journal_file" ]; then
+        echo "Error: '-t' requires a valid file path." >&2
+        exit 1
+    fi
+
+    temp_file=$(mktemp)
+    trap 'rm -f "$temp_file"' EXIT
+
+    # Generate new ToC and write to temp file.
+    awk '/^\+ SEC\// { $1="~"; NF--; print }' "$journal_file" > "$temp_file"
+    echo "" >> "$temp_file"
+
+    # Append the rest of the journal body, skipping the old ToC.
+    awk '/^\+ SEC\// && !p { if (NR>1) print prev; p=1 } p { print } { prev=$0 }' "$journal_file"
+
+    # Replace original file.
+    mv "$temp_file" "$journal_file"
+}
+
+do_update_toc() {
+    journal_file="$1"
+    if [ -z "$journal_file" ] || [ ! -f "$journal_file" ]; then
+
+        echo "Error: '-t' requires a valid file path." >&2
+        exit 1
+    fi
+
+    temp_file=$(mktemp)
+    trap 'rm -f "$temp_file"' EXIT
+
+    awk '/^\+ SEC\// { $1="~"; NF--; print }' "$journal_file" > "$temp_file"
+    echo "" >> "$temp_file"
+
+    first_heading_line=$(grep -n -m 1 "^\+ SEC/" "$journal_file" | cut -d: -f1)
+    if [ -n "$first_heading_line" ]; then
+        start_of_body=$((first_heading_line - 1))
+        sed -n "${start_of_body},\$p" "$journal_file" >> "$temp_file"
+    fi
+
+    mv "$temp_file" "$journal_file"
+}
+
+main "$@"
