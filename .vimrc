@@ -36,6 +36,7 @@ set modelines=0 " Limit the number of lines checked for modelines
 set autoindent " Indent new lines the same as the previous line
 set expandtab " Convert tabs to spaces
 set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
+set textwidth=72 " Wrap the columns at 72 chars when using gq
 
 " UI Enhancements
 syntax on
