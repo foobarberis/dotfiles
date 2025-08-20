@@ -60,8 +60,15 @@ set wildmode=list:longest,full " Wildmode settings
 nnoremap <leader>] /^+ SEC/<CR>:nohl<CR>
 nnoremap <leader>[ ?^+ SEC/<CR>:nohl<CR>
 
-" Append new sector to the journal
-nnoremap <leader>s :let title = input('New sector title: ') \| if !empty(title) \| execute "normal! G" \| execute "r! journal -s " . shellescape(title) \| execute "normal! o" \| endif<CR>
+" Add new sector above the current line
+function! AddJournalSector()
+  let title = input('Sector title: ')
+  if empty(title)
+    return
+  endif
+  execute '.-1read !journal -s ' . shellescape(title)
+endfunction
+nnoremap <leader>s :call AddJournalSector()<CR>
 
 " Create a new LOG entry.
 nnoremap <leader>l mm/^+ SEC\/.* LOG +$<CR>:nohl<CR>jo<Esc>:r! journal -l<CR>A

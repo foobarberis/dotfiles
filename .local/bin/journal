@@ -50,7 +50,7 @@ do_new_sector() {
     BANNER_LINE="+ SEC/$ID $UPPER_TITLE +"
     SEPARATOR_LINE=$(printf '%s' "$BANNER_LINE" | tr '[:print:]' '-')
 
-    printf '\n%s\n%s\n%s\n' "$SEPARATOR_LINE" "$BANNER_LINE" "$SEPARATOR_LINE"
+    printf '%s\n%s\n%s' "$SEPARATOR_LINE" "$BANNER_LINE" "$SEPARATOR_LINE"
 }
 
 do_new_log() {
