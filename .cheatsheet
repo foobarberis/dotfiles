@@ -1,7 +1,17 @@
+Rsync: Mirror a folder to a remote
+---
+  rsync -avz --delete ./local_folder/ user@remote-server:/path/to/remote_folder/
+
+  # --delete: Makes remote an exact copy. Deletes files on remote not in local source.
+  # Trailing Slash: The `/` on ./local_folder/ is critical. It copies the *contents* of the folder.
+  # Safety Check: Add the `-n` flag (`-avzn`) for a --dry-run to see what will change before you commit.
+---
+
 Git: Rebase against the remote `main` branch
 ---
-git fetch origin && git rebase -i origin/main
+  git fetch origin && git rebase -i origin/main
 ---
+
 Git: Nuke history and start a fresh repository (DANGEROUS)
 ---
   rm -rf .git/
