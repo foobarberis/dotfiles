@@ -74,7 +74,7 @@ nnoremap <leader>s :call AddJournalSector()<CR>
 nnoremap <leader>l mm/^+ SEC\/.* LOG +$<CR>:nohl<CR>jo<Esc>:r! journal -l<CR>A
 
 " Create a new INBOX entry
-nnoremap <leader>i mm/^+ SEC\/.* INBOX +$<CR>:nohl<CR>jjo-
+nnoremap <leader>i mm/^+ SEC\/.* INBOX +$<CR>:nohl<CR>jo
 
 " Update the Table of Contents
 nnoremap <leader>t :execute 'silent !~/.local/bin/journal -t ' . shellescape(expand('%')) \| checktime \| redraw!<CR>
