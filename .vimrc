@@ -40,7 +40,7 @@ set textwidth=72 " Wrap the columns at 72 chars when using gq
 
 " UI Enhancements
 syntax on
-colorscheme darkblue
+colorscheme vim
 set nowrap " Disable visual line wrapping
 set ruler " Show cursor position
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
