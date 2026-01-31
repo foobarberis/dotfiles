@@ -1,0 +1,38 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "general": {
+    "previewFeatures": true,
+    "vimMode": true,
+    "sessionRetention": {
+      "enabled": true
+    },
+    "enablePromptCompletion": true
+  },
+  "accessibility": {
+    "disableLoadingPhrases": true
+  },
+  "ui": {
+    "hideBanner": true,
+    "showStatusInTitle": true,
+    "hideTips": true,
+    "footer": {
+      "hideContextPercentage": false
+    },
+    "showMemoryUsage": true,
+    "hideWindowTitle": true,
+    "useAlternateBuffer": true
+  },
+  "experimental": {
+    "plan": true
+  },
+  "model": {
+    "name": "gemini-3-flash-preview"
+  },
+  "tools": {
+    "autoAccept": true
+  }
+}
