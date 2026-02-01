@@ -7,6 +7,8 @@ keybind = cmd+b=text:\x01\x7a
 background-opacity = 1
 background-blur=16
 background=#000000
+cursor-style=block
+shell-integration-features = no-cursor
 
 # typography
 font-family = "Cascadia Mono"
