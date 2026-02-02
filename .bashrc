@@ -3,7 +3,7 @@ if [ -f "${HOME}/.local/bin/git-prompt" ]; then
 fi
 export PS1='\n[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]\n> '
 export TERM='tmux-256color'
-export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+export PATH="${HOME}/.local/bin:/opt/nvim-linux-x86_64/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export EDITOR="nvim"
@@ -60,3 +60,7 @@ function sysupd {
         return 1
     fi
 }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
