@@ -3,7 +3,7 @@ if [ -f "${HOME}/.local/bin/git-prompt" ]; then
 fi
 export PS1='\n[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]\n> '
 export TERM='tmux-256color'
-export PATH="${HOME}/.local/bin:/opt/nvim-linux-x86_64/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export EDITOR="nvim"
@@ -27,6 +27,8 @@ shopt -s cdspell
 shopt -s dirspell
 
 set -o noclobber
+
+alias para='cd "/mnt/c/Users/16018659/OneDrive - bioMerieux/Documents/PARA"'
 
 alias t='tree'
 alias l='ls -Alhp --color'

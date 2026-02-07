@@ -2,7 +2,8 @@
   "security": {
     "auth": {
       "selectedType": "oauth-personal"
-    }
+    },
+    "blockGitExtensions": true
   },
   "general": {
     "previewFeatures": true,
@@ -10,21 +11,28 @@
     "sessionRetention": {
       "enabled": true
     },
-    "enablePromptCompletion": true
-  },
-  "accessibility": {
-    "disableLoadingPhrases": true
+    "enablePromptCompletion": false
   },
   "ui": {
     "hideBanner": true,
-    "showStatusInTitle": true,
-    "hideTips": true,
+    "showStatusInTitle": false,
+    "dynamicWindowTitle": false,
+    "hideTips": false,
+    "hideContextSummary": true,
+    "hideFooter": false,
+    "showMemoryUsage": true,
+    "hideWindowTitle": true,
+    "useAlternateBuffer": false,
+    "showLineNumbers": false,
+    "showSpinner": false,
+    "showHomeDirectoryWarning": true,
+    "accessibility": {
+      "enableLoadingPhrases": false
+    },
     "footer": {
       "hideContextPercentage": false
     },
-    "showMemoryUsage": true,
-    "hideWindowTitle": true,
-    "useAlternateBuffer": true
+    "showModelInfoInChat": true
   },
   "experimental": {
     "plan": true
@@ -33,6 +41,13 @@
     "name": "gemini-3-flash-preview"
   },
   "tools": {
-    "autoAccept": true
+    "autoAccept": true,
+    "shell": {
+      "showColor": true
+    }
+  },
+  "hasSeenIdeIntegrationNudge": true,
+  "ide": {
+    "enabled": true
   }
 }

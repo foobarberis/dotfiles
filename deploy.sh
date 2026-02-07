@@ -2,6 +2,7 @@
 
 # Ensure destination directories exist
 mkdir -p ${HOME}/.local/bin ${HOME}/.config/nvim
+mkdir -p ${HOME}/.gemini
 
 # Deploy shell configuration
 cp .bashrc ${HOME}
@@ -17,3 +18,8 @@ cp -Rfp .config/ ${HOME}/.config/
 
 # Deploy local binaries
 cp .local/bin/* ${HOME}/.local/bin
+
+# Deploy .gemini configuration
+cp ./ai/.gemini/GEMINI.md ${HOME}/.gemini/
+cp ./ai/.gemini/settings.json ${HOME}/.gemini/
+cp -R ./ai/.gemini/context ${HOME}/.gemini/
