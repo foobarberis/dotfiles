@@ -5,7 +5,7 @@ let mapleader = " "
 let g:loaded_matchparen = 1
 let g:loaded_netrw = 1
 
-" Hide entry for the right click menu
+" Hide entry for the right click menu (nvim only)
 aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-2-
 
@@ -40,7 +40,7 @@ set textwidth=72 " Wrap the columns at 72 chars when using gq
 
 " UI Enhancements
 syntax on
-colorscheme quiet
+colorscheme zaibatsu
 set nowrap " Disable visual line wrapping
 set ruler " Show cursor position
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
