@@ -20,6 +20,6 @@ cp -Rfp .config/ ${HOME}/.config/
 cp .local/bin/* ${HOME}/.local/bin
 
 # Deploy .gemini configuration
-cp ./ai/.gemini/GEMINI.md ${HOME}/.gemini/
-cp ./ai/.gemini/settings.json ${HOME}/.gemini/
-cp -R ./ai/.gemini/context ${HOME}/.gemini/
+cp ./.gemini/GEMINI.md ${HOME}/.gemini/
+cp ./.gemini/settings.json ${HOME}/.gemini/
+cp -R ./.gemini/context ${HOME}/.gemini/
