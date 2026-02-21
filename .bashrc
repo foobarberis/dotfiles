@@ -2,15 +2,17 @@ if [ -f "${HOME}/.local/bin/git-prompt" ]; then
     . "${HOME}/.local/bin/git-prompt"
 fi
 export PS1='\n[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]\n> '
-export TERM='tmux-256color'
+if [ -n "${TMUX:-}" ]; then
+    export TERM='tmux-256color'
+fi
 export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export PAGER="less"
-export HISTSIZE=""
-export HISTFILESIZE=""
+export HISTSIZE="100000"
+export HISTFILESIZE="200000"
 export HISTTIMEFORMAT="%F %T "
 export HISTCONTROL="ignoredups:ignorespace"
 export FZF_DEFAULT_COMMAND='find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/target/*"'
@@ -31,7 +33,11 @@ set -o noclobber
 alias para='cd "/mnt/c/Users/16018659/OneDrive - bioMerieux/Documents/PARA"'
 
 alias t='tree'
-alias l='ls -Alhp --color'
+if command -v gls >/dev/null 2>&1; then
+    alias l='gls -Alhp --color=auto'
+else
+    alias l='ls -Alhp -G'
+fi
 
 alias v='nvim'
 alias ed='nvim'
