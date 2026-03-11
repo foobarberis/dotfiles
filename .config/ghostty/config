@@ -4,14 +4,14 @@ keybind = cmd+s=text:\x01\x73
 keybind = cmd+b=text:\x01\x7a
 
 # aesthetics
+theme = Selenized Light
 background-opacity = 1
 background-blur=16
-background=#000000
 cursor-style=block
 shell-integration-features = no-cursor
 
 # typography
-font-family = "Cascadia Mono"
+font-family = "TX-02"
 font-size=16
 font-thicken=true
 font-thicken-strength=1

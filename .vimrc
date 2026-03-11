@@ -39,8 +39,8 @@ set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
 set textwidth=72 " Wrap the columns at 72 chars when using gq
 
 " UI Enhancements
-syntax on
-colorscheme zaibatsu
+syntax off
+colorscheme peachpuff
 set nowrap " Disable visual line wrapping
 set ruler " Show cursor position
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
