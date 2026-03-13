@@ -40,7 +40,15 @@ set textwidth=72 " Wrap the columns at 72 chars when using gq
 
 " UI Enhancements
 syntax off
-colorscheme peachpuff
+set notermguicolors
+colorscheme default
+
+" Make the background transparent
+hi Normal ctermbg=NONE guibg=NONE
+hi NonText ctermbg=NONE guibg=NONE
+hi LineNr ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
+
 set nowrap " Disable visual line wrapping
 set ruler " Show cursor position
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
