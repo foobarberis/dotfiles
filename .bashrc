@@ -39,11 +39,7 @@ else
     alias l='ls -Alhp -G'
 fi
 
-alias v="$EDITOR"
-alias ed="$EDITOR"
 alias vi="$EDITOR"
-alias vim="$EDITOR"
-
 alias g='git'
 alias ga='git add'
 alias gaa='git add --all'
