@@ -39,15 +39,9 @@ set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
 set textwidth=72 " Wrap the columns at 72 chars when using gq
 
 " UI Enhancements
-syntax off
-set notermguicolors
-colorscheme default
-
-" Make the background transparent
-hi Normal ctermbg=NONE guibg=NONE
-hi NonText ctermbg=NONE guibg=NONE
-hi LineNr ctermbg=NONE guibg=NONE
-hi SignColumn ctermbg=NONE guibg=NONE
+syntax on
+set termguicolors
+colorscheme shine
 
 set nowrap " Disable visual line wrapping
 set ruler " Show cursor position
