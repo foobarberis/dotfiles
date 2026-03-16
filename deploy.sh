@@ -20,10 +20,3 @@ cp -Rfp .config/. "$HOME/.config/"
 if [ -d .local/bin ]; then
     find .local/bin -mindepth 1 -maxdepth 1 -type f -exec cp -fp {} "$HOME/.local/bin/" \;
 fi
-
-# Deploy SSH configuration
-if [ -f .ssh/config ]; then
-    cp -fp .ssh/config "$HOME/.ssh/config"
-    chmod 600 "$HOME/.ssh/config"
-fi
-
