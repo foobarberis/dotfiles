@@ -8,7 +8,7 @@ fi
 export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-export EDITOR="nvim"
+export EDITOR="/usr/local/bin/vim"
 export VISUAL="$EDITOR"
 export PAGER="less"
 export HISTSIZE="100000"
@@ -39,10 +39,10 @@ else
     alias l='ls -Alhp -G'
 fi
 
-alias v='nvim'
-alias ed='nvim'
-alias vi='nvim'
-alias vim='nvim'
+alias v="$EDITOR"
+alias ed="$EDITOR"
+alias vi="$EDITOR"
+alias vim="$EDITOR"
 
 alias g='git'
 alias ga='git add'
