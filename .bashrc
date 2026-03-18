@@ -30,9 +30,6 @@ shopt -s dirspell
 
 set -o noclobber
 
-alias para='cd "/mnt/c/Users/16018659/OneDrive - bioMerieux/Documents/PARA"'
-
-alias t='tree'
 if command -v gls >/dev/null 2>&1; then
     alias l='gls -Alhp --color=auto'
 else
@@ -40,16 +37,11 @@ else
 fi
 
 alias vi="$EDITOR"
-alias g='git'
+alias lz='lazygit'
 alias ga='git add'
-alias gaa='git add --all'
 alias gc='git commit -m'
-alias gca='git commit -a -m'
 alias gs='git status'
-alias gco='git checkout'
-alias gb='git branch'
 alias gl='git log --oneline --graph --decorate'
-alias gsw='git switch'
 
 # Universal system update function. Detects package manager.
 function sysupd {
