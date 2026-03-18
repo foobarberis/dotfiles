@@ -5,6 +5,7 @@ set -eu
 mkdir -p \
     "$HOME/.local/bin" \
     "$HOME/.vim/colors" \
+    "$HOME/.config/alacritty" \
     "$HOME/.config/nvim/colors" \
     "$HOME/.config/nvim" \
     "$HOME/.ssh"
@@ -22,6 +23,12 @@ cp berkeley-light.vim "$HOME/.config/nvim/colors/berkeley-light.vim"
 
 # Deploy entire .config folder contents
 cp -Rfp .config/. "$HOME/.config/"
+cp .config/alacritty/alacritty.toml .config/alacritty/berkeley-light.toml "$HOME/.config/alacritty/"
+
+windows_alacritty_dir='/mnt/c/Users/16018659/OneDrive - bioMerieux/Documents/PARA/3 Resources/(R) Software/Alacritty'
+if [ -d "$windows_alacritty_dir" ]; then
+    cp .config/alacritty/alacritty.toml .config/alacritty/berkeley-light.toml "$windows_alacritty_dir/"
+fi
 
 # Deploy local binaries (if any)
 if [ -d .local/bin ]; then
