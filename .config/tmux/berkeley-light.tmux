@@ -31,6 +31,7 @@ set-option -g message-command-style "bg=$gold,fg=$black"
 
 # Copy mode
 set-window-option -g mode-style "bg=$gold,fg=$black"
+set-window-option -g copy-mode-selection-style "bg=$gold,fg=$black"
 set-window-option -g copy-mode-match-style "bg=$orange,fg=$white"
 set-window-option -g copy-mode-current-match-style "bg=$green,fg=$white"
 
