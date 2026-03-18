@@ -1,11 +1,13 @@
 if [ -f "${HOME}/.local/bin/git-prompt" ]; then
     . "${HOME}/.local/bin/git-prompt"
 fi
+
 export PS1='\n[ \u@\h \W$(__git_ps1 " (%s)") ($?) ]\n> '
 if [ -n "${TMUX:-}" ]; then
     export TERM='tmux-256color'
 fi
-export PATH="${HOME}/.local/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+export PATH="/home/linuxbrew/.linuxbrew/bin/:/opt/homebrew/bin:/opt/homebrew/sbin:${HOME}/.local/bin:/usr/local/bin:$PATH"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export EDITOR="/usr/local/bin/vim"
@@ -43,20 +45,13 @@ alias gc='git commit -m'
 alias gs='git status'
 alias gl='git log --oneline --graph --decorate'
 
-# Universal system update function. Detects package manager.
-function sysupd {
-    if command -v apt-get >/dev/null; then
-        sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get clean
-    elif command -v brew >/dev/null; then
-        brew update && brew upgrade && brew cleanup
-    elif command -v pkg >/dev/null; then
-        pkg update -y && pkg upgrade -y && pkg autoclean -y
-    else
-        echo "No supported package manager (apt, brew, pkg) found." >&2
-        return 1
-    fi
-}
-
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+
+function sysupd {
+    if command -v apt-get >/dev/null; then sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get clean; fi
+    if command -v brew >/dev/null; then brew update && brew upgrade && brew cleanup; fi
+    if command -v pkg >/dev/null; then pkg update -y && pkg upgrade -y && pkg autoclean -y; fi
+}
