@@ -26,6 +26,11 @@ cp -fp .bashrc "$HOME/.profile"
 cp -fp .bashrc "$HOME/.bash_profile"
 
 rm -f "$HOME/.vimrc"
+cat > "$HOME/.vimrc" <<'EOF'
+if filereadable(expand('~/.vim/vimrc'))
+  source ~/.vim/vimrc
+endif
+EOF
 replace_path .vim "$HOME/.vim"
 
 if [ -d .config ]; then
