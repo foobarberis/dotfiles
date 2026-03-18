@@ -1,3 +1,5 @@
+![Berkeley Light theme screenshot](assets/berkeley-weighted.png)
+
 We use Homebrew because `apt` is either outdated (`fzf`) or does not provide some packages (`lazygit`, `lazydocker`).
 
 ```sh
