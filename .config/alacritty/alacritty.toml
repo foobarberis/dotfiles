@@ -1,0 +1,47 @@
+[general]
+import = [
+  "./berkeley-light.toml"
+]
+live_config_reload = true
+
+[window]
+dynamic_padding = false
+startup_mode = "Maximized"
+
+[window.padding]
+x = 5
+y = 5
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "TX-02"
+style = "Regular"
+
+[font.bold]
+family = "TX-02"
+style = "Bold"
+
+[font.italic]
+family = "TX-02"
+style = "Oblique"
+
+[font.bold_italic]
+family = "TX-02"
+style = "Bold Oblique"
+
+[selection]
+save_to_clipboard = true
+
+[scrolling]
+history = 10000
+
+[terminal.shell]
+program = "C:\\Windows\\System32\\wsl.exe"
+args = ["--cd", "~"]
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Alt"
+action = "ToggleFullscreen"

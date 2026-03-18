@@ -1,0 +1,33 @@
+# Berkeley Light for Alacritty
+
+[colors.primary]
+background = "#FFFFFF"
+foreground = "#000000"
+
+[colors.cursor]
+text = "#FFFFFF"
+cursor = "#000000"
+
+[colors.selection]
+text = "#000000"
+background = "#FEB908"
+
+[colors.normal]
+black = "#000000"
+red = "#B73A34"
+green = "#0A805D"
+yellow = "#FEB908"
+blue = "#0581E1"
+magenta = "#9024F5"
+cyan = "#0581E1"
+white = "#767676"
+
+[colors.bright]
+black = "#000000"
+red = "#B73A34"
+green = "#0A805D"
+yellow = "#FEB908"
+blue = "#0581E1"
+magenta = "#9024F5"
+cyan = "#0581E1"
+white = "#767676"
