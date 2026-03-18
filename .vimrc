@@ -41,7 +41,7 @@ set textwidth=72 " Wrap the columns at 72 chars when using gq
 " UI Enhancements
 syntax on
 set termguicolors
-colorscheme shine
+colorscheme berkeley-light
 
 set nowrap " Disable visual line wrapping
 set ruler " Show cursor position
