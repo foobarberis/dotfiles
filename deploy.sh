@@ -1,36 +1,47 @@
 #!/bin/sh
 set -eu
 
-# Ensure destination directories exist
+replace_path() {
+    src=$1
+    dest=$2
+
+    rm -rf "$dest"
+    mkdir -p "$(dirname "$dest")"
+
+    if [ -d "$src" ]; then
+        mkdir -p "$dest"
+        cp -Rfp "$src"/. "$dest"/
+    else
+        cp -fp "$src" "$dest"
+    fi
+}
+
 mkdir -p \
-    "$HOME/.local/bin" \
-    "$HOME/.vim/colors" \
-    "$HOME/.config/alacritty" \
-    "$HOME/.config/nvim/colors" \
-    "$HOME/.config/nvim" \
+    "$HOME/.local" \
+    "$HOME/.config" \
     "$HOME/.ssh"
 
-# Deploy shell configuration
-cp .bashrc "$HOME/.bashrc"
-cp .bashrc "$HOME/.profile"
-cp .bashrc "$HOME/.bash_profile"
+cp -fp .bashrc "$HOME/.bashrc"
+cp -fp .bashrc "$HOME/.profile"
+cp -fp .bashrc "$HOME/.bash_profile"
 
-# Deploy Vim/Neovim configuration
-cp .vimrc "$HOME/.vimrc"
-cp .vimrc "$HOME/.config/nvim/init.vim"
-cp berkeley-light.vim "$HOME/.vim/colors/berkeley-light.vim"
-cp berkeley-light.vim "$HOME/.config/nvim/colors/berkeley-light.vim"
+rm -f "$HOME/.vimrc"
+replace_path .vim "$HOME/.vim"
 
-# Deploy entire .config folder contents
-cp -Rfp .config/. "$HOME/.config/"
-cp .config/alacritty/alacritty.toml .config/alacritty/berkeley-light.toml "$HOME/.config/alacritty/"
+if [ -d .config ]; then
+    find .config -mindepth 1 -maxdepth 1 | while IFS= read -r src; do
+        name=${src##*/}
+        replace_path "$src" "$HOME/.config/$name"
+    done
+fi
 
 windows_alacritty_dir='/mnt/c/Users/16018659/OneDrive - bioMerieux/Documents/PARA/3 Resources/(R) Software/Alacritty'
 if [ -d "$windows_alacritty_dir" ]; then
-    cp .config/alacritty/alacritty.toml .config/alacritty/berkeley-light.toml "$windows_alacritty_dir/"
+    cp -fp .config/alacritty/alacritty.toml \
+        .config/alacritty/berkeley-light.toml \
+        "$windows_alacritty_dir/"
 fi
 
-# Deploy local binaries (if any)
 if [ -d .local/bin ]; then
-    find .local/bin -mindepth 1 -maxdepth 1 -type f -exec cp -fp {} "$HOME/.local/bin/" \;
+    replace_path .local/bin "$HOME/.local/bin"
 fi
