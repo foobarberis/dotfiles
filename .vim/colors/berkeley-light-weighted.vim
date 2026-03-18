@@ -1,5 +1,4 @@
-" Name:         berkeley-light
-" Description:  Light colorscheme inspired by shine, using Berkeley colors
+" Name:         berkeley-light-weighted
 
 set background=light
 
@@ -7,7 +6,7 @@ hi clear
 if exists("syntax_on")
   syntax reset
 endif
-let g:colors_name = 'berkeley-light'
+let g:colors_name = 'berkeley-light-weighted'
 
 let g:terminal_ansi_colors = [
       \ '#000000', '#B73A34', '#0A805D', '#FEB908',
@@ -35,6 +34,7 @@ hi! link Tag Special
 hi! link Terminal Normal
 hi! link Boolean Constant
 hi! link Character Constant
+hi! link String Constant
 hi! link Conditional Statement
 hi! link Debug Special
 hi! link Define PreProc
@@ -48,7 +48,6 @@ hi! link Macro PreProc
 hi! link Number Constant
 hi! link PreCondit PreProc
 hi! link Repeat Statement
-hi! link SpecialComment Special
 hi! link StorageClass Type
 hi! link Structure Type
 hi! link Typedef Type
@@ -57,7 +56,7 @@ hi Normal guifg=#000000 guibg=#FFFFFF guisp=NONE gui=NONE ctermfg=black ctermbg=
 hi ColorColumn guifg=#000000 guibg=#EBEBEB guisp=NONE gui=NONE ctermfg=black ctermbg=grey cterm=NONE term=reverse
 hi Comment guifg=#9A9A9A guibg=NONE guisp=NONE gui=italic ctermfg=darkgrey ctermbg=NONE cterm=italic term=italic
 hi Conceal guifg=#006ec3 guibg=NONE guisp=NONE gui=NONE ctermfg=blue ctermbg=NONE cterm=NONE term=NONE
-hi Constant guifg=#E25600 guibg=NONE guisp=NONE gui=NONE ctermfg=darkyellow ctermbg=NONE cterm=NONE term=NONE
+hi Constant guifg=#E25600 guibg=NONE guisp=NONE gui=italic ctermfg=darkyellow ctermbg=NONE cterm=italic term=italic
 hi Cursor guifg=#FFFFFF guibg=#000000 guisp=NONE gui=NONE ctermfg=white ctermbg=black cterm=NONE term=reverse
 hi CursorColumn guifg=NONE guibg=#EBEBEB guisp=NONE gui=NONE ctermfg=NONE ctermbg=grey cterm=NONE term=NONE
 hi CursorLine guifg=NONE guibg=#EBEBEB guisp=NONE gui=NONE ctermfg=NONE ctermbg=grey cterm=NONE term=NONE
@@ -78,7 +77,7 @@ hi MatchParen guifg=#000000 guibg=#FEB908 guisp=NONE gui=NONE ctermfg=black cter
 hi ModeMsg guifg=#000000 guibg=#FFFFFF guisp=NONE gui=NONE ctermfg=black ctermbg=white cterm=NONE term=bold
 hi MoreMsg guifg=#0A805D guibg=#FFFFFF guisp=NONE gui=NONE ctermfg=darkgreen ctermbg=white cterm=NONE term=NONE
 hi NonText guifg=#EBEBEB guibg=#FFFFFF guisp=NONE gui=NONE ctermfg=grey ctermbg=white cterm=NONE term=NONE
-hi Number guifg=#E25600 guibg=NONE guisp=NONE gui=bold ctermfg=darkyellow ctermbg=NONE cterm=bold term=NONE
+hi Number guifg=#E25600 guibg=NONE guisp=NONE gui=italic ctermfg=darkyellow ctermbg=NONE cterm=italic term=italic
 hi NormalFloat guifg=#000000 guibg=#FFFFFF guisp=NONE gui=NONE ctermfg=black ctermbg=white cterm=NONE term=NONE
 hi FloatBorder guifg=#9A9A9A guibg=#FFFFFF guisp=NONE gui=NONE ctermfg=darkgrey ctermbg=white cterm=NONE term=NONE
 hi Pmenu guifg=#000000 guibg=#EBEBEB guisp=NONE gui=NONE ctermfg=black ctermbg=grey cterm=NONE term=reverse
@@ -93,6 +92,7 @@ hi QuickFixLine guifg=#000000 guibg=#FEB908 guisp=NONE gui=NONE ctermfg=black ct
 hi Search guifg=#FFFFFF guibg=#5f00b9 guisp=NONE gui=NONE ctermfg=white ctermbg=magenta cterm=NONE term=reverse
 hi SignColumn guifg=NONE guibg=NONE guisp=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE term=reverse
 hi Special guifg=#E25600 guibg=NONE guisp=NONE gui=NONE ctermfg=darkyellow ctermbg=NONE cterm=NONE term=NONE
+hi SpecialComment guifg=#E25600 guibg=NONE guisp=NONE gui=italic ctermfg=darkyellow ctermbg=NONE cterm=italic term=italic
 hi SpecialChar guifg=#006ec3 guibg=NONE guisp=NONE gui=NONE ctermfg=blue ctermbg=NONE cterm=NONE term=NONE
 hi SpecialKey guifg=#006ec3 guibg=NONE guisp=NONE gui=NONE ctermfg=blue ctermbg=NONE cterm=NONE term=bold
 hi SpellBad guifg=#B73A34 guibg=NONE guisp=#B73A34 gui=undercurl ctermfg=darkred ctermbg=NONE cterm=underline term=underline
