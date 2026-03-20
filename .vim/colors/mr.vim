@@ -11,9 +11,9 @@ let g:colors_name = 'mr'
 
 let s:white = '#F7F4EE'
 let s:black = '#1E1B18'
-let s:green = '#0A805D'
+let s:green = '#0A7F5D'
 let s:blue = '#006EC3'
-let s:orange = '#E25600'
+let s:orange = '#CB3F00'
 let s:red = '#B73A34'
 
 let g:terminal_ansi_colors = [

@@ -41,9 +41,9 @@ Typography is part of the theme. Use font styling and weight deliberately:
 Palette:
 - white `#F7F4EE`
 - black `#1E1B18`
-- green `#0A805D`
+- green `#0A7F5D`
 - blue `#006EC3`
-- orange `#E25600`
+- orange `#CB3F00`
 - red `#B73A34`
 
 Design principles:
