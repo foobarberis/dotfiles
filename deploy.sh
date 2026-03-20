@@ -18,8 +18,7 @@ replace_path() {
 
 mkdir -p \
     "$HOME/.local" \
-    "$HOME/.config" \
-    "$HOME/.ssh"
+    "$HOME/.config"
 
 cp -fp .bashrc "$HOME/.bashrc"
 cp -fp .bashrc "$HOME/.profile"
@@ -48,3 +47,4 @@ fi
 if [ -d .local/bin ]; then
     replace_path .local/bin "$HOME/.local/bin"
 fi
+
