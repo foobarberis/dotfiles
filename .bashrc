@@ -34,6 +34,8 @@ set -o noclobber
 
 if command -v gls >/dev/null 2>&1; then
     alias l='gls -Alhp --color=auto'
+elif ls --version >/dev/null 2>&1; then
+    alias l='ls -Alhp --color=auto'
 else
     alias l='ls -Alhp -G'
 fi
