@@ -1,5 +1,3 @@
-![Berkeley Light theme screenshot](assets/berkeley-weighted.png)
-
 We use Homebrew because `apt` is either outdated (`fzf`) or does not provide some packages (`lazygit`, `lazydocker`).
 
 ```sh
@@ -31,7 +29,11 @@ Design principles:
 
 ## Mirage Raceway theme
 
-Mirage Raceway keeps the Berkeley accent colors but reduces the working palette to six colors. The goal is a matte, muted, paper-like theme with minimal chrome and strong text contrast. It should avoid pure white and pure black, avoid large decorative color blocks, and rely on whitespace, thin separators, and typography for structure.
+Mirage Raceway keeps the Berkeley accent colors but reduces the working
+palette to six colors. The goal is a matte, muted, paper-like theme with
+minimal chrome and strong text contrast. It should avoid pure white and
+pure black, avoid large decorative color blocks, and rely on whitespace,
+thin separators, and typography for structure.
 
 Typography is part of the theme. Use font styling and weight deliberately:
 - regular for default text
