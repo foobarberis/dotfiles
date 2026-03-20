@@ -1,6 +1,6 @@
 [general]
 import = [
-  "./berkeley-light.toml"
+  "./mr.toml"
 ]
 live_config_reload = true
 

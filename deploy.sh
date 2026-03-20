@@ -41,10 +41,8 @@ if [ -d .config ]; then
 fi
 
 windows_alacritty_dir='/mnt/c/Users/16018659/OneDrive - bioMerieux/Documents/PARA/3 Resources/(R) Software/Alacritty'
-if [ -d "$windows_alacritty_dir" ]; then
-    cp -fp .config/alacritty/alacritty.toml \
-        .config/alacritty/berkeley-light.toml \
-        "$windows_alacritty_dir/"
+if [ -d "$windows_alacritty_dir" ] && [ -d .config/alacritty ]; then
+    cp -Rfp .config/alacritty/. "$windows_alacritty_dir/"
 fi
 
 if [ -d .local/bin ]; then

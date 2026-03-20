@@ -1,0 +1,41 @@
+# Mirage Raceway for Alacritty
+
+[colors.primary]
+background = "#F7F4EE"
+foreground = "#1E1B18"
+
+[colors.cursor]
+text = "#F7F4EE"
+cursor = "#1E1B18"
+
+[colors.selection]
+text = "#1E1B18"
+background = "#E25600"
+
+[colors.search.matches]
+foreground = "#F7F4EE"
+background = "#006EC3"
+
+[colors.search.focused_match]
+foreground = "#F7F4EE"
+background = "#0A805D"
+
+[colors.normal]
+black = "#1E1B18"
+red = "#B73A34"
+green = "#0A805D"
+yellow = "#E25600"
+blue = "#006EC3"
+magenta = "#B73A34"
+cyan = "#006EC3"
+white = "#F7F4EE"
+
+[colors.bright]
+black = "#1E1B18"
+red = "#B73A34"
+green = "#0A805D"
+yellow = "#E25600"
+blue = "#006EC3"
+magenta = "#B73A34"
+cyan = "#006EC3"
+white = "#F7F4EE"
