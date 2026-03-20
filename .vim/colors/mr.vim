@@ -156,6 +156,9 @@ call s:HL('DiagnosticUnderlineWarn', 'NONE', 'NONE', 'undercurl', 'NONE', 'NONE'
 call s:HL('DiagnosticUnderlineInfo', 'NONE', 'NONE', 'undercurl', 'NONE', 'NONE', 'underline', s:blue)
 call s:HL('DiagnosticUnderlineHint', 'NONE', 'NONE', 'undercurl', 'NONE', 'NONE', 'underline', s:green)
 
+highlight StatusLine gui=bold cterm=bold term=bold
+highlight StatusLineNC gui=italic cterm=italic term=italic
+
 if exists('g:terminal_ansi_colors')
   let g:terminal_color_0 = s:black
   let g:terminal_color_1 = s:red
