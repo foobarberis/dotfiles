@@ -1,6 +1,10 @@
 " Set leader key to Space
 let mapleader = " "
 
+" Project pickers
+nnoremap <silent> <leader>f :ProjectFiles<CR>
+nnoremap <silent> <leader>g :ProjectGrep<CR>
+
 " Disable the built-in matchparen plugin as it causes annoying cursor behavior.
 let g:loaded_matchparen = 1
 let g:loaded_netrw = 1
