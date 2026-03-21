@@ -17,8 +17,8 @@ foreground = "#F7F4EE"
 background = "#006EC3"
 
 [colors.search.focused_match]
-foreground = "#F7F4EE"
-background = "#0A7F5D"
+foreground = "#1E1B18"
+background = "#CB3F00"
 
 [colors.normal]
 black = "#1E1B18"

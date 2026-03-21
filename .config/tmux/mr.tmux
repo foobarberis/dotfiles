@@ -21,8 +21,8 @@ set-window-option -g window-status-current-format " [#I:#W]"
 set-option -g pane-border-style "fg=$black"
 set-option -g pane-active-border-style "fg=$orange"
 set-option -g pane-border-lines heavy
-set-option -g display-panes-colour "$orange"
-set-option -g display-panes-active-colour "$blue"
+set-option -g display-panes-colour "$blue"
+set-option -g display-panes-active-colour "$orange"
 
 # Messages and prompts
 set-option -g message-style "bg=$orange,fg=$black"
@@ -32,7 +32,7 @@ set-option -g message-command-style "bg=$orange,fg=$black"
 set-window-option -g mode-style "bg=$orange,fg=$black"
 set-window-option -g copy-mode-selection-style "bg=$orange,fg=$black"
 set-window-option -g copy-mode-match-style "bg=$blue,fg=$white"
-set-window-option -g copy-mode-current-match-style "bg=$green,fg=$white"
+set-window-option -g copy-mode-current-match-style "bg=$orange,fg=$black"
 
 # Status segments
 set-option -g status-left-length 20
