@@ -36,17 +36,14 @@ function! s:HL(group, guifg, guibg, gui, ctermfg, ctermbg, cterm, ...) abort
         \ 'term=' . a:cterm
 endfunction
 
-hi! link CurSearch Search
 hi! link CursorLineFold CursorLine
 hi! link CursorLineSign CursorLine
 hi! link EndOfBuffer NonText
 hi! link ErrorMsg Error
-hi! link Function Identifier
 hi! link LineNrAbove LineNr
 hi! link LineNrBelow LineNr
 hi! link MessageWindow Pmenu
 hi! link NormalNC Normal
-hi! link Operator Statement
 hi! link PopupNotification Todo
 hi! link StatusLineTerm StatusLine
 hi! link StatusLineTermNC StatusLineNC
@@ -60,7 +57,6 @@ hi! link String Constant
 hi! link Conditional Statement
 hi! link Debug Special
 hi! link Define PreProc
-hi! link Delimiter Special
 hi! link Exception Statement
 hi! link Float Number
 hi! link Include PreProc
@@ -77,7 +73,7 @@ hi! link Typedef Type
 call s:HL('Normal', s:black, s:white, 'NONE', 'black', 'white', 'NONE')
 call s:HL('ColorColumn', s:black, s:white, 'underline', 'black', 'white', 'underline')
 call s:HL('Comment', s:black, 'NONE', 'italic', 'black', 'NONE', 'italic')
-call s:HL('Conceal', s:blue, 'NONE', 'NONE', 'blue', 'NONE', 'NONE')
+call s:HL('Conceal', s:black, 'NONE', 'italic', 'black', 'NONE', 'italic')
 call s:HL('Constant', s:orange, 'NONE', 'italic', 'darkyellow', 'NONE', 'italic')
 call s:HL('Cursor', s:white, s:black, 'NONE', 'white', 'black', 'NONE')
 call s:HL('CursorColumn', s:black, 'NONE', 'underline', 'black', 'NONE', 'underline')
@@ -86,14 +82,17 @@ call s:HL('CursorLineNr', s:black, 'NONE', 'bold', 'black', 'NONE', 'bold')
 call s:HL('DiffAdd', s:white, s:green, 'NONE', 'white', 'darkgreen', 'NONE')
 call s:HL('DiffChange', s:black, s:orange, 'NONE', 'black', 'darkyellow', 'NONE')
 call s:HL('DiffDelete', s:white, s:red, 'NONE', 'white', 'darkred', 'NONE')
-call s:HL('DiffText', s:white, s:blue, 'bold', 'white', 'blue', 'bold')
+call s:HL('DiffText', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bold')
 call s:HL('Directory', s:blue, 'NONE', 'bold', 'blue', 'NONE', 'bold')
 call s:HL('Error', s:white, s:red, 'bold', 'white', 'darkred', 'bold')
 call s:HL('FoldColumn', s:black, 'NONE', 'italic', 'black', 'NONE', 'italic')
-call s:HL('Folded', s:blue, s:white, 'italic', 'blue', 'white', 'italic')
+call s:HL('Folded', s:black, s:white, 'italic', 'black', 'white', 'italic')
 call s:HL('FloatBorder', s:black, s:white, 'NONE', 'black', 'white', 'NONE')
 call s:HL('FloatTitle', s:green, s:white, 'bold', 'darkgreen', 'white', 'bold')
-call s:HL('Identifier', s:blue, 'NONE', 'NONE', 'blue', 'NONE', 'NONE')
+call s:HL('Identifier', s:black, 'NONE', 'NONE', 'black', 'NONE', 'NONE')
+call s:HL('Function', s:black, 'NONE', 'bold', 'black', 'NONE', 'bold')
+call s:HL('Operator', s:black, 'NONE', 'NONE', 'black', 'NONE', 'NONE')
+call s:HL('Delimiter', s:black, 'NONE', 'NONE', 'black', 'NONE', 'NONE')
 call s:HL('Ignore', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE')
 call s:HL('IncSearch', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bold')
 call s:HL('LineNr', s:black, 'NONE', 'italic', 'black', 'NONE', 'italic')
@@ -109,15 +108,16 @@ call s:HL('PmenuMatchSel', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bo
 call s:HL('PmenuSbar', s:white, s:white, 'NONE', 'white', 'white', 'NONE')
 call s:HL('PmenuSel', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bold')
 call s:HL('PmenuThumb', s:black, s:black, 'NONE', 'black', 'black', 'NONE')
-call s:HL('PreProc', s:blue, 'NONE', 'italic', 'blue', 'NONE', 'italic')
+call s:HL('PreProc', s:black, 'NONE', 'italic', 'black', 'NONE', 'italic')
 call s:HL('Question', s:orange, 'NONE', 'bold', 'darkyellow', 'NONE', 'bold')
-call s:HL('QuickFixLine', s:white, s:blue, 'NONE', 'white', 'blue', 'NONE')
+call s:HL('QuickFixLine', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bold')
 call s:HL('Search', s:white, s:blue, 'NONE', 'white', 'blue', 'NONE')
+call s:HL('CurSearch', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bold')
 call s:HL('SignColumn', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE')
 call s:HL('Special', s:orange, 'NONE', 'NONE', 'darkyellow', 'NONE', 'NONE')
 call s:HL('SpecialComment', s:orange, 'NONE', 'italic', 'darkyellow', 'NONE', 'italic')
-call s:HL('SpecialChar', s:blue, 'NONE', 'NONE', 'blue', 'NONE', 'NONE')
-call s:HL('SpecialKey', s:blue, 'NONE', 'bold', 'blue', 'NONE', 'bold')
+call s:HL('SpecialChar', s:orange, 'NONE', 'NONE', 'darkyellow', 'NONE', 'NONE')
+call s:HL('SpecialKey', s:black, 'NONE', 'italic', 'black', 'NONE', 'italic')
 call s:HL('SpellBad', s:red, 'NONE', 'undercurl', 'darkred', 'NONE', 'underline', s:red)
 call s:HL('SpellCap', s:green, 'NONE', 'undercurl', 'darkgreen', 'NONE', 'underline', s:green)
 call s:HL('SpellLocal', s:blue, 'NONE', 'undercurl', 'blue', 'NONE', 'underline', s:blue)
@@ -131,7 +131,7 @@ call s:HL('TabLineSel', s:black, s:white, 'bold,underline', 'black', 'white', 'b
 call s:HL('Title', s:green, 'NONE', 'bold', 'darkgreen', 'NONE', 'bold')
 call s:HL('TitleBar', s:black, s:white, 'bold', 'black', 'white', 'bold')
 call s:HL('TitleBarNC', s:black, s:white, 'italic', 'black', 'white', 'italic')
-call s:HL('Todo', s:white, s:blue, 'bold', 'white', 'blue', 'bold')
+call s:HL('Todo', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bold')
 call s:HL('ToolbarButton', s:black, s:white, 'bold,underline', 'black', 'white', 'bold,underline')
 call s:HL('ToolbarLine', s:black, s:white, 'underline', 'black', 'white', 'underline')
 call s:HL('Type', s:green, 'NONE', 'bold', 'darkgreen', 'NONE', 'bold')
@@ -144,7 +144,7 @@ call s:HL('WildMenu', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bold')
 call s:HL('WinBar', s:black, s:white, 'bold', 'black', 'white', 'bold')
 call s:HL('WinBarNC', s:black, s:white, 'italic', 'black', 'white', 'italic')
 call s:HL('WinSeparator', s:black, s:white, 'NONE', 'black', 'white', 'NONE')
-call s:HL('lCursor', s:white, s:blue, 'NONE', 'white', 'blue', 'NONE')
+call s:HL('lCursor', s:black, s:orange, 'NONE', 'black', 'darkyellow', 'NONE')
 
 call s:HL('DiagnosticError', s:red, 'NONE', 'NONE', 'darkred', 'NONE', 'NONE')
 call s:HL('DiagnosticWarn', s:orange, 'NONE', 'NONE', 'darkyellow', 'NONE', 'NONE')
