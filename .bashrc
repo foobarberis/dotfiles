@@ -12,9 +12,6 @@ path_append() {
 
 path_prepend "${HOME}/.local/bin"
 path_prepend "/usr/local/bin"
-path_prepend "/opt/homebrew/sbin"
-path_prepend "/opt/homebrew/bin"
-path_prepend "/home/linuxbrew/.linuxbrew/bin"
 
 export PATH
 
@@ -40,7 +37,6 @@ if [ -n "${TMUX:-}" ]; then
 fi
 
 export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
 export EDITOR="vim"
 export VISUAL="$EDITOR"
 export PAGER="less"
