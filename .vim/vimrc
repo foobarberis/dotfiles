@@ -20,6 +20,9 @@ set autoread " Automatically reload files changed outside Vim
 set belloff=all " Disable bell sound / flash
 set backspace=indent,eol,start " Make backspace work more intuitively
 set nobackup noswapfile " Do not create backup or swap files
+" Avoid warning when switching away from an unsaved file
+set hidden
+set confirm
 
 " Line numbers & display settings
 set number " Show line numbers
@@ -30,7 +33,7 @@ set statusline=%F " Show full path in the status line
 
 " Search settings
 set incsearch " Enable incremental search
-set hlsearch " Highlight search matches
+set nohlsearch " Don't highlight search matches
 set ignorecase " Ignore case unless search pattern contains uppercase
 set smartcase " Enable smart case search
 set path+=** " Enable recursive searching for filenames
@@ -40,7 +43,12 @@ set modelines=0 " Limit the number of lines checked for modelines
 set autoindent " Indent new lines the same as the previous line
 set expandtab " Convert tabs to spaces
 set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
-set textwidth=72 " Wrap the columns at 72 chars when using gq
+" Wrap the columns at 80 chars when using gq but not when typing
+set textwidth=80
+augroup my_format_options
+ autocmd!
+ autocmd FileType * setlocal formatoptions-=t formatoptions-=c formatoptions-=a formatoptions+=q
+augroup END
 
 " UI Enhancements
 syntax on
@@ -48,7 +56,6 @@ set termguicolors
 colorscheme mr
 
 set nowrap " Disable visual line wrapping
-set ruler " Show cursor position
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
 
 " Clipboard
