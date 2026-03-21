@@ -18,7 +18,8 @@ replace_path() {
 
 mkdir -p \
     "$HOME/.local" \
-    "$HOME/.config"
+    "$HOME/.config" \
+    "$HOME/.pi"
 
 cp -fp .bashrc "$HOME/.bashrc"
 cp -fp .bashrc "$HOME/.profile"
@@ -46,5 +47,20 @@ fi
 
 if [ -d .local/bin ]; then
     replace_path .local/bin "$HOME/.local/bin"
+fi
+
+if [ -d .pi/agent ]; then
+    mkdir -p \
+        "$HOME/.pi/agent" \
+        "$HOME/.pi/agent/contexts" \
+        "$HOME/.pi/agent/extensions"
+
+    cp -fp .pi/agent/APPEND_SYSTEM.md "$HOME/.pi/agent/APPEND_SYSTEM.md"
+    cp -fp .pi/agent/README.md "$HOME/.pi/agent/README.md"
+    cp -fp .pi/agent/settings.json "$HOME/.pi/agent/settings.json"
+    cp -fp .pi/agent/presets.json "$HOME/.pi/agent/presets.json"
+    cp -fp .pi/agent/contexts/coder.md "$HOME/.pi/agent/contexts/coder.md"
+    cp -fp .pi/agent/contexts/teacher.md "$HOME/.pi/agent/contexts/teacher.md"
+    cp -fp .pi/agent/extensions/preset.ts "$HOME/.pi/agent/extensions/preset.ts"
 fi
 
