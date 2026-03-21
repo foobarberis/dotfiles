@@ -20,3 +20,9 @@
 - Avoid comments unless they carry information the code cannot.
 - Keep names short but explicit.
 - Prioritize data structures and data flow. Good structure simplifies the program.
+
+## Tools
+- Prefer rg for text search and fd for file discovery when available.
+- Fall back to grep/find only if rg/fd are unavailable.
+- Use ls only for direct inspection of a known directory.
+

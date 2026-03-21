@@ -19,5 +19,4 @@
 - `/preset teacher`
 
 ## Notes
-- The old `SYSTEM.md` copy is gone. Pi keeps its default system prompt and appends `APPEND_SYSTEM.md`.
 - Teacher mode keeps only `read` and `bash`, and its bash commands are limited to read-only inspection.
