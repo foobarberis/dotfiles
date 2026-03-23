@@ -37,7 +37,7 @@ if [ -n "${TMUX:-}" ]; then
 fi
 
 export LANG="en_US.UTF-8"
-export EDITOR="vim"
+export EDITOR="/usr/local/bin/vim"
 export VISUAL="$EDITOR"
 export PAGER="less"
 export HISTSIZE="100000"
