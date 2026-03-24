@@ -75,6 +75,28 @@ alias gc='git commit -m'
 alias gs='git status'
 alias gl='git log --oneline --graph --decorate'
 
+pit() {
+    pi \
+        --no-extensions \
+        --no-skills \
+        --tools read,grep,find,ls \
+        --system-prompt "$HOME/.pi/agent/contexts/teacher-system.md" \
+        --append-system-prompt "$HOME/.pi/agent/APPEND_SYSTEM.md" \
+        --session-dir "$HOME/.pi/sessions/teacher" \
+        "$@"
+}
+
+pic() {
+    pi \
+        --no-extensions \
+        --no-skills \
+        --tools read,bash,edit,write \
+        --system-prompt "$HOME/.pi/agent/contexts/coder-system.md" \
+        --append-system-prompt "$HOME/.pi/agent/APPEND_SYSTEM.md" \
+        --session-dir "$HOME/.pi/sessions/coder" \
+        "$@"
+}
+
 function sysupd {
     if command -v apt-get >/dev/null; then sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get clean; fi
     if command -v brew >/dev/null; then brew update && brew upgrade && brew cleanup; fi
