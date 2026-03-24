@@ -58,11 +58,7 @@ if [ -d .pi/agent ]; then
     cp -fp .pi/agent/APPEND_SYSTEM.md "$HOME/.pi/agent/APPEND_SYSTEM.md"
     cp -fp .pi/agent/README.md "$HOME/.pi/agent/README.md"
     cp -fp .pi/agent/settings.json "$HOME/.pi/agent/settings.json"
-    cp -fp .pi/agent/presets.json "$HOME/.pi/agent/presets.json"
-    cp -fp .pi/agent/contexts/coder.md "$HOME/.pi/agent/contexts/coder.md"
-    cp -fp .pi/agent/contexts/teacher.md "$HOME/.pi/agent/contexts/teacher.md"
     cp -fp .pi/agent/contexts/coder-system.md "$HOME/.pi/agent/contexts/coder-system.md"
     cp -fp .pi/agent/contexts/teacher-system.md "$HOME/.pi/agent/contexts/teacher-system.md"
-    cp -fp .pi/agent/extensions/preset.ts "$HOME/.pi/agent/extensions/preset.ts"
 fi
 
