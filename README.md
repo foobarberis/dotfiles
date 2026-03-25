@@ -94,3 +94,10 @@ Linux/X11:
 ```sh
 make -j6
 ```
+
+6. Install
+
+```sh
+sudo make install
+```
+
