@@ -80,8 +80,11 @@ call s:HL('Conceal', s:blue, 'NONE', 'NONE', 'blue', 'NONE', 'NONE')
 call s:HL('Constant', s:orange, 'NONE', 'italic', 'darkyellow', 'NONE', 'italic')
 call s:HL('Cursor', s:white, s:black, 'NONE', 'white', 'black', 'NONE')
 call s:HL('CursorColumn', s:black, 'NONE', 'underline', 'black', 'NONE', 'underline')
-call s:HL('CursorLine', s:black, 'NONE', 'underline', 'black', 'NONE', 'underline')
-call s:HL('CursorLineNr', s:black, 'NONE', 'bold', 'black', 'NONE', 'bold')
+call s:HL('CursorLine', 'NONE', 'NONE', 'underline', 'NONE', 'NONE', 'underline', s:black)
+call s:HL('CursorLineNr', 'NONE', 'NONE', 'underline', 'NONE', 'NONE', 'underline', s:black)
+" Prefer a consistent black underline for the cursor line in terminals that support it.
+silent! highlight CursorLine ctermul=black
+silent! highlight CursorLineNr ctermul=black
 call s:HL('DiffAdd', s:white, s:green, 'NONE', 'white', 'darkgreen', 'NONE')
 call s:HL('DiffChange', s:black, s:orange, 'NONE', 'black', 'darkyellow', 'NONE')
 call s:HL('DiffDelete', s:white, s:red, 'NONE', 'white', 'darkred', 'NONE')
