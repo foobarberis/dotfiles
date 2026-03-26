@@ -26,10 +26,19 @@ set confirm
 
 " Line numbers & display settings
 set number " Show line numbers
-set cursorline " Highlight the current cursor line
+" Underline only the active window's cursor line
+augroup my_cursorline
+  autocmd!
+  autocmd WinEnter,BufEnter * setlocal cursorline
+  autocmd WinLeave,BufLeave * setlocal nocursorline
+augroup END
 set scrolloff=2 " Keep at least 2 lines above/below cursor when scrolling
-set laststatus=2 " Always show status line
-set statusline=%F " Show full path in the status line
+
+" Horizontal split separator: use the per-window statusline, filled with a dash.
+" Keep filenames per-window in the statusline.
+set laststatus=2
+set statusline=---[\ %t%h%m%r\ ]%=
+set fillchars+=stl:-,stlnc:-
 
 " Search settings
 set incsearch " Enable incremental search

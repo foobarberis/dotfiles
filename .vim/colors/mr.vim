@@ -125,8 +125,8 @@ call s:HL('SpellCap', s:green, 'NONE', 'undercurl', 'darkgreen', 'NONE', 'underl
 call s:HL('SpellLocal', s:blue, 'NONE', 'undercurl', 'blue', 'NONE', 'underline', s:blue)
 call s:HL('SpellRare', s:orange, 'NONE', 'undercurl', 'darkyellow', 'NONE', 'underline', s:orange)
 call s:HL('Statement', s:green, 'NONE', 'bold', 'darkgreen', 'NONE', 'bold')
-call s:HL('StatusLine', s:black, s:white, 'bold,underline', 'black', 'white', 'bold,underline')
-call s:HL('StatusLineNC', s:black, s:white, 'italic,underline', 'black', 'white', 'italic,underline')
+call s:HL('StatusLine', s:black, s:white, 'bold', 'black', 'white', 'bold')
+call s:HL('StatusLineNC', s:black, s:white, 'bold', 'black', 'white', 'bold')
 call s:HL('TabLine', s:black, s:white, 'underline', 'black', 'white', 'underline')
 call s:HL('TabLineFill', s:black, s:white, 'underline', 'black', 'white', 'underline')
 call s:HL('TabLineSel', s:black, s:white, 'bold,underline', 'black', 'white', 'bold,underline')
@@ -158,7 +158,7 @@ call s:HL('DiagnosticUnderlineInfo', 'NONE', 'NONE', 'undercurl', 'NONE', 'NONE'
 call s:HL('DiagnosticUnderlineHint', 'NONE', 'NONE', 'undercurl', 'NONE', 'NONE', 'underline', s:green)
 
 highlight StatusLine gui=bold cterm=bold term=bold
-highlight StatusLineNC gui=italic cterm=italic term=italic
+highlight StatusLineNC gui=bold cterm=bold term=bold
 
 if exists('g:terminal_ansi_colors')
   let g:terminal_color_0 = s:black
