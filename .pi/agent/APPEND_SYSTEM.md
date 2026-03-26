@@ -20,4 +20,5 @@
 - Avoid comments unless they carry information the code cannot.
 - Keep names short but explicit.
 - Prioritize data structures and data flow. Good structure simplifies the program.
+- Before writing a function, check if is there is another function serving the same purpose to avoid duplicates.
 
