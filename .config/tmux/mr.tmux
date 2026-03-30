@@ -19,7 +19,7 @@ set-window-option -g window-status-current-format " [#I:#W]"
 
 # Panes
 set-option -g pane-border-style "fg=$black"
-set-option -g pane-active-border-style "fg=$orange"
+set-option -g pane-active-border-style "fg=$blue"
 set-option -g pane-border-lines heavy
 set-option -g display-panes-colour "$blue"
 set-option -g display-panes-active-colour "$orange"
