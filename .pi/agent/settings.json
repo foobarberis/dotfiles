@@ -1,6 +1,11 @@
 {
   "theme": "light",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.4",
-  "defaultThinkingLevel": "xhigh"
+  "defaultModel": "gpt-5.2",
+  "defaultThinkingLevel": "high",
+  "lastChangelogVersion": "0.64.0",
+  "showHardwareCursor": true,
+  "steeringMode": "all",
+  "followUpMode": "all",
+  "hideThinkingBlock": true
 }
