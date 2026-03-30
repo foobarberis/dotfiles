@@ -8,8 +8,14 @@ live_config_reload = true
 dynamic_padding = false
 opacity = 1.0
 
+[cursor]
+thickness = 0.40
+blink_timeout = 0
+blink_interval = 500
+
 [cursor.style]
 shape = "Underline"
+blinking = "Always"
 
 [window.padding]
 x = 5
