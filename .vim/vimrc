@@ -17,6 +17,14 @@ aunmenu PopUp.-2-
 set encoding=utf-8 " Use UTF-8 encoding
 set mouse=a " Enable mouse support in all modes
 set autoread " Automatically reload files changed outside Vim
+
+" Autoread only triggers after certain events. Force a check when Vim regains focus.
+" Requires terminal focus events; for tmux add:  set -g focus-events on
+augroup my_autoread
+  autocmd!
+  autocmd FocusGained,BufEnter * checktime
+augroup END
+
 set belloff=all " Disable bell sound / flash
 set backspace=indent,eol,start " Make backspace work more intuitively
 set nobackup noswapfile " Do not create backup or swap files
