@@ -15,6 +15,11 @@ let s:green = '#0A7F5D'
 let s:blue = '#006EC3'
 let s:orange = '#CB3F00'
 let s:red = '#B73A34'
+
+" Terminal Vim has no alpha in highlight groups. Use a pre-blended 10% ink
+" overlay (black mixed into the paper background) for subtle selections.
+let s:overlay10 = '#E1DED9'
+
 let g:terminal_ansi_colors = [
       \ s:black, s:red, s:green, s:orange,
       \ s:blue, s:red, s:blue, s:white,
@@ -97,7 +102,7 @@ call s:HL('FloatBorder', s:black, s:white, 'NONE', 'black', 'white', 'NONE')
 call s:HL('FloatTitle', s:green, s:white, 'bold', 'darkgreen', 'white', 'bold')
 call s:HL('Identifier', s:green, 'NONE', 'NONE', 'blue', 'NONE', 'NONE')
 call s:HL('Ignore', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE')
-call s:HL('IncSearch', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bold')
+call s:HL('IncSearch', 'NONE', s:overlay10, 'NONE', 'NONE', 'NONE', 'NONE')
 call s:HL('LineNr', s:black, 'NONE', 'italic', 'black', 'NONE', 'italic')
 call s:HL('MatchParen', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bold')
 call s:HL('ModeMsg', s:black, s:white, 'bold', 'black', 'white', 'bold')
@@ -114,7 +119,7 @@ call s:HL('PmenuThumb', s:black, s:black, 'NONE', 'black', 'black', 'NONE')
 call s:HL('PreProc', s:blue, 'NONE', 'italic', 'blue', 'NONE', 'italic')
 call s:HL('Question', s:orange, 'NONE', 'bold', 'darkyellow', 'NONE', 'bold')
 call s:HL('QuickFixLine', s:white, s:blue, 'NONE', 'white', 'blue', 'NONE')
-call s:HL('Search', s:white, s:blue, 'NONE', 'white', 'blue', 'NONE')
+call s:HL('Search', 'NONE', s:overlay10, 'NONE', 'NONE', 'NONE', 'NONE')
 call s:HL('SignColumn', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE')
 call s:HL('Special', s:orange, 'NONE', 'NONE', 'darkyellow', 'NONE', 'NONE')
 call s:HL('SpecialComment', s:orange, 'NONE', 'italic', 'darkyellow', 'NONE', 'italic')
@@ -139,7 +144,7 @@ call s:HL('ToolbarLine', s:black, s:white, 'underline', 'black', 'white', 'under
 call s:HL('Type', s:green, 'NONE', 'bold', 'darkgreen', 'NONE', 'bold')
 call s:HL('Underlined', s:blue, 'NONE', 'underline', 'blue', 'NONE', 'underline')
 call s:HL('VertSplit', s:black, s:white, 'NONE', 'black', 'white', 'NONE')
-call s:HL('Visual', s:black, s:orange, 'NONE', 'black', 'darkyellow', 'NONE')
+call s:HL('Visual', 'NONE', s:overlay10, 'NONE', 'NONE', 'NONE', 'NONE')
 call s:HL('VisualNOS', s:black, 'NONE', 'underline', 'black', 'NONE', 'underline')
 call s:HL('WarningMsg', s:orange, s:white, 'bold', 'darkyellow', 'white', 'bold')
 call s:HL('WildMenu', s:black, s:orange, 'bold', 'black', 'darkyellow', 'bold')

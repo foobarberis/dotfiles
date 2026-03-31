@@ -4,6 +4,7 @@ green="#0A7F5D"
 blue="#006EC3"
 orange="#CB3F00"
 red="#B73A34"
+highlight="#E1DED9"  # 10% ink-on-paper highlight (matches Vim Visual/Search)
 
 # Status bar
 set-option -g status-style "bg=$white,fg=$black"
@@ -29,10 +30,11 @@ set-option -g message-style "bg=$orange,fg=$black"
 set-option -g message-command-style "bg=$orange,fg=$black"
 
 # Copy mode
-set-window-option -g mode-style "bg=$orange,fg=$black"
-set-window-option -g copy-mode-selection-style "bg=$orange,fg=$black"
-set-window-option -g copy-mode-match-style "bg=$blue,fg=$white"
-set-window-option -g copy-mode-current-match-style "bg=$orange,fg=$black"
+set-window-option -g mode-style "bg=$highlight,fg=$black"
+set-window-option -g copy-mode-position-style "bg=$highlight,fg=$black"
+set-window-option -g copy-mode-selection-style "bg=$highlight,fg=$black"
+set-window-option -g copy-mode-match-style "bg=$highlight,fg=$black"
+set-window-option -g copy-mode-current-match-style "bg=$highlight,fg=$black"
 
 # Status segments
 set-option -g status-left-length 20

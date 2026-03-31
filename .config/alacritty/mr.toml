@@ -8,17 +8,19 @@ foreground = "#1E1B18"
 text = "#F7F4EE"
 cursor = "#1E1B18"
 
+# Subtle 10% ink-on-paper highlight (matches Vim's Visual/Search in mr.vim)
+# 10% of #1E1B18 blended into #F7F4EE => #E1DED9
 [colors.selection]
 text = "#1E1B18"
-background = "#CB3F00"
+background = "#E1DED9"
 
 [colors.search.matches]
-foreground = "#F7F4EE"
-background = "#006EC3"
+foreground = "#1E1B18"
+background = "#E1DED9"
 
 [colors.search.focused_match]
 foreground = "#1E1B18"
-background = "#CB3F00"
+background = "#E1DED9"
 
 [colors.normal]
 black = "#1E1B18"
