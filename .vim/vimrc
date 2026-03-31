@@ -49,7 +49,7 @@ set statusline=---[\ %t%h%m%r\ ]%=
 set fillchars+=stl:-,stlnc:-
 
 " Search settings
-set incsearch " Enable incremental search
+set noincsearch " Disable incremental search
 set nohlsearch " Don't highlight search matches
 set ignorecase " Ignore case unless search pattern contains uppercase
 set smartcase " Enable smart case search
