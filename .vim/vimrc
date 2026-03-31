@@ -68,7 +68,7 @@ augroup my_format_options
 augroup END
 
 " UI Enhancements
-syntax on
+syntax off
 set termguicolors
 colorscheme mr
 
