@@ -54,6 +54,18 @@ if command -v fzf &>/dev/null; then
     eval "$(fzf --bash)"
 fi
 
+# Work around programs that change the terminal cursor color and sometimes fail
+# to reset it.
+__reset_cursor_color() {
+    printf '\033]12;#1E1B18\033\\'
+}
+if [[ $- == *i* ]]; then
+    case ";${PROMPT_COMMAND:-};" in
+        *";__reset_cursor_color;"*) ;;
+        *) PROMPT_COMMAND="__reset_cursor_color${PROMPT_COMMAND:+;${PROMPT_COMMAND}}" ;;
+    esac
+fi
+
 shopt -s histappend
 shopt -s cdspell
 shopt -s dirspell
