@@ -40,7 +40,7 @@ if [ -d .config ]; then
     done
 fi
 
-windows_alacritty_dir='/mnt/c/Users/16018659/OneDrive - bioMerieux/Documents/PARA/3 Resources/(R) Software/Alacritty'
+windows_alacritty_dir='C:\Users\16018659\AppData\Roaming\alacritty'
 if [ -d "$windows_alacritty_dir" ] && [ -d .config/alacritty ]; then
     cp -Rfp .config/alacritty/. "$windows_alacritty_dir/"
 fi
