@@ -85,3 +85,8 @@ endif
 " Wildmenu
 set wildmenu " Enhance command-line completion
 set wildmode=list:longest,full " Wildmode settings
+
+if has("gui_running")
+  set guifont=Comic\ Code:h10
+endif
+

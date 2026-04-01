@@ -40,10 +40,34 @@ if [ -d .config ]; then
     done
 fi
 
-windows_alacritty_dir='C:\Users\16018659\AppData\Roaming\alacritty'
+windows_alacritty_dir=${WINDOWS_ALACRITTY_DIR:-}
+windows_vim_dir=${WINDOWS_VIM_DIR:-}
+
+# If running under WSL, resolve the Windows home directory and deploy there.
+if [ -z "$windows_alacritty_dir" ] || [ -z "$windows_vim_dir" ]; then
+    if command -v wslpath >/dev/null 2>&1 && command -v cmd.exe >/dev/null 2>&1; then
+        win_home=$(cmd.exe /c "echo %USERPROFILE%" 2>/dev/null | tr -d '\r')
+        win_home_u=$(wslpath -u "$win_home" 2>/dev/null || true)
+
+        if [ -n "$win_home_u" ]; then
+            : "${windows_alacritty_dir:=$win_home_u/AppData/Roaming/alacritty}"
+            : "${windows_vim_dir:=$win_home_u/vimfiles}"
+        fi
+    fi
+fi
+
+# Fallback (e.g. Git Bash/Cygwin). This path will be a no-op on Linux.
+: "${windows_alacritty_dir:=C:\\Users\\16018659\\AppData\\Roaming\\alacritty}"
+: "${windows_vim_dir:=C:\\Users\\16018659\\vimfiles}"
+
 if [ -d "$windows_alacritty_dir" ] && [ -d .config/alacritty ]; then
     cp -Rfp .config/alacritty/. "$windows_alacritty_dir/"
 fi
+
+if [ -d "$windows_vim_dir" ] && [ -d .vim ]; then
+    cp -Rfp .vim/. "$windows_vim_dir/"
+fi
+
 
 if [ -d .local/bin ]; then
     replace_path .local/bin "$HOME/.local/bin"
