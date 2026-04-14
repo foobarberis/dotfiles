@@ -57,7 +57,7 @@ set path+=** " Enable recursive searching for filenames
 set modelines=0 " Limit the number of lines checked for modelines
 
 " Indentation & Tabs
-set autoindent " Indent new lines the same as the previous line
+set noautoindent " Indent new lines the same as the previous line
 set expandtab " Convert tabs to spaces
 set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
 " Wrap the columns at 80 chars when using gq but not when typing
