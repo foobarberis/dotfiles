@@ -1,14 +1,45 @@
 [core]
-	excludesfile = ~/.gitignore_global
+   excludesfile = ~/.gitignore-global
+
 [merge]
-	tool = vimdiff
+   conflictStyle = zdiff3
+
 [mergetool]
-	keepBackup = false
+   keepBackup = false
 
-[include]
-	path = ~/.gitconfig-user
+[pull]
+   rebase = true
 
-[includeIf "gitdir:~/Code/School/"]
-	path = ~/.gitconfig-school
+[rebase]
+   autosquash = false
+   autostash = false
+
+[fetch]
+   prune = true
+
+[diff]
+   algorithm = histogram
+   colorMoved = zebra
+   mnemonicPrefix = true
+
+[commit]
+   verbose = true
+
+[help]
+   autocorrect = prompt
+
+[branch]
+   sort = -committerdate
+
+[tag]
+   sort = version:refname
+
+[credential]
+	helper = store
+
+[user]
+  email = foobarberis@gmail.com
+  name = Matthieu Barberis
+
 [includeIf "gitdir:~/Code/Work/"]
-	path = ~/.gitconfig-work
+   path = ~/.gitconfig-work
