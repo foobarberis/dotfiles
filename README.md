@@ -1,5 +1,3 @@
-# dotfiles
-
 # Dependencies and deployment
 
 We use Homebrew because `apt` is either outdated (`fzf`) or does not provide some packages (`lazygit`, `lazydocker`).
@@ -11,7 +9,7 @@ brew install tmux fzf lazygit lazydocker tree ripgrep fd
 
 Run `deploy.sh` to install the dotfiles. **It overwrites the target files and directories.**
 
-## Building Vim
+# Building Vim
 
 I build Vim from source to control which features are enabled. I use the following steps:
 
@@ -100,4 +98,14 @@ make -j6
 ```sh
 sudo make install
 ```
+
+# Colors
+
+Palette:
+- bg / white `#F7F4EE`
+- fg / black `#1E1B18`
+- green `#0A7F5D`
+- blue `#006EC3`
+- orange `#CB3F00`
+- red `#B73A34`
 
