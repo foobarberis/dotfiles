@@ -60,12 +60,7 @@ set modelines=0 " Limit the number of lines checked for modelines
 set noautoindent " Indent new lines the same as the previous line
 set expandtab " Convert tabs to spaces
 set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
-" Wrap the columns at 80 chars when using gq but not when typing
-set textwidth=80
-augroup my_format_options
- autocmd!
- autocmd FileType * setlocal formatoptions-=t formatoptions-=c formatoptions-=a formatoptions+=q
-augroup END
+set textwidth=0
 
 " UI Enhancements
 syntax off
