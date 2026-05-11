@@ -9,12 +9,8 @@ nnoremap <silent> <leader>g :ProjectGrep<CR>
 let g:loaded_matchparen = 1
 let g:loaded_netrw = 1
 
-" Hide entry for the right click menu (nvim only)
-aunmenu PopUp.How-to\ disable\ mouse
-aunmenu PopUp.-2-
-
 " General settings
-set encoding=utf-8 " Use UTF-8 encoding
+set encoding=utf-8
 set mouse=a " Enable mouse support in all modes
 set autoread " Automatically reload files changed outside Vim
 
@@ -57,15 +53,26 @@ set path+=** " Enable recursive searching for filenames
 set modelines=0 " Limit the number of lines checked for modelines
 
 " Indentation & Tabs
-set noautoindent " Indent new lines the same as the previous line
+set noautoindent
 set expandtab " Convert tabs to spaces
 set tabstop=2 shiftwidth=2 softtabstop=2 " Use 2 spaces per tab
-set textwidth=0
 
-" UI Enhancements
+" Wrap to 80 with gq, but never auto-break while typing
+set textwidth=80
+set wrapmargin=0
+set formatoptions-=t
+set formatoptions-=c
+set formatoptions-=a
+set formatoptions-=v
+set formatoptions+=q
+
+" UI
 syntax off
 set termguicolors
 colorscheme mr
+if has("gui_running")
+  set guifont=Comic\ Code:h10
+endif
 
 set nowrap " Disable visual line wrapping
 set listchars=eol:↲,tab:▸·,trail:•,nbsp:⎵ " Display special characters for whitespace
@@ -80,8 +87,4 @@ endif
 " Wildmenu
 set wildmenu " Enhance command-line completion
 set wildmode=list:longest,full " Wildmode settings
-
-if has("gui_running")
-  set guifont=Comic\ Code:h10
-endif
 
