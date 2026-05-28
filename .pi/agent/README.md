@@ -1,36 +1,19 @@
 # pi agent layout
 
-## Launchers
-- `pit`: teacher profile for explanation, review, and planning.
-  - tools: `read,grep,find,ls`
-  - system prompt: `contexts/teacher-system.md`
-  - appended rules: `APPEND_SYSTEM.md`
-  - session dir: `~/.pi/sessions/teacher`
-- `pic`: coder profile for implementation.
-  - tools: `read,bash,edit,write`
-  - system prompt: `contexts/coder-system.md`
-  - appended rules: `APPEND_SYSTEM.md`
-  - session dir: `~/.pi/sessions/coder`
-- plain `pi`: unchanged generic entrypoint.
-  - uses pi's default system prompt plus the discovered `APPEND_SYSTEM.md`
+## Global prompt
+- plain `pi` uses `~/.pi/agent/SYSTEM.md`
+- source file in this repo: `.pi/agent/SYSTEM.md`
+- this stays as `SYSTEM.md` because pi uses `AGENTS.md` as a separate context-file layer, not as a system-prompt replacement
 
-## Prompt files
-- `APPEND_SYSTEM.md`: shared appended rules for `pi`, `pit`, and `pic`.
-- `contexts/teacher-system.md`: system prompt for `pit`.
-- `contexts/coder-system.md`: system prompt for `pic`.
+## Skills
+- `skills/humanize-text`: rewrites prose to sound natural, clear, and concise
+- `skills/grill-me`: grills a plan or design question-by-question until decisions are resolved
 
-## Legacy preset files
-The preset-based workflow is no longer the recommended entrypoint.
-
-Legacy files kept for follow-up cleanup:
-- `contexts/coder.md`
-- `contexts/teacher.md`
-- `presets.json`
-- `extensions/preset.ts`
+## Deployment
+- `deploy.sh` copies `.pi/agent/SYSTEM.md` to `~/.pi/agent/SYSTEM.md`
+- `deploy.sh` copies each repo skill under `.pi/agent/skills/` into `~/.pi/agent/skills/`
+- `deploy.sh` removes old launcher-era files such as `~/.pi/agent/APPEND_SYSTEM.md` and `~/.pi/agent/contexts/`
 
 ## Notes
-- `grep` is backed by `rg`.
-- `find` is backed by `fd`.
-- `pit` and `pic` reuse the shared `APPEND_SYSTEM.md` overlay instead of duplicating those rules in each system prompt file.
-- `pit` and `pic` disable extension and skill discovery, so they do not load the preset extension.
-- `AGENTS.md` loading is still enabled.
+- `AGENTS.md` loading is still enabled
+- skills are discovered from `~/.pi/agent/skills/`

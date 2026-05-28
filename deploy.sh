@@ -20,8 +20,9 @@ mkdir -p \
     "$HOME/.config" \
     "$HOME/.emacs.d" \
     "$HOME/.local/bin" \
-    "$HOME/.pi/agent/contexts" \
+    "$HOME/.pi/agent" \
     "$HOME/.pi/agent/extensions" \
+    "$HOME/.pi/agent/skills" \
     "$HOME/.ssh/config.d" \
     "$HOME/.vim/colors" \
     "$HOME/.vim/plugin"
@@ -43,10 +44,15 @@ copy_path gitconfig/.gitignore-global "$HOME/.gitignore-global"
 
 copy_path .local/bin "$HOME/.local/bin"
 
-copy_path .pi/agent/APPEND_SYSTEM.md "$HOME/.pi/agent/APPEND_SYSTEM.md"
+rm -f "$HOME/.pi/agent/APPEND_SYSTEM.md"
+rm -rf "$HOME/.pi/agent/contexts"
 copy_path .pi/agent/README.md "$HOME/.pi/agent/README.md"
 copy_path .pi/agent/settings.json "$HOME/.pi/agent/settings.json"
-copy_path .pi/agent/contexts "$HOME/.pi/agent/contexts"
+copy_path .pi/agent/SYSTEM.md "$HOME/.pi/agent/SYSTEM.md"
+for skill in .pi/agent/skills/*; do
+    [ -e "$skill" ] || continue
+    copy_path "$skill" "$HOME/.pi/agent/skills/$(basename "$skill")"
+done
 
 copy_path .ssh/config.d "$HOME/.ssh/config.d"
 
