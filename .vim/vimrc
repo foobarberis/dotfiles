@@ -84,6 +84,14 @@ else
   set clipboard=unnamedplus
 endif
 
+" Bracketed paste inside tmux/screen
+if &term =~# '^\%(tmux\|screen\)'
+	let &t_BE = "\e[?2004h"
+	let &t_BD = "\e[?2004l"
+	exec "set t_PS=\e[200~"
+	exec "set t_PE=\e[201~"
+endif
+
 " Wildmenu
 set wildmenu " Enhance command-line completion
 set wildmode=list:longest,full " Wildmode settings
