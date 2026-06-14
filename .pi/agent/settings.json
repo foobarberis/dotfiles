@@ -1,11 +1,13 @@
 {
   "theme": "light",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.4",
-  "defaultThinkingLevel": "xhigh",
-  "lastChangelogVersion": "0.76.0",
-  "showHardwareCursor": true,
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "medium",
+  "showHardwareCursor": false,
   "steeringMode": "all",
   "followUpMode": "all",
-  "hideThinkingBlock": true
+  "hideThinkingBlock": true,
+  "quietStartup": false,
+  "enableInstallTelemetry": false,
+  "collapseChangelog": false,
 }
