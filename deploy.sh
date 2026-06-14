@@ -18,6 +18,7 @@ copy_path() {
 
 mkdir -p \
     "$HOME/.config" \
+    "$HOME/.config/mpv/scripts" \
     "$HOME/.emacs.d" \
     "$HOME/.local/bin" \
     "$HOME/.pi/agent" \
@@ -33,7 +34,9 @@ copy_path .bashrc "$HOME/.bash_profile"
 
 copy_path .config/alacritty "$HOME/.config/alacritty"
 copy_path .config/ghostty "$HOME/.config/ghostty"
-copy_path .config/mpv "$HOME/.config/mpv"
+copy_path .config/mpv/mpv.conf "$HOME/.config/mpv/mpv.conf"
+copy_path .config/mpv/input.conf "$HOME/.config/mpv/input.conf"
+copy_path .config/mpv/scripts "$HOME/.config/mpv/scripts"
 copy_path .config/tmux "$HOME/.config/tmux"
 
 copy_path .emacs.d "$HOME/.emacs.d"
