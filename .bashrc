@@ -90,7 +90,7 @@ alias gl='git log --oneline --graph --decorate'
 alias retroarch-shmup='/Applications/RetroArch.app/Contents/MacOS/RetroArch --appendconfig "$HOME/Code/dotfiles/.config/retroarch/shmup.cfg"'
 
 function sysupd {
-    if command -v apt-get >/dev/null; then sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get clean; fi
+    if command -v apt >/dev/null; then sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean; fi
     if command -v brew >/dev/null; then brew update && brew upgrade && brew cleanup; fi
     if command -v pkg >/dev/null; then pkg update -y && pkg upgrade -y && pkg autoclean -y; fi
 }
