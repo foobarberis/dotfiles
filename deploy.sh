@@ -20,6 +20,7 @@ mkdir -p \
     "$HOME/.config" \
     "$HOME/.config/mpv/scripts" \
     "$HOME/.emacs.d" \
+    "$HOME/.emacs.terminal.d" \
     "$HOME/.local/bin" \
     "$HOME/.pi/agent" \
     "$HOME/.pi/agent/extensions" \
@@ -40,6 +41,7 @@ copy_path .config/mpv/scripts "$HOME/.config/mpv/scripts"
 copy_path .config/tmux "$HOME/.config/tmux"
 
 copy_path .emacs.d "$HOME/.emacs.d"
+copy_path .emacs.terminal.d "$HOME/.emacs.terminal.d"
 
 copy_path gitconfig/.gitconfig "$HOME/.gitconfig"
 copy_path gitconfig/.gitconfig-work "$HOME/.gitconfig-work"
