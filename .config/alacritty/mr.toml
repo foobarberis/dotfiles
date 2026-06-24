@@ -8,7 +8,7 @@ foreground = "#1E1B18"
 text = "#F7F4EE"
 cursor = "#1E1B18"
 
-# Subtle 10% ink-on-paper highlight (matches Vim's Visual/Search in mr.vim)
+# Subtle 10% ink-on-paper highlight (matches Vim's Visual/Search in nosyntax.vim)
 # 10% of #1E1B18 blended into #F7F4EE => #E1DED9
 [colors.selection]
 text = "#1E1B18"

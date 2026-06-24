@@ -18,7 +18,6 @@ copy_path() {
 
 mkdir -p \
     "$HOME/.config" \
-    "$HOME/.config/mpv/scripts" \
     "$HOME/.emacs.d" \
     "$HOME/.emacs.terminal.d" \
     "$HOME/.local/bin" \
@@ -34,10 +33,7 @@ copy_path .bashrc "$HOME/.profile"
 copy_path .bashrc "$HOME/.bash_profile"
 
 copy_path .config/alacritty "$HOME/.config/alacritty"
-copy_path .config/ghostty "$HOME/.config/ghostty"
 copy_path .config/mpv/mpv.conf "$HOME/.config/mpv/mpv.conf"
-copy_path .config/mpv/input.conf "$HOME/.config/mpv/input.conf"
-copy_path .config/mpv/scripts "$HOME/.config/mpv/scripts"
 copy_path .config/tmux "$HOME/.config/tmux"
 
 copy_path .emacs.d "$HOME/.emacs.d"
@@ -64,7 +60,6 @@ copy_path .ssh/config.d "$HOME/.ssh/config.d"
 copy_path .vim/colors "$HOME/.vim/colors"
 copy_path .vim/plugin "$HOME/.vim/plugin"
 copy_path .vim/vimrc "$HOME/.vim/vimrc"
-copy_path .vim/vimrc "$HOME/.vimrc"
 
 if [ -d "/mnt/c/Users/16018659" ]; then
     copy_path .config/alacritty "/mnt/c/Users/16018659/AppData/Roaming/alacritty"

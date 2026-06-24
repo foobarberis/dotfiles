@@ -86,7 +86,7 @@ set formatoptions+=q
 " UI
 syntax off
 set termguicolors
-colorscheme mr
+colorscheme nosyntax
 if has("gui_running")
   set guifont=Comic\ Code:h10
 endif
