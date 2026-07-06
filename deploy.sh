@@ -33,6 +33,7 @@ copy_path .bashrc "$HOME/.profile"
 copy_path .bashrc "$HOME/.bash_profile"
 
 copy_path .config/alacritty "$HOME/.config/alacritty"
+copy_path .config/ghostty/config.ghostty "$HOME/.config/ghostty/config.ghostty"
 copy_path .config/mpv/mpv.conf "$HOME/.config/mpv/mpv.conf"
 copy_path .config/tmux "$HOME/.config/tmux"
 

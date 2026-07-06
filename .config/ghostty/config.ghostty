@@ -1,0 +1,43 @@
+font-family = "Comic Code"
+font-family-bold = "Comic Code"
+font-family-italic = "Comic Code"
+font-family-bold-italic = "Comic Code"
+font-style = "Regular"
+font-style-bold = "Bold"
+font-style-italic = "Oblique"
+font-style-bold-italic = "Bold Oblique"
+font-size = 16
+
+background = "#F7F4EE"
+foreground = "#1E1B18"
+
+cursor-color = "#1E1B18"
+cursor-text = "#F7F4EE"
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+selection-foreground = "#1E1B18"
+selection-background = "#E1DED9"
+
+search-foreground = "#1E1B18"
+search-background = "#E1DED9"
+search-selected-foreground = "#1E1B18"
+search-selected-background = "#E1DED9"
+
+palette = 0=#1E1B18
+palette = 1=#B73A34
+palette = 2=#0A7F5D
+palette = 3=#CB3F00
+palette = 4=#006EC3
+palette = 5=#B73A34
+palette = 6=#006EC3
+palette = 7=#F7F4EE
+palette = 8=#1E1B18
+palette = 9=#B73A34
+palette = 10=#0A7F5D
+palette = 11=#CB3F00
+palette = 12=#006EC3
+palette = 13=#B73A34
+palette = 14=#006EC3
+palette = 15=#F7F4EE
