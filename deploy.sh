@@ -18,8 +18,6 @@ copy_path() {
 
 mkdir -p \
     "$HOME/.config" \
-    "$HOME/.emacs.d" \
-    "$HOME/.emacs.terminal.d" \
     "$HOME/.local/bin" \
     "$HOME/.pi/agent" \
     "$HOME/.pi/agent/extensions" \
@@ -36,9 +34,6 @@ copy_path .config/alacritty "$HOME/.config/alacritty"
 copy_path .config/ghostty/config.ghostty "$HOME/.config/ghostty/config.ghostty"
 copy_path .config/mpv/mpv.conf "$HOME/.config/mpv/mpv.conf"
 copy_path .config/tmux "$HOME/.config/tmux"
-
-copy_path .emacs.d "$HOME/.emacs.d"
-copy_path .emacs.terminal.d "$HOME/.emacs.terminal.d"
 
 copy_path gitconfig/.gitconfig "$HOME/.gitconfig"
 copy_path gitconfig/.gitconfig-work "$HOME/.gitconfig-work"
@@ -61,8 +56,3 @@ copy_path .ssh/config.d "$HOME/.ssh/config.d"
 copy_path .vim/colors "$HOME/.vim/colors"
 copy_path .vim/plugin "$HOME/.vim/plugin"
 copy_path .vim/vimrc "$HOME/.vim/vimrc"
-
-if [ -d "/mnt/c/Users/16018659" ]; then
-    copy_path .config/alacritty "/mnt/c/Users/16018659/AppData/Roaming/alacritty"
-    copy_path .vim "/mnt/c/Users/16018659/vimfiles"
-fi
