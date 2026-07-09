@@ -99,6 +99,37 @@ make -j6
 sudo make install
 ```
 
+# Shell and Vim movement keys
+
+Bash/readline defaults use Emacs-style cursor movement:
+
+| Key | Action |
+| --- | --- |
+| `Ctrl-b` | Move back one character |
+| `Ctrl-f` | Move forward one character |
+| `Ctrl-a` | Move to beginning of line |
+| `Ctrl-e` | Move to end of line |
+| `Alt-b` / `Option-b` | Move back one word |
+| `Alt-f` / `Option-f` | Move forward one word |
+| `Ctrl-p` | Previous history entry |
+| `Ctrl-n` | Next history entry |
+| `Ctrl-w` | Delete previous word |
+| `Alt-d` / `Option-d` | Delete next word |
+| `Ctrl-k` | Delete to end of line |
+| `Ctrl-u` | Delete before cursor |
+| `Ctrl-y` | Paste/yank deleted text |
+
+Vim horizontal scrolling:
+
+| Command | Action |
+| --- | --- |
+| `zs` | Scroll horizontally so the cursor is at the start/left of the window |
+| `ze` | Scroll horizontally so the cursor is at the end/right of the window |
+| `zh` | Scroll left by one character |
+| `zl` | Scroll right by one character |
+| `zH` | Scroll left by half a screen |
+| `zL` | Scroll right by half a screen |
+
 # Colors
 
 Palette:
