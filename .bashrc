@@ -86,6 +86,7 @@ alias ga='git add'
 alias gc='git commit -m'
 alias gs='git status'
 alias gl='git log --oneline --graph --decorate'
+alias fd='/opt/homebrew/bin/fd --color never'
 
 alias retroarch-shmup='/Applications/RetroArch.app/Contents/MacOS/RetroArch --appendconfig "$HOME/Code/dotfiles/.config/retroarch/shmup.cfg"'
 
